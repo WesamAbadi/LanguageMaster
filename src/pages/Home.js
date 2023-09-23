@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../config/firebase-config";
+import "../styles/pages/Home.css";
 
 function Home() {
   const [languages, setLanguages] = useState([]);
@@ -13,7 +14,6 @@ function Home() {
       data: doc.data(),
     }));
     setLanguages(languagesData);
-    console.log(languagesData);
   };
 
   useEffect(() => {
@@ -23,14 +23,17 @@ function Home() {
   return (
     <div>
       <h2>Home</h2>
-      <p>what language do you wanna learn?</p>
-      <select name="languages" id="languages">
+      <p>What language do you want to learn?</p>
+
+      {/* Display languages as a grid */}
+      <div className="languages-grid">
         {languages.map((language) => (
-          <option key={language.id} value={language.id}>
-            {language.data.name}
-          </option>
+          <div key={language.id} className="language-card">
+            <h3>{language.data.name}</h3>
+            {/* You can display more information about the language here */}
+          </div>
         ))}
-      </select>
+      </div>
     </div>
   );
 }
