@@ -25,12 +25,10 @@ function Home() {
       <h2>Home</h2>
       <p>What language do you want to learn?</p>
 
-      {/* Display languages as a grid */}
       <div className="languages-grid">
         {languages.map((language) => (
           <div key={language.id} className="language-card">
-            <h3>{language.data.name}</h3>
-            {/* You can display more information about the language here */}
+            <h3>{language.data.title}</h3>
           </div>
         ))}
       </div>

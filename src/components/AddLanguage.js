@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "../config/firebase-config";
-import "../styles/components/AddLanguage.css"; // Import your CSS file
+import "../styles/components/AddLanguage.css";
 
 function AddLanguage() {
   const [languageName, setLanguageName] = useState("");
@@ -9,14 +9,11 @@ function AddLanguage() {
   const createLanguage = async () => {
     const languageRef = doc(db, "languages", languageName);
     const languageData = {
-      name: languageName,
+      title: languageName,
     };
     await setDoc(languageRef, languageData);
     setLanguageName(""); // Clear the input field after adding a language
   };
-  useEffect(() => {
-    console.log("component loaded");
-  });
 
   return (
     <div className="add-language-container">

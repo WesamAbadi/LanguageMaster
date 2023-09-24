@@ -8,6 +8,15 @@
 # testing
 /coverage
 
+#firebase
+.firebaserc
+firestore-debug.log
+firebase-debug.log
+ui-debug.log
+firebase.json
+firestore.indexes.json
+firestore.rules
+
 # production
 /build
 
