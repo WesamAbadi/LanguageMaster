@@ -10,11 +10,9 @@ function AddLesson({ updateFeedback }) {
   const [selectedLanguage, setSelectedLanguage] = useState("english");
   const [lessons, setLessons] = useState([]);
 
-  const [newLessonId, setNewLessonId] = useState("");
   const [newLessonTitle, setNewLessonTitle] = useState("");
   const [newLessonMp3, setNewLessonMp3] = useState("");
   const [newLessonContent, setNewLessonContent] = useState("");
-  const [newLessonType, setNewLessonType] = useState("");
 
   const handleLanguageChange = (event) => {
     const selectedValue = event.target.value;
@@ -47,11 +45,20 @@ function AddLesson({ updateFeedback }) {
 
   const createLesson = async () => {
     try {
-      if (selectedLanguage && newLessonId) {
+      if (selectedLanguage) {
         const lessonsCollectionRef = collection(db, "lessons");
         const languageDocRef = doc(lessonsCollectionRef, selectedLanguage);
         const lessonsRef = collection(languageDocRef, "lessons");
+        const lessonsSnapshot = await getDocs(lessonsRef);
+        let highestLessonId = 0;
 
+        lessonsSnapshot.forEach((doc) => {
+          const lessonId = parseInt(doc.id, 10); // Convert ID to an integer
+          if (!isNaN(lessonId) && lessonId > highestLessonId) {
+            highestLessonId = lessonId;
+          }
+        });
+        const newLessonId = (highestLessonId + 1).toString();
         const lessonDocRef = doc(lessonsRef, newLessonId);
         if (activeTab === "lestining") {
           const lessonData = {
@@ -75,7 +82,6 @@ function AddLesson({ updateFeedback }) {
           await setDoc(lessonDocRef, lessonData);
         }
 
-        setNewLessonId("");
         setNewLessonTitle("");
         setNewLessonContent("");
         fetchLessons();
@@ -95,11 +101,9 @@ function AddLesson({ updateFeedback }) {
       case "lestining":
         return (
           <Lestining
-            newLessonId={newLessonId}
             newLessonTitle={newLessonTitle}
             newLessonContent={newLessonContent}
             newLessonMp3={newLessonMp3}
-            setNewLessonId={setNewLessonId}
             setNewLessonTitle={setNewLessonTitle}
             setNewLessonContent={setNewLessonContent}
             setNewLessonMp3={setNewLessonMp3}

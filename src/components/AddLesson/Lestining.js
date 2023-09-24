@@ -1,26 +1,15 @@
 import React from "react";
 
 function Lestining({
-  newLessonId,
   newLessonTitle,
   newLessonContent,
   newLessonMp3,
-  setNewLessonId,
   setNewLessonTitle,
   setNewLessonContent,
   setNewLessonMp3,
 }) {
   return (
     <div>
-      <div>
-        <label> Lesson ID:</label>
-        <input
-          type="text"
-          placeholder="Lesson ID"
-          value={newLessonId}
-          onChange={(event) => setNewLessonId(event.target.value)}
-        />
-      </div>
       <div>
         <label>Lesson title:</label>
         <input

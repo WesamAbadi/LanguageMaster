@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../config/firebase-config";
+import { Link } from "react-router-dom"; // Import Link from react-router-dom
 import "../styles/pages/Home.css";
 
 function Home() {
@@ -21,15 +22,15 @@ function Home() {
   }, []);
 
   return (
-    <div>
+    <div className="home">
       <h2>Home</h2>
       <p>What language do you want to learn?</p>
 
       <div className="languages-grid">
         {languages.map((language) => (
-          <div key={language.id} className="language-card">
-            <h3>{language.data.title}</h3>
-          </div>
+          <Link to={`/${language.data.title}`} key={language.id}>
+            <div className="language-card">{language.data.title}</div>
+          </Link>
         ))}
       </div>
     </div>

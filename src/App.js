@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Admin from "./pages/Admin";
+import LanguagePage from "./pages/LanguagePage"; // Import LanguagePage component
+
 function App() {
   return (
     <Router>
@@ -14,6 +16,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/Admin" element={<Admin />} />
+        <Route path="/:languageName" element={<LanguagePage />} />
       </Routes>
     </Router>
   );

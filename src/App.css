@@ -1,3 +1,7 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope&display=swap");
+body {
+  font-family: "Manrope", sans-serif;
+}
 .App {
   text-align: center;
 }
@@ -43,7 +47,10 @@
   border: 1px solid black;
   border-radius: 5px;
   padding: 10px;
-  margin-bottom: 10px;
+  margin: 10px;
+}
+.lesson-type {
+  font-weight: bold;
 }
 
 @keyframes App-logo-spin {
