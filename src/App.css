@@ -34,6 +34,17 @@
 .error-feedback {
   color: red;
 }
+.lessons {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  padding: 10px;
+}
+.lesson-card {
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
 
 @keyframes App-logo-spin {
   from {
