@@ -27,6 +27,13 @@
 .App-link {
   color: #61dafb;
 }
+.success-feedback {
+  color: green;
+}
+
+.error-feedback {
+  color: red;
+}
 
 @keyframes App-logo-spin {
   from {

@@ -3,16 +3,21 @@ import { doc, setDoc } from "firebase/firestore";
 import { db } from "../config/firebase-config";
 import "../styles/components/AddLanguage.css";
 
-function AddLanguage() {
+function AddLanguage({ updateFeedback }) {
   const [languageName, setLanguageName] = useState("");
 
   const createLanguage = async () => {
-    const languageRef = doc(db, "languages", languageName);
-    const languageData = {
-      title: languageName,
-    };
-    await setDoc(languageRef, languageData);
-    setLanguageName(""); // Clear the input field after adding a language
+    try {
+      const languageRef = doc(db, "languages", languageName.toLowerCase());
+      const languageData = {
+        title: languageName,
+      };
+      await setDoc(languageRef, languageData);
+      setLanguageName("");
+      updateFeedback("Language added successfully!", "success");
+    } catch (error) {
+      updateFeedback("Error adding language. Please try again.", "error");
+    }
   };
 
   return (

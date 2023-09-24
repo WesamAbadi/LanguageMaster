@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { doc, setDoc, getDocs, collection } from "firebase/firestore";
 import { db } from "../config/firebase-config";
 
-function AddLesson() {
+function AddLesson({ updateFeedback }) {
   const [languages, setLanguages] = useState([]);
   const [selectedLanguage, setSelectedLanguage] = useState("english");
   const [lessons, setLessons] = useState([]);
@@ -14,7 +14,6 @@ function AddLesson() {
   const handleLanguageChange = (event) => {
     const selectedValue = event.target.value;
     setSelectedLanguage(selectedValue);
-    console.log(selectedValue);
   };
 
   const fetchLanguages = async () => {
@@ -42,26 +41,31 @@ function AddLesson() {
   };
 
   const createLesson = async () => {
-    if (selectedLanguage && newLessonId) {
-      const lessonsCollectionRef = collection(db, "lessons");
-      const languageDocRef = doc(lessonsCollectionRef, selectedLanguage);
-      const lessonsRef = collection(languageDocRef, "lessons");
+    try {
+      if (selectedLanguage && newLessonId) {
+        const lessonsCollectionRef = collection(db, "lessons");
+        const languageDocRef = doc(lessonsCollectionRef, selectedLanguage);
+        const lessonsRef = collection(languageDocRef, "lessons");
 
-      const lessonDocRef = doc(lessonsRef, newLessonId);
+        const lessonDocRef = doc(lessonsRef, newLessonId);
 
-      const lessonData = {
-        title: newLessonTitle,
-        content: newLessonContent,
-      };
+        const lessonData = {
+          title: newLessonTitle,
+          content: newLessonContent,
+        };
 
-      await setDoc(lessonDocRef, lessonData);
+        await setDoc(lessonDocRef, lessonData);
 
-      console.log("Added data: ", lessonData);
+        console.log("Added data: ", lessonData);
 
-      setNewLessonId("");
-      setNewLessonTitle("");
-      setNewLessonContent("");
-      fetchLessons();
+        setNewLessonId("");
+        setNewLessonTitle("");
+        setNewLessonContent("");
+        fetchLessons();
+        updateFeedback("Lesson added successfully!", "success");
+      }
+    } catch (error) {
+      updateFeedback("Error adding lesson. Please try again.", "error");
     }
   };
 
@@ -81,7 +85,7 @@ function AddLesson() {
           </option>
         ))}
       </select>
-      <button onClick={fetchLessons}>Check</button>
+      <button onClick={fetchLessons}>Fetch lessons</button>
       {lessons.length ? (
         lessons.map((lesson) => (
           <div key={lesson.id}>
