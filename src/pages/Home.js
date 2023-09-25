@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../config/firebase-config";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../styles/pages/Home.css";
 
-function Home() {
+function Home({ isAuth }) {
   const [languages, setLanguages] = useState([]);
+  let navigate = useNavigate();
 
   const fetchLanguages = async () => {
     const languagesCollection = collection(db, "languages");
@@ -18,6 +19,9 @@ function Home() {
   };
 
   useEffect(() => {
+    if (!isAuth) {
+      navigate("/");
+    }
     fetchLanguages();
   }, []);
 
