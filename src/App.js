@@ -3,7 +3,9 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Admin from "./pages/Admin";
-import LanguagePage from "./pages/LanguagePage"; // Import LanguagePage component
+import LanguagePage from "./pages/LanguagePage";
+import LessonPage from "./pages/LessonPage";
+import Soon from "./pages/Soon";
 
 function App() {
   return (
@@ -17,6 +19,8 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/Admin" element={<Admin />} />
         <Route path="/:languageName" element={<LanguagePage />} />
+        <Route path="/:languageName/:lessonId" element={<LessonPage />} />
+        <Route path="/:languageName/:levelId/:lessonId" element={<Soon />} />
       </Routes>
     </Router>
   );

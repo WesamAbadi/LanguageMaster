@@ -3,13 +3,14 @@ import React, { useState, useEffect } from "react";
 import { doc, getDocs, collection } from "firebase/firestore";
 import { db } from "../config/firebase-config";
 import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function LanguagePage() {
   const { languageName } = useParams();
   const [lessons, setLessons] = useState([]);
 
   const fetchLessons = async () => {
-    if (languageName) {
+    if (true) {
       const lessonsCollectionRef = collection(db, "lessons");
       const languageDocRef = doc(
         lessonsCollectionRef,
@@ -35,18 +36,15 @@ function LanguagePage() {
       <div className="lessons">
         {lessons.length ? (
           lessons.map((lesson) => (
-            <div
-              className={`lesson-card ${lesson.data.type}-lesson`}
-              key={lesson.id}
-            >
-              <p className="lesson-type">Type: {lesson.data.type}</p>
-              <p>ID: {lesson.id}</p>
-              <h3>Title: {lesson.data.title}</h3>
-              <audio controls>
-                <source src={lesson.data.mp3} />
-                Your browser does not support the audio element.
-              </audio>
-            </div>
+            <Link to={`/${languageName}/${lesson.id}`} key={lesson.id}>
+              <div
+                className={`lesson-card ${lesson.data.type}-lesson`}
+                key={lesson.id}
+              >
+                <p className="lesson-type">Type: {lesson.data.type}</p>
+                <h3>Title: {lesson.data.title}</h3>
+              </div>
+            </Link>
           ))
         ) : (
           <p>No lessons found.</p>
