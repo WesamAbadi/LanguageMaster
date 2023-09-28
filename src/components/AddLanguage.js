@@ -5,12 +5,18 @@ import "../styles/components/AddLanguage.css";
 
 function AddLanguage({ updateFeedback }) {
   const [languageName, setLanguageName] = useState("");
+  const [languageDescription, setLanguageDescription] = useState("DESCRIPTION");
+  const [languageImage, setLanguageImage] = useState(
+    "https://superpalestinian.com/cdn/shop/products/image_09032836-9067-40fb-ae76-1c1de1cbc1ef.png?v=1669664967&width=1946"
+  );
 
   const createLanguage = async () => {
     try {
       const languageRef = doc(db, "languages", languageName.toLowerCase());
       const languageData = {
         title: languageName,
+        description: languageDescription,
+        image: languageImage,
       };
       await setDoc(languageRef, languageData);
       setLanguageName("");
@@ -28,6 +34,20 @@ function AddLanguage({ updateFeedback }) {
         placeholder="Language name"
         value={languageName}
         onChange={(e) => setLanguageName(e.target.value)}
+        className="language-input"
+      />
+      <input
+        type="text"
+        placeholder="Language description"
+        value={languageDescription}
+        onChange={(e) => setLanguageDescription(e.target.value)}
+        className="language-input"
+      />
+      <input
+        type="text"
+        placeholder="Language IMG URL"
+        value={languageImage}
+        onChange={(e) => setLanguageImage(e.target.value)}
         className="language-input"
       />
       <button onClick={createLanguage} className="add-button">

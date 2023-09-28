@@ -5,18 +5,11 @@ function LanguageCard({ language, style }) {
   return (
     <div className="card-div" style={style}>
       <div className="gow-img-div img-div">
-        <img
-          src="https://c8.alamy.com/zooms/9/7dc164d7ae494b308363a758306993ea/twjdyd.jpg"
-          alt="god-of-war-figurine"
-        />
+        <img src={language.data.image} />
       </div>
       <div className="text-container">
-        <h2 className="item-name">{language.data.title}</h2>
-        <p className="date">
-          English is the most spoken language in the world!
-          <br />
-          Learning it is a must!
-        </p>
+        <h2 className="language-name">{language.data.title}</h2>
+        <p className="description">{language.data.description}</p>
         <div className="pricing-and-cart">
           <div className="pricing">
             <p className="current-price">4 levels</p>

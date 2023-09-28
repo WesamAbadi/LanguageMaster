@@ -7,7 +7,7 @@ function AddLesson({ updateFeedback }) {
   const [activeTab, setActiveTab] = useState(0);
 
   const [languages, setLanguages] = useState([]);
-  const [selectedLanguage, setSelectedLanguage] = useState("english");
+  const [selectedLanguage, setSelectedLanguage] = useState("");
   const [lessons, setLessons] = useState([]);
 
   const [newLessonTitle, setNewLessonTitle] = useState("");
