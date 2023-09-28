@@ -1,0 +1,49 @@
+// TabSwithch.scss
+
+.tabs-container {
+  display: flex;
+  justify-content: center;
+
+  .tab-switch {
+    position: relative;
+    text-align: center;
+    background-color: #ebebeb;
+    border-radius: 2rem;
+    width: 20rem;
+  }
+
+  .tab-indicator {
+    content: "";
+    position: absolute;
+    width: calc(100% / var(--num-tabs));
+    top: 0;
+    transition: transform cubic-bezier(0.88, -0.35, 0.565, 1.35) 0.4s;
+    border-radius: 27.5px;
+    box-shadow: 0 2px 15px 0 rgba(0, 0, 0, 0.1);
+    background-color: #3d90ef;
+    height: 100%;
+    z-index: 0;
+  }
+
+  .tab-switch.left:after {
+    left: 0;
+  }
+
+  .tab-switch .tab {
+    display: inline-block;
+    width: calc(100% / var(--num-tabs));
+    padding: 12px 0;
+    z-index: 1;
+    position: relative;
+    cursor: pointer;
+    transition: color 200ms;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: normal;
+    user-select: none;
+  }
+
+  .tab-switch .tab.active {
+    color: #ffffff;
+  }
+}

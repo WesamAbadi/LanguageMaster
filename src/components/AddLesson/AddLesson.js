@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { doc, setDoc, getDocs, collection } from "firebase/firestore";
-import { db } from "../config/firebase-config";
-import Lestining from "./AddLesson/Lestining";
+import { db } from "../../config/firebase-config";
+import Lestining from "./Lestining";
 
 function AddLesson({ updateFeedback }) {
   const [activeTab, setActiveTab] = useState(0);

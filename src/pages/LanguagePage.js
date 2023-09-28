@@ -4,10 +4,14 @@ import { doc, getDocs, collection } from "firebase/firestore";
 import { db } from "../config/firebase-config";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
+import TabSwitch from "../components/TabSwitch";
 
 function LanguagePage() {
   const { languageName } = useParams();
   const [lessons, setLessons] = useState([]);
+
+  const [activeTab, setActiveTab] = useState(0);
+  const tabNames = ["Campaign", "Lessons List"];
 
   const fetchLessons = async () => {
     if (true) {
@@ -26,30 +30,43 @@ function LanguagePage() {
     }
   };
 
+  const handleTabChange = (direction) => {
+    setActiveTab(direction);
+  };
+
   useEffect(() => {
     fetchLessons();
   }, []);
+
   return (
     <div>
       <h2>{languageName} Page</h2>
-
-      <div className="lessons">
-        {lessons.length ? (
-          lessons.map((lesson) => (
-            <Link to={`/${languageName}/${lesson.id}`} key={lesson.id}>
-              <div
-                className={`lesson-card ${lesson.data.type}-lesson`}
-                key={lesson.id}
-              >
-                <p className="lesson-type">Type: {lesson.data.type}</p>
-                <h3>Title: {lesson.data.title}</h3>
-              </div>
-            </Link>
-          ))
-        ) : (
-          <p>No lessons found.</p>
-        )}
-      </div>
+      <TabSwitch
+        activeTab={activeTab}
+        onTabChange={handleTabChange}
+        tabs={tabNames}
+      />
+      {activeTab === 0 ? (
+        <p>Campaign soon..</p>
+      ) : (
+        <div className="lessons">
+          {lessons.length ? (
+            lessons.map((lesson) => (
+              <Link to={`/${languageName}/${lesson.id}`} key={lesson.id}>
+                <div
+                  className={`lesson-card ${lesson.data.type}-lesson`}
+                  key={lesson.id}
+                >
+                  <p className="lesson-type">Type: {lesson.data.type}</p>
+                  <h3>Title: {lesson.data.title}</h3>
+                </div>
+              </Link>
+            ))
+          ) : (
+            <p>No lessons found.</p>
+          )}
+        </div>
+      )}
     </div>
   );
 }

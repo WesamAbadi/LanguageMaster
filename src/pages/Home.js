@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../config/firebase-config";
 import { Link, useNavigate } from "react-router-dom";
-import "../styles/pages/Home.css";
+import "../styles/pages/Home.scss";
 
+import LanguageCard from "../components/LanguageCard";
 function Home({ isAuth }) {
   const [languages, setLanguages] = useState([]);
   let navigate = useNavigate();
@@ -19,9 +20,9 @@ function Home({ isAuth }) {
   };
 
   useEffect(() => {
-    if (!isAuth) {
-      navigate("/");
-    }
+    // if (!isAuth) {
+    //   navigate("/");
+    // }
     fetchLanguages();
   }, []);
 
@@ -33,7 +34,7 @@ function Home({ isAuth }) {
       <div className="languages-grid">
         {languages.map((language) => (
           <Link to={`/${language.data.title}`} key={language.id}>
-            <div className="language-card">{language.data.title}</div>
+            <LanguageCard language={language} />
           </Link>
         ))}
       </div>

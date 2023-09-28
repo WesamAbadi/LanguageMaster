@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import AddLanguage from "../components/AddLanguage";
-import AddLesson from "../components/AddLesson";
+import AddLesson from "../components/AddLesson/AddLesson";
 import "../styles/pages/Admin.css";
 
 function Admin() {

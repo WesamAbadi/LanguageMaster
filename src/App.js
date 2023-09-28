@@ -8,6 +8,7 @@ import Login from "./pages/Login";
 import Admin from "./pages/Admin";
 import LanguagePage from "./pages/LanguagePage";
 import LessonPage from "./pages/LessonPage";
+import Landing from "./pages/Landing";
 import Soon from "./pages/Soon";
 
 function App() {
@@ -34,7 +35,7 @@ function App() {
   return (
     <Router>
       <nav>
-        <Link to="/">Home</Link>
+        <Link to="/Home">Home</Link>
         <Link to="/Admin">Admin</Link>
         {isAuth ? (
           <button onClick={signOutUser}>Sign out</button>
@@ -43,8 +44,9 @@ function App() {
         )}
       </nav>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/" element={<Landing />} />
+        <Route path="/Home" element={<Home />} />
+        <Route path="/Login" element={<Login />} />
         <Route path="/Admin" element={<Admin />} />
         <Route path="/:languageName" element={<LanguagePage />} />
         <Route path="/:languageName/:lessonId" element={<LessonPage />} />
