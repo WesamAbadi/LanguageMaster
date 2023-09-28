@@ -1,4 +1,4 @@
-import "./App.css";
+import "./App.scss";
 import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import { auth, googleProvider } from "./config/firebase-config";
