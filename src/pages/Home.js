@@ -32,9 +32,12 @@ function Home({ isAuth }) {
       <p>What language do you want to learn?</p>
 
       <div className="languages-grid">
-        {languages.map((language) => (
+        {languages.map((language, index) => (
           <Link to={`/${language.data.title}`} key={language.id}>
-            <LanguageCard language={language} />
+            <LanguageCard
+              style={{ animationDuration: `${1 + index * 0.25}s` }}
+              language={language}
+            />
           </Link>
         ))}
       </div>

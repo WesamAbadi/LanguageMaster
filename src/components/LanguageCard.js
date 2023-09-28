@@ -1,9 +1,9 @@
 import React from "react";
 import "../styles/components/LanguageCard.scss";
 
-function LanguageCard({ language }) {
+function LanguageCard({ language, style }) {
   return (
-    <div className="card-div">
+    <div className="card-div" style={style}>
       <div className="gow-img-div img-div">
         <img
           src="https://c8.alamy.com/zooms/9/7dc164d7ae494b308363a758306993ea/twjdyd.jpg"

@@ -13,6 +13,7 @@ $font-family_1: "Manrope", sans-serif;
 }
 body {
   font-family: $font-family_1;
+  animation: fadeIn 1s;
 }
 
 .success-feedback {
@@ -38,5 +39,13 @@ body {
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
+  }
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }
