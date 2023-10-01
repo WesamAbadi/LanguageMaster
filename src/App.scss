@@ -14,6 +14,9 @@ $font-family_1: "Manrope", sans-serif;
 body {
   font-family: $font-family_1;
   animation: fadeIn 1s;
+  background-image: url("./assets/img/bg.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .success-feedback {
@@ -36,6 +39,48 @@ body {
 .lesson-type {
   font-weight: bold;
 }
+
+nav {
+  background: rgba(255, 255, 255, 0.15); // Transparent white background
+  backdrop-filter: blur(10px); // Apply a blur effect to the background
+  border-radius: 10px; // Rounded corners
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); // Box shadow for depth
+
+  a {
+    color: #000000; // Default text color for links
+    text-decoration: none;
+    margin: 0 10px; // Spacing between links
+    transition: color 0.3s;
+    padding: 5px;
+  }
+
+  button {
+    background: rgb(81 81 81 / 9%);
+    border: none;
+    border-radius: 5px;
+    padding: 8px 12px;
+    color: #000000;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: scale(1.05);
+    }
+  }
+
+  a.active {
+    color: #ffffff;
+    font-weight: bold;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+  }
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;

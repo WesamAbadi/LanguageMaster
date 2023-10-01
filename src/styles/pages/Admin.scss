@@ -1,0 +1,79 @@
+$color_1: white;
+$background-color_1: #007bff;
+$background-color_2: #0056b3;
+$background-color_3: #f9f9f9;
+
+.tab-navigation {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+  button {
+    padding: 10px 20px;
+    background-color: $background-color_1;
+    color: $color_1;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    &:hover {
+      background-color: $background-color_2;
+    }
+  }
+}
+.tab-content {
+  border: 1px solid #ccc;
+  padding: 20px;
+  background-color: $background-color_3;
+}
+.section-title {
+  text-align: center;
+}
+
+button {
+  background: rgb(255 255 255 / 21%);
+  border: none;
+  border-radius: 5px;
+  padding: 8px 12px;
+  color: #000000;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.05);
+  }
+}
+
+select {
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+  cursor: pointer;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.3);
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(255, 87, 34, 0.7);
+  }
+}
+
+option {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  color: #000000;
+}
+
+.language-fetch {
+  text-align: center;
+  .language-select {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+}

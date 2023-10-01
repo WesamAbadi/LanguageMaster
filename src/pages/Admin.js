@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import AddLanguage from "../components/AddLanguage";
 import AddLesson from "../components/AddLesson/AddLesson";
 import TabSwitch from "../components/TabSwitch";
-import "../styles/pages/Admin.css";
+import "../styles/pages/Admin.scss";
 
 function Admin() {
   const [activeTab, setActiveTab] = useState(-3);
@@ -26,7 +26,6 @@ function Admin() {
 
   return (
     <div>
-      <h2>Admin Page</h2>
       <div>
         <TabSwitch
           activeTab={activeTab}

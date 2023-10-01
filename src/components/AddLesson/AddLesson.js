@@ -108,29 +108,40 @@ function AddLesson({ updateFeedback }) {
 
   return (
     <div>
-      <p>Select a language to add a lesson to:</p>
-      <select name="languages" id="languages" onChange={handleLanguageChange}>
-        {languages.map((language) => (
-          <option key={language.id} value={language.id}>
-            {language.data.title}
-          </option>
-        ))}
-      </select>
-      <button onClick={fetchLessons}>Fetch lessons</button>
-      <div className="lessons">
-        {lessons.length ? (
-          lessons.map((lesson) => (
-            <div className="lesson-card" key={lesson.id}>
-              <h3>{lesson.id}</h3>
-              <p>{lesson.data.title}</p>
-            </div>
-          ))
-        ) : (
-          <p>No lessons found.</p>
-        )}
+      <div className="language-fetch">
+        <div>
+          <p>Select a language to add a lesson to:</p>
+        </div>
+        <div className="language-select">
+          <select
+            name="languages"
+            id="languages"
+            onChange={handleLanguageChange}
+          >
+            {languages.map((language) => (
+              <option key={language.id} value={language.id}>
+                {language.data.title}
+              </option>
+            ))}
+          </select>
+          <button onClick={fetchLessons}>Fetch lessons</button>
+          <div className="lessons">
+            {lessons.length ? (
+              lessons.map((lesson) => (
+                <div className="lesson-card" key={lesson.id}>
+                  <h3>{lesson.id}</h3>
+                  <p>{lesson.data.title}</p>
+                </div>
+              ))
+            ) : (
+              <p>No lessons found.</p>
+            )}
+          </div>
+        </div>
       </div>
-
-      <h3>Add a new lesson</h3>
+      <div className="section-title">
+        <h3>Add a new lesson</h3>
+      </div>
       <TabSwitch
         activeTab={activeTab}
         onTabChange={handleTabChange}

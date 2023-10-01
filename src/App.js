@@ -1,6 +1,11 @@
 import "./App.scss";
 import { useState } from "react";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  NavLink,
+} from "react-router-dom";
 import { auth, googleProvider } from "./config/firebase-config";
 import { signInWithPopup, signOut } from "firebase/auth";
 import Home from "./pages/Home";
@@ -35,8 +40,10 @@ function App() {
   return (
     <Router>
       <nav>
-        <Link to="/Home">Home</Link>
-        <Link to="/Admin">Admin</Link>
+        <div>
+          <NavLink to="/Home">Home</NavLink>
+          <NavLink to="/Admin">Admin</NavLink>
+        </div>
         {isAuth ? (
           <button onClick={signOutUser}>Sign out</button>
         ) : (
