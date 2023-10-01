@@ -10,13 +10,12 @@
     text-align: center;
     background-color: #ebebeb;
     border-radius: 2rem;
-    width: 70vw;
   }
 
   .tab-indicator {
     content: "";
     position: absolute;
-    width: calc(100% / var(--num-tabs));
+    width: 14rem;
     top: 0;
     transition: transform cubic-bezier(0.88, -0.35, 0.565, 1.35) 0.4s;
     border-radius: 27.5px;
@@ -32,7 +31,7 @@
 
   .tab-switch .tab {
     display: inline-block;
-    width: calc(100% / var(--num-tabs));
+    width: 14rem;
     padding: 12px 0;
     z-index: 1;
     position: relative;

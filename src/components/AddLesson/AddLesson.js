@@ -2,9 +2,11 @@ import React, { useState, useEffect } from "react";
 import { doc, setDoc, getDocs, collection } from "firebase/firestore";
 import { db } from "../../config/firebase-config";
 import Lestining from "./Lestining";
+import TabSwitch from "../TabSwitch";
 
 function AddLesson({ updateFeedback }) {
-  const [activeTab, setActiveTab] = useState(0);
+  const [activeTab, setActiveTab] = useState(-3);
+  const tabNames = ["Lestining", "speaking", "Add a new lesson"];
 
   const [languages, setLanguages] = useState([]);
   const [selectedLanguage, setSelectedLanguage] = useState("");
@@ -44,8 +46,10 @@ function AddLesson({ updateFeedback }) {
   };
 
   const createLesson = async () => {
+    console.log("fist");
     try {
       if (selectedLanguage) {
+        console.log(`Adding lesson for ${selectedLanguage}`);
         const lessonsCollectionRef = collection(db, "lessons");
         const languageDocRef = doc(lessonsCollectionRef, selectedLanguage);
         const lessonsRef = collection(languageDocRef, "lessons");
@@ -92,36 +96,16 @@ function AddLesson({ updateFeedback }) {
     }
   };
 
+  const handleTabChange = (direction) => {
+    setActiveTab(direction);
+    console.log(`Active tab is now: ${activeTab}`);
+  };
+
   useEffect(() => {
     fetchLanguages();
     fetchLessons();
   }, []);
-  const renderTabContent = () => {
-    switch (activeTab) {
-      case "lestining":
-        return (
-          <Lestining
-            newLessonTitle={newLessonTitle}
-            newLessonContent={newLessonContent}
-            newLessonMp3={newLessonMp3}
-            setNewLessonTitle={setNewLessonTitle}
-            setNewLessonContent={setNewLessonContent}
-            setNewLessonMp3={setNewLessonMp3}
-          />
-        );
-      case "story":
-        return null;
-      case "writing":
-        return null;
-      default:
-        return (
-          <div>
-            <p>Select the type of lesson you want to add</p>
-            <p>Start by selecting a tab</p>
-          </div>
-        );
-    }
-  };
+
   return (
     <div>
       <p>Select a language to add a lesson to:</p>
@@ -147,16 +131,34 @@ function AddLesson({ updateFeedback }) {
       </div>
 
       <h3>Add a new lesson</h3>
-      <div className="tab-navigation">
-        <button onClick={() => setActiveTab("lestining")}>
-          Listening lesson
-        </button>
-        <button onClick={() => setActiveTab("story")}>Story lesson</button>
-        <button onClick={() => setActiveTab("writing")}>Writing lesson</button>
-      </div>
-      <div className="tab-content">{renderTabContent()}</div>
+      <TabSwitch
+        activeTab={activeTab}
+        onTabChange={handleTabChange}
+        tabs={tabNames}
+      />
 
-      <button onClick={createLesson}>Add new lesson</button>
+      {activeTab === 0 ? (
+        <Lestining
+          newLessonTitle={newLessonTitle}
+          newLessonContent={newLessonContent}
+          newLessonMp3={newLessonMp3}
+          setNewLessonTitle={setNewLessonTitle}
+          setNewLessonContent={setNewLessonContent}
+          setNewLessonMp3={setNewLessonMp3}
+        />
+      ) : activeTab === 1 ? (
+        <p>SOON</p>
+      ) : activeTab === 2 ? (
+        <p>SOON</p>
+      ) : (
+        <p>Please select a tab</p>
+      )}
+
+      {[0, 1, 2].includes(activeTab) && (
+        <button className="add-lesson-button" onClick={createLesson}>
+          Add new lesson
+        </button>
+      )}
     </div>
   );
 }
