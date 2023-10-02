@@ -3,14 +3,13 @@ import React, { useState, useEffect } from "react";
 import { doc, getDocs, collection } from "firebase/firestore";
 import { db } from "../config/firebase-config";
 import { useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
 import TabSwitch from "../components/TabSwitch";
-
+import LessonCard from "../components/ViewLesson/LessonCard";
 function LanguagePage() {
   const { languageName } = useParams();
   const [lessons, setLessons] = useState([]);
 
-  const [activeTab, setActiveTab] = useState(0);
+  const [activeTab, setActiveTab] = useState(1);
   const tabNames = ["Campaign", "Lessons List"];
 
   const fetchLessons = async () => {
@@ -52,15 +51,7 @@ function LanguagePage() {
         <div className="lessons">
           {lessons.length ? (
             lessons.map((lesson) => (
-              <Link to={`/${languageName}/${lesson.id}`} key={lesson.id}>
-                <div
-                  className={`lesson-card ${lesson.data.type}-lesson`}
-                  key={lesson.id}
-                >
-                  <p className="lesson-type">Type: {lesson.data.type}</p>
-                  <h3>Title: {lesson.data.title}</h3>
-                </div>
-              </Link>
+              <LessonCard lesson={lesson} languageName={languageName} />
             ))
           ) : (
             <p>No lessons found.</p>

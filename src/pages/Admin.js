@@ -5,7 +5,7 @@ import TabSwitch from "../components/TabSwitch";
 import "../styles/pages/Admin.scss";
 
 function Admin() {
-  const [activeTab, setActiveTab] = useState(-3);
+  const [activeTab, setActiveTab] = useState(-5);
   const tabNames = [
     "Add a new language",
     "Add a new lesson",

@@ -31,10 +31,10 @@ body {
   padding: 10px;
 }
 .lesson-card {
-  border: 1px solid black;
-  border-radius: 5px;
+  border-radius: 1rem;
   padding: 10px;
   margin: 10px;
+  background: rgba(255, 255, 255, 0.33);
 }
 .lesson-type {
   font-weight: bold;
