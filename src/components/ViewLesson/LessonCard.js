@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import "../../styles/components/LessonCard.scss";
 
 function LessonCard({ lesson, languageName }) {
   return (

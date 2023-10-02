@@ -34,7 +34,7 @@ function LessonPage() {
   }, [languageName, lessonId]);
 
   if (!lessonData) {
-    return <p>Loading...</p>;
+    return <p>Invalid lesson URL</p>;
   }
 
   return (

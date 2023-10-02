@@ -51,7 +51,11 @@ function LanguagePage() {
         <div className="lessons">
           {lessons.length ? (
             lessons.map((lesson) => (
-              <LessonCard lesson={lesson} languageName={languageName} />
+              <LessonCard
+                lesson={lesson}
+                languageName={languageName}
+                key={lesson.id}
+              />
             ))
           ) : (
             <p>No lessons found.</p>

@@ -1,13 +1,9 @@
 import React, { useState, useEffect } from "react";
-import {
-  doc,
-  setDoc,
-  getDocs,
-  collection,
-  addDoc, // Import addDoc for creating a new document
-} from "firebase/firestore";
+import { doc, setDoc, getDocs, collection } from "firebase/firestore";
 import { db } from "../../config/firebase-config";
 import Lestining from "./Lestining";
+import LessonCard from "../ViewLesson/LessonCard";
+
 import TabSwitch from "../TabSwitch";
 
 function AddLesson({ updateFeedback }) {
@@ -153,10 +149,11 @@ function AddLesson({ updateFeedback }) {
           <div className="lessons">
             {lessons.length ? (
               lessons.map((lesson) => (
-                <div className="lesson-card" key={lesson.id}>
-                  <h3>{lesson.id}</h3>
-                  <p>{lesson.data.title}</p>
-                </div>
+                <LessonCard
+                  key={lesson.id}
+                  lesson={lesson}
+                  languageName={selectedLanguage}
+                />
               ))
             ) : (
               <p>No lessons found.</p>
