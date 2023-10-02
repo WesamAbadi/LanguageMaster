@@ -30,7 +30,7 @@ function LessonPage() {
   };
 
   useEffect(() => {
-    fetchLesson();
+    fetchLesson(); // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [languageName, lessonId]);
 
   if (!lessonData) {
