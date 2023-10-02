@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "../config/firebase-config";
-import "../styles/components/AddLanguage.css";
+import "../styles/components/AddLanguage.scss";
 
 function AddLanguage({ updateFeedback }) {
   const [languageName, setLanguageName] = useState("");

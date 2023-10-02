@@ -3,4 +3,18 @@
   padding: 10px;
   margin: 10px;
   background: rgba(255, 255, 255, 0.33);
+  backdrop-filter: blur(7px);
+  animation: popup 0.5s;
+}
+
+@keyframes popup {
+  0% {
+    padding: 2px;
+  }
+  50% {
+    padding: 13px;
+  }
+  100% {
+    opacity: 10px;
+  }
 }

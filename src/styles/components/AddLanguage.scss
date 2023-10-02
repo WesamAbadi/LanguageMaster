@@ -3,15 +3,32 @@
 .add-language-container {
   max-width: 400px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 50px;
   border: 1px solid #ccc;
-  border-radius: 4px;
-  background-color: #f9f9f9;
+  border-radius: 2rem;
+  background-color: #f9f9f95c;
+  backdrop-filter: blur(5px);
 }
 
 .add-language-container h4 {
   font-size: 20px;
   margin-bottom: 10px;
+}
+.add-language-container {
+  button {
+    background: rgb(255 255 255 / 61%);
+    border: none;
+    border-radius: 5px;
+    padding: 8px 12px;
+    color: #000000;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: scale(1.05);
+    }
+  }
 }
 
 .language-input {
