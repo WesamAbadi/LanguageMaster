@@ -2,16 +2,27 @@
 import React, { useState, useEffect } from "react";
 import { doc, getDocs, collection } from "firebase/firestore";
 import { db } from "../config/firebase-config";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import TabSwitch from "../components/TabSwitch";
 import LessonCard from "../components/ViewLesson/LessonCard";
 function LanguagePage() {
   const { languageName } = useParams();
   const [lessons, setLessons] = useState([]);
+  const [languages, setLanguages] = useState([]);
+  let navigate = useNavigate();
 
   const [activeTab, setActiveTab] = useState(1);
   const tabNames = ["Campaign", "Lessons List"];
 
+  const fetchLanguages = async () => {
+    const languagesCollection = collection(db, "languages");
+    const languagesSnapshot = await getDocs(languagesCollection);
+    const languagesData = languagesSnapshot.docs.map((doc) => ({
+      id: doc.id,
+      data: doc.data(),
+    }));
+    setLanguages(languagesData);
+  };
   const fetchLessons = async () => {
     if (true) {
       const lessonsCollectionRef = collection(db, "lessons");
@@ -29,12 +40,31 @@ function LanguagePage() {
     }
   };
 
+  const verifyLanguage = async () => {
+    try {
+      await fetchLanguages();
+
+      const titles = languages.map((item) => item.data.title.toLowerCase());
+      const newLanguageName = languageName.toLowerCase();
+      console.log("title: " + titles);
+
+      if (titles.includes(newLanguageName)) {
+        console.log(`${newLanguageName} is one of the titles.`);
+        await fetchLessons();
+      } else {
+        console.log(`${newLanguageName} is not one of the titles.`);
+      }
+    } catch (error) {
+      console.error("Error fetching languages:", error);
+    }
+  };
+
   const handleTabChange = (direction) => {
     setActiveTab(direction);
   };
 
   useEffect(() => {
-    fetchLessons(); // eslint-disable-next-line react-hooks/exhaustive-deps
+    verifyLanguage();
   }, []);
 
   return (

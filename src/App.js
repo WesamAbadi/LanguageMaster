@@ -5,6 +5,7 @@ import {
   Routes,
   Route,
   NavLink,
+  Navigate,
 } from "react-router-dom";
 
 import { auth, googleProvider, db } from "./config/firebase-config";
@@ -20,6 +21,7 @@ import Soon from "./pages/Soon";
 
 function App() {
   const [user, setUser] = useState(null);
+  const isAdminUser = user !== null && user.admin === true;
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(async (authUser) => {
@@ -76,8 +78,7 @@ function App() {
           <NavLink to="/Admin">Admin</NavLink>
         </div>
         {user ? (
-          <div>
-            <p>admin or not: {user.admin}</p>
+          <div className="flex">
             <p>Welcome, {user.displayName}!</p>
             <button onClick={signOutUser}>Sign out</button>
           </div>
@@ -86,6 +87,7 @@ function App() {
         )}
       </nav>
       <Routes>
+        <Route path="*" element={<Navigate to="/" replace />} />
         <Route path="/" element={<Landing />} />
         <Route path="/Home" element={<Home />} />
         <Route path="/Login" element={<Login />} />

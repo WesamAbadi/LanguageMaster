@@ -11,6 +11,13 @@ $font-family_1: "Manrope", sans-serif;
     transform: rotate(360deg);
   }
 }
+.flex {
+  display: flex;
+  align-items: center;
+  p {
+    margin: 0;
+  }
+}
 body {
   font-family: $font-family_1;
   animation: fadeIn 1s;
