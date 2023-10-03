@@ -1,8 +1,6 @@
 import React from "react";
 
 function Lestining({ lessonData }) {
-  console.log("lessons iss ", lessonData);
-
   return (
     <div>
       <h3>Title: {lessonData.title}</h3>

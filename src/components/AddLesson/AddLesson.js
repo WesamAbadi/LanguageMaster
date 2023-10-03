@@ -57,8 +57,6 @@ function AddLesson({ updateFeedback }) {
   const createLesson = async () => {
     try {
       if (selectedLanguage && newLessonTitle && newLessonContent) {
-        console.log(`Adding lesson for ${selectedLanguage}`);
-
         const lessonsCollectionRef = collection(db, "lessons");
         const languageDocRef = doc(lessonsCollectionRef, selectedLanguage);
         const lessonsRef = collection(languageDocRef, "lessons");
@@ -97,7 +95,6 @@ function AddLesson({ updateFeedback }) {
         setNewLessonMp3("");
         fetchLessons();
         updateFeedback("Lesson added successfully!", "success");
-        console.log("New lesson added with ID: ", newLessonId);
       } else {
         updateFeedback("Please fill in all the required fields.", "error");
       }
@@ -109,7 +106,6 @@ function AddLesson({ updateFeedback }) {
 
   const handleTabChange = (direction) => {
     setActiveTab(direction);
-    console.log(`Active tab is now: ${direction}`);
   };
 
   useEffect(() => {

@@ -6,8 +6,10 @@ import {
   Route,
   NavLink,
 } from "react-router-dom";
-import { auth, googleProvider } from "./config/firebase-config";
+
+import { auth, googleProvider, db } from "./config/firebase-config";
 import { signInWithPopup, signOut } from "firebase/auth";
+import { doc, setDoc, getDoc, collection } from "firebase/firestore";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Admin from "./pages/Admin";
@@ -20,18 +22,31 @@ function App() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    // Set up an authentication observer
-    const unsubscribe = auth.onAuthStateChanged((authUser) => {
+    const unsubscribe = auth.onAuthStateChanged(async (authUser) => {
       if (authUser) {
-        // User is signed in.
         setUser(authUser);
+        const userRef = collection(db, "users");
+        const userDocRef = doc(userRef, authUser.uid);
+        const userDoc = await getDoc(userDocRef);
+        if (userDoc.exists()) {
+          const userData = userDoc.data();
+          setUser({ ...authUser, ...userData });
+        } else {
+          try {
+            const newUserData = {
+              name: user.displayName,
+              admin: false,
+            };
+            await setDoc(userDocRef, newUserData);
+          } catch (error) {
+            console.error("Error fetching user data from Firestore:", error);
+          }
+        }
       } else {
-        // User is signed out.
         setUser(null);
       }
     });
 
-    // Clean up the observer when the component unmounts
     return () => {
       unsubscribe();
     };
@@ -62,6 +77,7 @@ function App() {
         </div>
         {user ? (
           <div>
+            <p>admin or not: {user.admin}</p>
             <p>Welcome, {user.displayName}!</p>
             <button onClick={signOutUser}>Sign out</button>
           </div>
@@ -73,7 +89,7 @@ function App() {
         <Route path="/" element={<Landing />} />
         <Route path="/Home" element={<Home />} />
         <Route path="/Login" element={<Login />} />
-        <Route path="/Admin" element={<Admin />} />
+        <Route path="/Admin" element={<Admin user={user} />} />
         <Route path="/:languageName" element={<LanguagePage />} />
         <Route path="/:languageName/:lessonId" element={<LessonPage />} />
         <Route path="/:languageName/:levelId/:lessonId" element={<Soon />} />
