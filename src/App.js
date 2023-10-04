@@ -36,7 +36,7 @@ function App() {
         } else {
           try {
             const newUserData = {
-              name: user.displayName,
+              name: authUser.displayName, // Access displayName from authUser
               admin: false,
             };
             await setDoc(userDocRef, newUserData);
@@ -79,7 +79,6 @@ function App() {
         </div>
         {user ? (
           <div className="flex">
-            <p>Welcome, {user.displayName}!</p>
             <button onClick={signOutUser}>Sign out</button>
           </div>
         ) : (
