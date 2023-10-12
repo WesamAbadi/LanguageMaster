@@ -4,10 +4,10 @@ import { db } from "../config/firebase-config";
 import { useNavigate, useParams } from "react-router-dom";
 import TabSwitch from "../components/TabSwitch";
 import LessonCard from "../components/ViewLesson/LessonCard";
+import "../styles/pages/LanguagePage.scss";
 
 function LanguagePage() {
   const { languageName } = useParams();
-  const [languages, setLanguages] = useState([]);
   const [lessons, setLessons] = useState([]);
   let navigate = useNavigate();
 
@@ -22,14 +22,12 @@ function LanguagePage() {
         id: doc.id,
         data: doc.data(),
       }));
-      setLanguages(languagesData);
       const languageExists = languagesData.some(
         (language) => language.id === languageName
       );
       if (!languageExists) {
         navigate("/");
       }
-      console.log("language exists: ", languageExists);
       const lessonsCollectionRef = collection(db, "lessons");
       const languageDocRef = doc(
         lessonsCollectionRef,
@@ -62,7 +60,9 @@ function LanguagePage() {
 
   return (
     <div>
-      <h2>{languageName} Page</h2>
+      <div className="page-title">
+        <h2>{languageName}</h2>
+      </div>
       <TabSwitch
         activeTab={activeTab}
         onTabChange={handleTabChange}
