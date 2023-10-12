@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { diff_match_patch } from "diff-match-patch";
-
+import AudioPlayer from "./AudioPlayer";
 const dmp = new diff_match_patch();
 
 function Lestining({ lessonData }) {
@@ -52,6 +52,7 @@ function Lestining({ lessonData }) {
         <source src={lessonData.mp3} />
         Your browser does not support the audio element.
       </audio>
+      <AudioPlayer />
       <p>{lessonData.type}</p>
       <textarea
         name=""
