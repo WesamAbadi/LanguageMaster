@@ -27,6 +27,7 @@ function Lestining({
           value={newLessonMp3}
           onChange={(event) => setNewLessonMp3(event.target.value)}
         />
+        <a target="_blank" href="https://jukehost.co.uk/library/upload">upload here</a>
       </div>
       <div>
         <label>Lesson content:</label>
