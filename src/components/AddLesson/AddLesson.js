@@ -123,37 +123,40 @@ function AddLesson({ updateFeedback }) {
           {languages.length === 0 ? (
             <p>No languages found.</p>
           ) : (
-            languages.map((language) => (
-              <div key={language.id}>
-                <input
-                  type="radio"
-                  name="languages"
-                  id={language.id}
-                  value={language.id}
-                  onChange={() => handleLanguageChange(language.id)}
-                  checked={selectedLanguage === language.id}
-                />
-                <label htmlFor={language.id}>{language.data.title}</label>
-                <button onClick={fetchLessons}>Fetch lessons</button>
-              </div>
-            ))
+            <>
+              {languages.map((language) => (
+                <div key={language.id}>
+                  <input
+                    type="radio"
+                    name="languages"
+                    id={language.id}
+                    value={language.id}
+                    onChange={() => handleLanguageChange(language.id)}
+                    checked={selectedLanguage === language.id}
+                  />
+                  <label htmlFor={language.id}>{language.data.title}</label>
+                </div>
+              ))}
+              <button onClick={fetchLessons}>Fetch lessons</button>
+            </>
           )}
+        </div>
 
-          <div className="lessons">
-            {lessons.length ? (
-              lessons.map((lesson) => (
-                <LessonCard
-                  key={lesson.id}
-                  lesson={lesson}
-                  languageName={selectedLanguage}
-                />
-              ))
-            ) : (
-              <p>No lessons found.</p>
-            )}
-          </div>
+        <div className="lessons">
+          {lessons.length ? (
+            lessons.map((lesson) => (
+              <LessonCard
+                key={lesson.id}
+                lesson={lesson}
+                languageName={selectedLanguage}
+              />
+            ))
+          ) : (
+            <p>No lessons found.</p>
+          )}
         </div>
       </div>
+
       <div className="section-title">
         <h3>Add a new lesson</h3>
       </div>
