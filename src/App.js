@@ -52,7 +52,6 @@ function App() {
     return () => {
       unsubscribe();
     };
-
   }, []);
 
   const signInWithGoogle = async () => {

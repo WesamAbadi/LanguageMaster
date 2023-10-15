@@ -33,7 +33,7 @@ function Home({ isAuth }) {
       <div>
         <p>Contuniue where you left off </p>
       </div>
-      <p>What language do you want to learn?</p>
+      <p>Or start learning a new language</p>
 
       <div className="languages-grid">
         {languages.map((language, index) => (
