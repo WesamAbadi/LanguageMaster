@@ -23,7 +23,7 @@ function LanguagePage() {
         data: doc.data(),
       }));
       const languageExists = languagesData.some(
-        (language) => language.id === languageName
+        (language) => language.data.title === languageName
       );
       if (!languageExists) {
         navigate("/");
