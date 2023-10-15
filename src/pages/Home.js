@@ -6,6 +6,7 @@ import "../styles/pages/Home.scss";
 
 import LanguageCard from "../components/LanguageCard";
 function Home({ isAuth }) {
+  console.log(isAuth);
   const [languages, setLanguages] = useState([]);
   let navigate = useNavigate();
 
@@ -20,15 +21,18 @@ function Home({ isAuth }) {
   };
 
   useEffect(() => {
-    // if (!isAuth) {
-    //   navigate("/");
-    // }
+    if (!isAuth) {
+      navigate("/");
+    }
     fetchLanguages();
   }, []);
 
   return (
     <div className="home">
       <h2>Home</h2>
+      <div>
+        <p>Contuniue where you left off </p>
+      </div>
       <p>What language do you want to learn?</p>
 
       <div className="languages-grid">

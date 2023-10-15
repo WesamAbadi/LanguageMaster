@@ -52,6 +52,7 @@ function App() {
     return () => {
       unsubscribe();
     };
+
   }, []);
 
   const signInWithGoogle = async () => {
@@ -88,7 +89,7 @@ function App() {
       <Routes>
         <Route path="*" element={<Navigate to="/" replace />} />
         <Route path="/" element={<Landing />} />
-        <Route path="/Home" element={<Home />} />
+        <Route path="/Home" element={<Home isAuth={user} />} />
         <Route path="/Login" element={<Login />} />
         <Route path="/Admin" element={<Admin user={user} />} />
         <Route path="/:languageName" element={<LanguagePage />} />
