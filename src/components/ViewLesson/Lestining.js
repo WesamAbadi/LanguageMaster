@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { diff_match_patch } from "diff-match-patch";
 import AudioPlayer from "./AudioPlayer";
+
 const dmp = new diff_match_patch();
 
-function Lestining({ lessonData }) {
+function Listening({ lessonData }) {
   const [inputText, setInputText] = useState("");
   const [comparisonResult, setComparisonResult] = useState(null);
 
@@ -28,7 +29,16 @@ function Lestining({ lessonData }) {
     // Render the differences with highlights
     const diffElements = differences.map((diff, index) => {
       const key = `${diff[0]}_${index}`;
-      const className = diff[0] === -1 ? "difference" : "";
+      let className = "neutral";
+
+      if (diff[0] === -1) {
+        // Incorrect part
+        className = "difference-wrong";
+      } else if (diff[0] === 0) {
+        // Correct part
+        className = "difference-correct";
+      }
+
       return (
         <span key={key} className={className}>
           {diff[1]}
@@ -39,8 +49,14 @@ function Lestining({ lessonData }) {
     // Set the comparison result in state
     setComparisonResult(
       <div>
-        <p>Matching Percentage: {matchPercentage}%</p>
-        {diffElements}
+        <p>Matching Percentage: {Math.round(matchPercentage)}%</p>
+        {Math.round(matchPercentage) === 100 ? (
+          <p>Perfecto!</p>
+        ) : Math.round(matchPercentage) >= 70 ? (
+          <p>Good job! You can do better!</p>
+        ) : (
+          <p>Keep trying!</p>
+        )}
       </div>
     );
   };
@@ -68,4 +84,4 @@ function Lestining({ lessonData }) {
   );
 }
 
-export default Lestining;
+export default Listening;
