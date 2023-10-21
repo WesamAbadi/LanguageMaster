@@ -4,7 +4,7 @@ import AudioPlayer from "./AudioPlayer";
 
 const dmp = new diff_match_patch();
 
-function Listening({ lessonData }) {
+function Listening({ lessonData, markLessonCompleted }) {
   const [inputText, setInputText] = useState("");
   const [comparisonResult, setComparisonResult] = useState(null);
 
@@ -25,6 +25,10 @@ function Listening({ lessonData }) {
     ).toFixed(2);
 
     console.log("Matching Percentage: " + matchPercentage + "%");
+    if (matchPercentage >= 70) {
+      console.log("Lesson is completed!");
+      markLessonCompleted();
+    }
 
     // Render the differences with highlights
     const diffElements = differences.map((diff, index) => {
@@ -57,6 +61,8 @@ function Listening({ lessonData }) {
         ) : (
           <p>Keep trying!</p>
         )}
+
+        {diffElements}
       </div>
     );
   };

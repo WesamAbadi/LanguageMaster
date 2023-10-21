@@ -7,6 +7,7 @@ import Lestining from "../components/ViewLesson/Lestining";
 function LessonPage() {
   const { languageName, lessonId } = useParams();
   const [lessonData, setLessonData] = useState(null);
+  const [isCompleted, setIsCompleted] = useState(false);
   const fetchLesson = async () => {
     try {
       if (languageName && lessonId) {
@@ -29,44 +30,53 @@ function LessonPage() {
     }
   };
 
-  const markAsCompleted = async () => {
+  const markLessonCompleted = async () => {
+    setIsCompleted(true);
+    await markAsCompleted();
+  };
+
+  const checkIfCompleted = async () => {
     try {
-      // Check if the user is authenticated and has a UID
       if (auth.currentUser && auth.currentUser.uid) {
-        console.log("User is authenticated and UID is:", auth.currentUser.uid);
-
-        // Construct a reference to the user's document
         const userDocRef = doc(db, "users", auth.currentUser.uid);
-        console.log("User document ref:", userDocRef);
-
-        // Construct a reference to the "progress" collection
         const progressCollectionRef = collection(userDocRef, "progress");
-        console.log("Progress collection ref:", progressCollectionRef);
-
-        // Construct a reference to the language-specific document inside "progress"
-        console.log("Language name ref:", languageName);
         const languageDocRef = doc(progressCollectionRef, languageName);
-        console.log("Language document ref:", languageDocRef);
-
-        // Get the current lessons array for the language
         const languageDocSnapshot = await getDoc(languageDocRef);
 
+        if (languageDocSnapshot.exists()) {
+          const lessonsArray = languageDocSnapshot.data().lessons || [];
+
+          if (lessonsArray.includes(lessonId)) {
+            setIsCompleted(true);
+          }
+        }
+      } else {
+        console.error("User is not authenticated or UID is missing.");
+      }
+    } catch (error) {
+      console.error("Error checking if lesson is completed:", error);
+    }
+  };
+
+  const markAsCompleted = async () => {
+    try {
+      if (auth.currentUser && auth.currentUser.uid) {
+        const userDocRef = doc(db, "users", auth.currentUser.uid);
+        const progressCollectionRef = collection(userDocRef, "progress");
+        const languageDocRef = doc(progressCollectionRef, languageName);
+
+        const languageDocSnapshot = await getDoc(languageDocRef);
         let lessonsArray = [];
 
         if (languageDocSnapshot.exists()) {
-          // If the document exists, update the lessons array
           lessonsArray = languageDocSnapshot.data().lessons || [];
         }
 
-        // Check if the lessonId is not already in the lessons array
         if (!lessonsArray.includes(lessonId)) {
-          // Add the lessonId to the lessons array
           lessonsArray.push(lessonId);
-
-          // Update the language document with the new lessons array
           await setDoc(languageDocRef, { lessons: lessonsArray });
-        }
-        else{
+          setIsCompleted(true);
+        } else {
           console.log("Lesson already completed");
         }
       } else {
@@ -77,9 +87,9 @@ function LessonPage() {
     }
   };
 
-
   useEffect(() => {
-    fetchLesson(); // eslint-disable-next-line react-hooks/exhaustive-deps
+    fetchLesson(); 
+    checkIfCompleted();
   }, [languageName, lessonId]);
 
   if (!lessonData) {
@@ -88,11 +98,17 @@ function LessonPage() {
 
   return (
     <div className="lesson-page">
-      <button onClick={() => markAsCompleted()}>
-        mark as completed
-      </button>
+      {!isCompleted && ( // Check if the lesson is not already completed
+        <button onClick={() => markLessonCompleted()}>Mark as completed</button>
+      )}
+      {isCompleted && <p>Lesson is already completed</p>}
       <h1>{lessonId}</h1>
-      {lessonData.type === "lestining" && <Lestining lessonData={lessonData} />}
+      {lessonData.type === "lestining" && (
+        <Lestining
+          lessonData={lessonData}
+          markLessonCompleted={markLessonCompleted}
+        />
+      )}
     </div>
   );
 }
