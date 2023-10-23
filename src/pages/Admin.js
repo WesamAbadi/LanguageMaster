@@ -67,6 +67,10 @@ function Admin({ user }) {
         <div>
           <h1>Access Denied</h1>
           <p>You do not have permission to access this page.</p>
+          <p>
+            If you want to be an Admin at Language Master,
+              <a href="#"><button>APPLY HERE</button></a>
+          </p>
         </div>
       )}
     </div>

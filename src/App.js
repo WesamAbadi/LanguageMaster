@@ -74,8 +74,8 @@ function App() {
     <Router>
       <nav>
         <div>
-          <NavLink to="/Home">Home</NavLink>
-          <NavLink to="/Admin">Admin</NavLink>
+          <NavLink to={user ? "/Home" : "/"}>Home</NavLink>
+          {user && <NavLink to="/Admin">Admin</NavLink>}
         </div>
         {user ? (
           <div className="flex">
@@ -92,23 +92,23 @@ function App() {
           <Route path="/Login" element={<Login />} />
           <Route
             path="/Home"
-            element={user ? <Home isAuth={user} /> : <Navigate to="/" />}
+            element={user ? <Home isAuth={user} /> : <Navigate to="/Login" />}
           />
           <Route
             path="/Admin"
-            element={user ? <Admin user={user} /> : <Navigate to="/" />}
+            element={user ? <Admin user={user} /> : <Navigate to="/Login" />}
           />
           <Route
             path="/:languageName"
-            element={user ? <LanguagePage /> : <Navigate to="/" />}
+            element={user ? <LanguagePage /> : <Navigate to="/Login" />}
           />
           <Route
             path="/:languageName/:lessonId"
-            element={user ? <LessonPage /> : <Navigate to="/" />}
+            element={user ? <LessonPage /> : <Navigate to="/Login" />}
           />
           <Route
             path="/:languageName/:levelId/:lessonId"
-            element={user ? <Soon /> : <Navigate to="/" />}
+            element={user ? <Soon /> : <Navigate to="/Login" />}
           />
         </Routes>
       </div>

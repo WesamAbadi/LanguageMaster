@@ -3,14 +3,6 @@ $color_4: red;
 $font-family_1: "Manrope", sans-serif;
 
 @import "https://fonts.googleapis.com/css2?family=Manrope&display=swap";
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
 .flex {
   display: flex;
   align-items: center;
@@ -20,8 +12,8 @@ $font-family_1: "Manrope", sans-serif;
 }
 body {
   font-family: $font-family_1;
-  animation: fadeIn 1s;
   background: black;
+  animation: fadeIn 1s;
   h2 {
     font-size: 2.75rem;
     line-height: 3.25rem;
@@ -64,9 +56,9 @@ nav {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
   a {
-    color: #ffffff; // Default text color for links
+    color: #ffffff; 
     text-decoration: none;
-    margin: 0 10px; // Spacing between links
+    margin: 0 10px; 
     transition: color 0.3s;
     padding: 5px;
   }
@@ -91,12 +83,6 @@ nav {
     font-weight: bold;
     background: rgba(0, 0, 0, 0.3);
     border-radius: 5px;
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
   }
 }
 @keyframes fadeIn {

@@ -39,7 +39,7 @@
   border-radius: 10px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   transition: transform 0.2s ease-in-out;
-  animation-name: fadeIn;
+  animation-name: fadeIn2;
 
   /* ======== General styling of all cards and heart divs ========== */
   .img-div {
@@ -185,7 +185,7 @@
   transform: translate(0, -10px);
 }
 
-@keyframes fadeIn {
+@keyframes fadeIn2 {
   0% {
     opacity: 0;
   }

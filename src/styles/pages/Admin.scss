@@ -31,10 +31,11 @@ $background-color_3: #f9f9f9;
 button {
   background: rgb(255 255 255 / 21%);
   border: none;
-  border-radius: 5px;
+  border-radius: 2rem;
   padding: 8px 12px;
-  color: #000000;
+  color: #ffffff;
   cursor: pointer;
+  margin: 0px 5px;
   transition: background 0.3s, transform 0.2s;
 
   &:hover {
