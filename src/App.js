@@ -22,6 +22,7 @@ import Soon from "./pages/Soon";
 function App() {
   const [user, setUser] = useState(null);
   const isAdminUser = user !== null && user.admin === true;
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(async (authUser) => {
@@ -47,6 +48,9 @@ function App() {
       } else {
         setUser(null);
       }
+      setLoading(false);
+      console.log(authUser);
+      console.log(user);
     });
 
     return () => {
@@ -69,7 +73,10 @@ function App() {
       console.error("Error signing out:", error);
     }
   };
-
+  if (loading) {
+    // Render a loading indicator while waiting for the data to load
+    return <div>Loading...</div>;
+  }
   return (
     <Router>
       <nav>
