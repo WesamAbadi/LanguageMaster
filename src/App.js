@@ -89,12 +89,27 @@ function App() {
         <Routes>
           <Route path="*" element={<Navigate to="/" replace />} />
           <Route path="/" element={<Landing />} />
-          <Route path="/Home" element={<Home isAuth={user} />} />
           <Route path="/Login" element={<Login />} />
-          <Route path="/Admin" element={<Admin user={user} />} />
-          <Route path="/:languageName" element={<LanguagePage />} />
-          <Route path="/:languageName/:lessonId" element={<LessonPage />} />
-          <Route path="/:languageName/:levelId/:lessonId" element={<Soon />} />
+          <Route
+            path="/Home"
+            element={user ? <Home isAuth={user} /> : <Navigate to="/" />}
+          />
+          <Route
+            path="/Admin"
+            element={user ? <Admin user={user} /> : <Navigate to="/" />}
+          />
+          <Route
+            path="/:languageName"
+            element={user ? <LanguagePage /> : <Navigate to="/" />}
+          />
+          <Route
+            path="/:languageName/:lessonId"
+            element={user ? <LessonPage /> : <Navigate to="/" />}
+          />
+          <Route
+            path="/:languageName/:levelId/:lessonId"
+            element={user ? <Soon /> : <Navigate to="/" />}
+          />
         </Routes>
       </div>
     </Router>
