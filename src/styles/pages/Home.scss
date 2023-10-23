@@ -7,3 +7,25 @@
     text-decoration: none;
   }
 }
+
+.card-row {
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: repeat(3, 1fr);
+  min-height: 264px;
+  .suggestion-card {
+    background: #0e0e0e;
+    margin: 1rem;
+    padding: 1rem;
+    border-radius: 2rem;
+    .buttons-row {
+      display: inline-grid;
+      button {
+        color: white;
+        background: #1e1f20;
+        border-radius: 2rem;
+        margin: 5px;
+      }
+    }
+  }
+}

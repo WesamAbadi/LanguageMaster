@@ -85,16 +85,18 @@ function App() {
           <button onClick={signInWithGoogle}>Sign in with Google</button>
         )}
       </nav>
-      <Routes>
-        <Route path="*" element={<Navigate to="/" replace />} />
-        <Route path="/" element={<Landing />} />
-        <Route path="/Home" element={<Home isAuth={user} />} />
-        <Route path="/Login" element={<Login />} />
-        <Route path="/Admin" element={<Admin user={user} />} />
-        <Route path="/:languageName" element={<LanguagePage />} />
-        <Route path="/:languageName/:lessonId" element={<LessonPage />} />
-        <Route path="/:languageName/:levelId/:lessonId" element={<Soon />} />
-      </Routes>
+      <div className="content-container">
+        <Routes>
+          <Route path="*" element={<Navigate to="/" replace />} />
+          <Route path="/" element={<Landing />} />
+          <Route path="/Home" element={<Home isAuth={user} />} />
+          <Route path="/Login" element={<Login />} />
+          <Route path="/Admin" element={<Admin user={user} />} />
+          <Route path="/:languageName" element={<LanguagePage />} />
+          <Route path="/:languageName/:lessonId" element={<LessonPage />} />
+          <Route path="/:languageName/:levelId/:lessonId" element={<Soon />} />
+        </Routes>
+      </div>
     </Router>
   );
 }

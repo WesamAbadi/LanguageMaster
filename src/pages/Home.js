@@ -29,22 +29,55 @@ function Home({ isAuth }) {
 
   return (
     <div className="home">
-      <h2>Home</h2>
-      <div>
-        <p>Contuniue where you left off </p>
+      <h2>LOGO</h2>
+      <h2>Home again</h2>
+      <p> Welcome to the home page </p>
+      <div className="card-row">
+        <div className="suggestion-card">
+          <h3>Pick up where you left off</h3>
+          <div className="buttons-row">
+            <button>Get Started</button>
+            <button>Get Started</button>
+            <button>Get Started</button>
+          </div>
+        </div>
+        <div className="suggestion-card">
+          <h3>Explore new languages</h3>
+          <div className="buttons-row">
+            {languages.map((language, index) => (
+              <Link
+                to={`/${language.data.title}`}
+                meta={language.id}
+                key={language.id}
+              >
+                <button>{ language.data.title }</button>
+              </Link>
+            ))}
+          </div>
+        </div>
+        <div className="suggestion-card">
+          <h3>Create content & give feedback</h3>
+          <div className="buttons-row">
+            <button>Get Started</button>
+            <button>Get Started</button>
+            <button>Get Started</button>
+          </div>
+        </div>
       </div>
-      <p>Or start learning a new language</p>
-
-      <div className="languages-grid">
+      {/* <div className="languages-grid">
         {languages.map((language, index) => (
-          <Link to={`/${language.data.title}`} meta={language.id} key={language.id}>
+          <Link
+            to={`/${language.data.title}`}
+            meta={language.id}
+            key={language.id}
+          >
             <LanguageCard
               style={{ animationDuration: `${1 + index * 0.25}s` }}
               language={language}
             />
           </Link>
         ))}
-      </div>
+      </div> */}
     </div>
   );
 }
