@@ -72,7 +72,7 @@ nav {
     background: unset;
     font-size: 21px;
     display: flex;
-    margin: 0;
+    margin: 2px;
     &:hover {
       background: rgb(255 255 255 / 11%);
     }
@@ -87,6 +87,7 @@ nav {
 }
 
 .extensions-container {
+  display: grid;
   .extension {
     display: grid;
     grid-auto-flow: column;

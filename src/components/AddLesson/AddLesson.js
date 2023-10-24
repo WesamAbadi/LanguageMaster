@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import { doc, setDoc, getDocs, collection } from "firebase/firestore";
 import { db } from "../../config/firebase-config";
 import Lestining from "./Lestining";
+import Speaking from "./Speaking";
 import LessonCard from "../ViewLesson/LessonCard";
-
 import TabSwitch from "../TabSwitch";
 
 function AddLesson({ updateFeedback }) {
   const [activeTab, setActiveTab] = useState(-5);
-  const tabNames = ["Lestining", "speaking", "Add a new lesson"];
+  const tabNames = ["Lestining", "speaking", "Quiz"];
 
   const [languages, setLanguages] = useState([]);
   const [selectedLanguage, setSelectedLanguage] = useState("");
@@ -80,15 +80,23 @@ function AddLesson({ updateFeedback }) {
         } else if (activeTab === 1) {
           lessonType = "speaking";
         }
+        if (lessonType === "speaking") {
+          const newLessonData = {
+            title: newLessonTitle,
+            content: newLessonContent,
+            type: lessonType,
+          };
+          await setDoc(lessonDocRef, newLessonData);
+        } else {
+          const newLessonData = {
+            title: newLessonTitle,
+            content: newLessonContent,
+            mp3: newLessonMp3,
+            type: lessonType,
+          };
+          await setDoc(lessonDocRef, newLessonData);
+        }
 
-        const newLessonData = {
-          title: newLessonTitle,
-          content: newLessonContent,
-          mp3: newLessonMp3,
-          type: lessonType,
-        };
-
-        await setDoc(lessonDocRef, newLessonData);
 
         setNewLessonTitle("");
         setNewLessonContent("");
@@ -176,14 +184,22 @@ function AddLesson({ updateFeedback }) {
           setNewLessonMp3={setNewLessonMp3}
         />
       ) : activeTab === 1 ? (
-        <p>SOON</p>
+        <p>
+          {" "}
+          <Speaking
+            newLessonTitle={newLessonTitle}
+            newLessonContent={newLessonContent}
+            setNewLessonTitle={setNewLessonTitle}
+            setNewLessonContent={setNewLessonContent}
+          />
+        </p>
       ) : activeTab === 2 ? (
         <p>SOON</p>
       ) : (
         <p>Please select a tab</p>
       )}
 
-      {[0].includes(activeTab) && (
+      {[0, 1].includes(activeTab) && (
         <button className="add-lesson-button" onClick={createLesson}>
           Add new lesson
         </button>

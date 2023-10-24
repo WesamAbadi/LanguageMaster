@@ -4,6 +4,7 @@ import { doc, getDoc, setDoc, collection } from "firebase/firestore";
 import { db, auth } from "../config/firebase-config";
 import { useParams } from "react-router-dom";
 import Lestining from "../components/ViewLesson/Lestining";
+import Speaking from "../components/ViewLesson/Speaking";
 function LessonPage() {
   const { languageName, lessonId } = useParams();
   const [lessonData, setLessonData] = useState(null);
@@ -105,6 +106,12 @@ function LessonPage() {
       <h1>{lessonId}</h1>
       {lessonData.type === "lestining" && (
         <Lestining
+          lessonData={lessonData}
+          markLessonCompleted={markLessonCompleted}
+        />
+      )}
+      {lessonData.type === "speaking" && (
+        <Speaking
           lessonData={lessonData}
           markLessonCompleted={markLessonCompleted}
         />

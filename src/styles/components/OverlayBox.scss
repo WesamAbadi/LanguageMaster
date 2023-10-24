@@ -3,6 +3,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  &:has(.overlay-content) {
+    background-color: #232323;
+    border-radius: 2rem;
+  }
   .overlay-content {
     display: flex;
     justify-content: center;
@@ -14,7 +18,7 @@
     min-height: 13rem;
     position: absolute;
     top: 3rem;
-    left: -16rem;
+    left: -15.7rem;
     color: white;
     .user-info {
       display: flex;
