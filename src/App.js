@@ -8,6 +8,8 @@ import {
   Navigate,
   useNavigate,
 } from "react-router-dom";
+import { FaPuzzlePiece, FaRegCircleQuestion, FaGear } from "react-icons/fa6";
+
 
 import { auth, googleProvider, db } from "./config/firebase-config";
 import { signInWithPopup, signOut } from "firebase/auth";
@@ -87,10 +89,23 @@ function App() {
         </div>
         {user ? (
           <div className="flex">
-            <button onClick={signOutUser}>Sign out</button>
+            <button className="icons">
+              <FaRegCircleQuestion />
+            </button>
+            <button className="icons">
+              <FaPuzzlePiece />
+            </button>
+            <button className="icons">
+              <FaGear />
+            </button>
+            <button className="login-button" onClick={signOutUser}>
+              Sign out
+            </button>
           </div>
         ) : (
-          <button onClick={signInWithGoogle}>Sign in with Google</button>
+          <button className="login-button" onClick={signInWithGoogle}>
+            Sign in with Google
+          </button>
         )}
       </nav>
       <div className="content-container">

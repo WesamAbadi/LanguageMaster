@@ -66,18 +66,14 @@ nav {
     padding: 5px;
   }
 
-  button {
-    background: rgb(255 255 255 / 11%);
-    border: none;
-    border-radius: 5px;
-    padding: 8px 12px;
-    color: white;
-    cursor: pointer;
-    transition: background 0.3s, transform 0.2s;
 
+  .icons {
+    background: unset;
+    font-size: 21px;
+    display: flex;
+    margin: 0;
     &:hover {
-      background: rgba(255, 255, 255, 0.3);
-      transform: scale(1.05);
+      background: rgb(255 255 255 / 11%);
     }
   }
 
