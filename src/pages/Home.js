@@ -8,6 +8,9 @@ import LanguageCard from "../components/LanguageCard";
 function Home({ isAuth }) {
   const [languages, setLanguages] = useState([]);
   const [progress, setProgress] = useState([]);
+  const [displayAll, setDisplayAll] = useState(false);
+  const itemsToShow = displayAll ? languages : languages.slice(0, 3);
+
   let navigate = useNavigate();
 
   const fetchLanguages = async () => {
@@ -34,6 +37,10 @@ function Home({ isAuth }) {
     }
   };
 
+    const toggleDisplay = () => {
+      setDisplayAll(!displayAll);
+    };
+
   useEffect(() => {
     if (!isAuth) {
       navigate("/");
@@ -46,7 +53,7 @@ function Home({ isAuth }) {
     <div className="home">
       <h2>LOGO</h2>
       <h2>
-        Welcome again, {isAuth.name ? isAuth.name.split(" ")[0]+"!" : "Guest"}
+        Welcome again, {isAuth.name ? isAuth.name.split(" ")[0] + "!" : "Guest"}
       </h2>
       <p> Start your learinng journey with us, let's get started! </p>
       <div className="card-row">
@@ -63,7 +70,7 @@ function Home({ isAuth }) {
         <div className="suggestion-card">
           <h3>Explore new languages</h3>
           <div className="buttons-row">
-            {languages.map((language, index) => (
+            {itemsToShow.map((language, index) => (
               <Link
                 to={`/${language.data.title}`}
                 meta={language.id}
@@ -72,6 +79,11 @@ function Home({ isAuth }) {
                 <button>{language.data.title}</button>
               </Link>
             ))}
+            {languages.length > 3 && (
+              <button onClick={toggleDisplay}>
+                {displayAll ? "...Show Less" : "...Show All"}
+              </button>
+            )}
           </div>
         </div>
         <div className="suggestion-card">
