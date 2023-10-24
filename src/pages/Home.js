@@ -6,7 +6,6 @@ import "../styles/pages/Home.scss";
 
 import LanguageCard from "../components/LanguageCard";
 function Home({ isAuth }) {
-  console.log(isAuth);
   const [languages, setLanguages] = useState([]);
   const [progress, setProgress] = useState([]);
   let navigate = useNavigate();
@@ -30,7 +29,6 @@ function Home({ isAuth }) {
         data: doc.data(),
       }));
       setProgress(progressData);
-      console.log("progress: ", progressData);
     } catch (error) {
       console.error("Error fetching user progress:", error);
     }
@@ -47,18 +45,16 @@ function Home({ isAuth }) {
   return (
     <div className="home">
       <h2>LOGO</h2>
-      <h2>Home again</h2>
-      <p> Welcome to the home page </p>
+      <h2>
+        Welcome again, {isAuth.name ? isAuth.name.split(" ")[0]+"!" : "Guest"}
+      </h2>
+      <p> Start your learinng journey with us, let's get started! </p>
       <div className="card-row">
         <div className="suggestion-card">
           <h3>Pick up where you left off</h3>
           <div className="buttons-row">
             {progress.map((language, index) => (
-              <Link
-                to={`/${language.id}`}
-                meta={language.id}
-                key={language.id}
-              >
+              <Link to={`/${language.id}`} meta={language.id} key={language.id}>
                 <button>{language.id}</button>
               </Link>
             ))}

@@ -24,9 +24,7 @@ function Listening({ lessonData, markLessonCompleted }) {
       100
     ).toFixed(2);
 
-    console.log("Matching Percentage: " + matchPercentage + "%");
     if (matchPercentage >= 70) {
-      console.log("Lesson is completed!");
       markLessonCompleted();
     }
 

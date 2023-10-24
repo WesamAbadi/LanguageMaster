@@ -63,7 +63,6 @@ function LanguagePage() {
         data: languageDocSnapshot.data(),
       };
       setProgress(progressData);
-      console.log("progress: ", progressData);
     } catch (error) {
       console.error("Error fetching user progress:", error);
     }

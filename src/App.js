@@ -6,6 +6,7 @@ import {
   Route,
   NavLink,
   Navigate,
+  useNavigate,
 } from "react-router-dom";
 
 import { auth, googleProvider, db } from "./config/firebase-config";
@@ -23,6 +24,7 @@ function App() {
   const [user, setUser] = useState(null);
   const isAdminUser = user !== null && user.admin === true;
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(async (authUser) => {
@@ -49,8 +51,6 @@ function App() {
         setUser(null);
       }
       setLoading(false);
-      console.log(authUser);
-      console.log(user);
     });
 
     return () => {
@@ -61,6 +61,7 @@ function App() {
   const signInWithGoogle = async () => {
     try {
       await signInWithPopup(auth, googleProvider);
+      navigate("/home");
     } catch (error) {
       console.error("Error signing in with Google:", error);
     }
@@ -69,6 +70,7 @@ function App() {
   const signOutUser = async () => {
     try {
       await signOut(auth);
+      navigate("/");
     } catch (error) {
       console.error("Error signing out:", error);
     }
@@ -77,7 +79,7 @@ function App() {
     return <div>Loading...</div>;
   }
   return (
-    <Router>
+    <div>
       <nav>
         <div>
           <NavLink to={user ? "/Home" : "/"}>Home</NavLink>
@@ -118,7 +120,7 @@ function App() {
           />
         </Routes>
       </div>
-    </Router>
+    </div>
   );
 }
 

@@ -1,6 +1,6 @@
 // LessonPage.js
 import React, { useState, useEffect } from "react";
-import { doc, getDoc, getDocs, setDoc, collection } from "firebase/firestore";
+import { doc, getDoc, setDoc, collection } from "firebase/firestore";
 import { db, auth } from "../config/firebase-config";
 import { useParams } from "react-router-dom";
 import Lestining from "../components/ViewLesson/Lestining";

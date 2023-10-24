@@ -45,6 +45,9 @@
     line-height: normal;
     user-select: none;
     color: #adadadab;
+    &:hover {
+      color: white;
+    }
   }
 
   .tab-switch .tab.active {
