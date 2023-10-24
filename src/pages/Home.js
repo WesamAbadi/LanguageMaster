@@ -20,6 +20,7 @@ function Home({ isAuth }) {
       id: doc.id,
       data: doc.data(),
     }));
+    localStorage.setItem("languagesData", JSON.stringify(languagesData));
     setLanguages(languagesData);
   };
   const fetchUserProgress = async () => {

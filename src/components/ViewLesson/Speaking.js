@@ -3,7 +3,7 @@ import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
 
-function Speaking() {
+function Speaking({ lessonData, markLessonCompleted, languageCode }) {
   const {
     transcript,
     listening,
@@ -14,12 +14,22 @@ function Speaking() {
   if (!browserSupportsSpeechRecognition) {
     return <span>Browser doesn't support speech recognition.</span>;
   }
+
   return (
     <div>
       Speaking
       <div>
         <p>Microphone: {listening ? "on" : "off"}</p>
-        <button onClick={SpeechRecognition.startListening}>Start</button>
+        <button
+          onClick={() =>
+            SpeechRecognition.startListening({
+              continuous: true,
+              language: languageCode,
+            })
+          }
+        >
+          Start
+        </button>
         <button onClick={SpeechRecognition.stopListening}>Stop</button>
         <button onClick={resetTranscript}>Reset</button>
         <p>{transcript}</p>

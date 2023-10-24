@@ -6,6 +6,7 @@ import "../styles/components/AddLanguage.scss";
 function AddLanguage({ updateFeedback }) {
   const [languageName, setLanguageName] = useState("");
   const [languageDescription, setLanguageDescription] = useState("DESCRIPTION");
+  const [languageCode, selectedLanguageCode] = useState("en");
   const [languageImage, setLanguageImage] = useState(
     "https://superpalestinian.com/cdn/shop/products/image_09032836-9067-40fb-ae76-1c1de1cbc1ef.png?v=1669664967&width=1946"
   );
@@ -17,6 +18,7 @@ function AddLanguage({ updateFeedback }) {
         title: languageName,
         description: languageDescription,
         image: languageImage,
+        code: languageCode,
       };
       await setDoc(languageRef, languageData);
       setLanguageName("");
@@ -36,6 +38,21 @@ function AddLanguage({ updateFeedback }) {
         onChange={(e) => setLanguageName(e.target.value)}
         className="language-input"
       />
+      <div style={{ display: "flex", alignItems: "baseline" }}>
+        <input
+          type="text"
+          placeholder="Language code"
+          value={languageCode}
+          onChange={(e) => setLanguageName(e.target.value)}
+          className="language-input"
+        />
+        <a
+          target="_blank"
+          href="https://github.com/JamesBrill/react-speech-recognition/blob/HEAD/docs/API.md#language-string"
+        >
+          <button style={{ height: "30px", width: "30px" }}>?</button>
+        </a>
+      </div>
       <input
         type="text"
         placeholder="Language description"

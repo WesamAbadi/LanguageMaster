@@ -9,6 +9,8 @@ function LessonPage() {
   const { languageName, lessonId } = useParams();
   const [lessonData, setLessonData] = useState(null);
   const [isCompleted, setIsCompleted] = useState(false);
+  const [languageCode, setlanguageCode] = useState(null);
+
   const fetchLesson = async () => {
     try {
       if (languageName && lessonId) {
@@ -88,9 +90,26 @@ function LessonPage() {
     }
   };
 
+  const getLanguageCode = async () => {
+    const storedLanguagesData = localStorage.getItem("languagesData");
+    if (storedLanguagesData) {
+      const parsedLanguagesData = JSON.parse(storedLanguagesData);
+      for (const language of parsedLanguagesData) {
+        if (language.data.title === languageName) {
+          if (language.data.code) {
+            setlanguageCode(language.data.code);
+            console.log(language.data.code);
+          }
+          break;
+        }
+      }
+    }
+  };
+
   useEffect(() => {
-    fetchLesson(); 
+    fetchLesson();
     checkIfCompleted();
+    getLanguageCode();
   }, [languageName, lessonId]);
 
   if (!lessonData) {
@@ -99,7 +118,7 @@ function LessonPage() {
 
   return (
     <div className="lesson-page">
-      {!isCompleted && ( // Check if the lesson is not already completed
+      {!isCompleted && (
         <button onClick={() => markLessonCompleted()}>Mark as completed</button>
       )}
       {isCompleted && <p>Lesson is already completed</p>}
@@ -114,6 +133,7 @@ function LessonPage() {
         <Speaking
           lessonData={lessonData}
           markLessonCompleted={markLessonCompleted}
+          languageCode={languageCode}
         />
       )}
     </div>
