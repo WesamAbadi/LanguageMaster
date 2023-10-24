@@ -13,7 +13,12 @@ import { auth, googleProvider, db } from "./config/firebase-config";
 import { signInWithPopup, signOut } from "firebase/auth";
 import { doc, setDoc, getDoc, collection } from "firebase/firestore";
 
-import { FaPuzzlePiece, FaRegCircleQuestion, FaGear } from "react-icons/fa6";
+import {
+  FaPuzzlePiece,
+  FaRegCircleQuestion,
+  FaGear,
+  FaCircleUser,
+} from "react-icons/fa6";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Admin from "./pages/Admin";
@@ -92,20 +97,25 @@ function App() {
           <div className="flex">
             <OverlayBox
               icon={<FaRegCircleQuestion />}
-              content={<div>Content for Circle</div>}
+              content={<div>FAQ</div>}
             />
             <OverlayBox
               icon={<FaPuzzlePiece />}
-              content={<div>Content for Puzzle Piece</div>}
+              content={<div>Extensions</div>}
             />
+            <OverlayBox icon={<FaGear />} content={<div>Settings</div>} />
             <OverlayBox
-              icon={<FaGear />}
-              content={<div>Content for Gear</div>}
+              icon={<FaCircleUser />}
+              content={
+                <div className="user-info">
+                  <p>{user.email}</p>
+                  <p>{user.name}</p>
+                  <button className="login-button" onClick={signOutUser}>
+                    Sign out
+                  </button>
+                </div>
+              }
             />
-
-            <button className="login-button" onClick={signOutUser}>
-              Sign out
-            </button>
           </div>
         ) : (
           <button className="login-button" onClick={signInWithGoogle}>
