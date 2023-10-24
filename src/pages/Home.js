@@ -80,8 +80,8 @@ function Home({ isAuth }) {
               </Link>
             ))}
             {languages.length > 3 && (
-              <button onClick={toggleDisplay}>
-                {displayAll ? "...Show Less" : "...Show All"}
+              <button className="show-more" onClick={toggleDisplay}>
+                {displayAll ? "Show Less -" : "Show More +"}
               </button>
             )}
           </div>
