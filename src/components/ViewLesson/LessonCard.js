@@ -11,7 +11,7 @@ function LessonCard({ lesson, languageName, isCompleted }) {
           key={lesson.id}
         >
           <p className="lesson-type">Type: {lesson.data.type}</p>
-          <h3>Title: {lesson.data.title}</h3>
+          <p>Title: {lesson.data.title}</p>
         </div>
       </Link>
     </div>

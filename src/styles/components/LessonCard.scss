@@ -2,9 +2,12 @@
   border-radius: 1rem;
   padding: 10px;
   margin: 10px;
-  background: rgba(255, 255, 255, 0.33);
-  backdrop-filter: blur(7px);
+  background: #0e0e0e;
   animation: popup 0.5s;
+  p{
+    color: white;
+    text-align: center;
+  }
 
   &.completed {
     ::before {
@@ -15,6 +18,9 @@
       font-size: 15px;
       color: gold;
     }
+  }
+  &:hover{
+    border: rgba(255, 255, 255, 0.158) solid 1px;
   }
 }
 

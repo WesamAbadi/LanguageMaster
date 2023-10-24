@@ -8,7 +8,7 @@
   .tab-switch {
     position: relative;
     text-align: center;
-    background: rgba(255, 255, 255, 0.33);
+    background: rgba(0, 0, 0, 0.33);
     -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -23,7 +23,7 @@
     transition: transform cubic-bezier(0.88, -0.35, 0.565, 1.35) 0.4s;
     border-radius: 27.5px;
     box-shadow: 0 2px 15px 0 rgba(0, 0, 0, 0.1);
-    background-color: #69808f;
+    background-color: #334e5f;
     height: 100%;
     z-index: 0;
   }
@@ -44,6 +44,7 @@
     font-weight: bold;
     line-height: normal;
     user-select: none;
+    color: #adadadab;
   }
 
   .tab-switch .tab.active {
