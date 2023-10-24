@@ -60,7 +60,7 @@ function LanguagePage() {
 
       const progressData = {
         id: languageDocSnapshot.id,
-        data: languageDocSnapshot.data() || null, // Set to an empty object if data() is undefined
+        data: languageDocSnapshot.data() || null,
       };
       setProgress(progressData);
     } catch (error) {

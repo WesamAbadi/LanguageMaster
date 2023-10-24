@@ -25,8 +25,8 @@ function Home({ isAuth }) {
   };
   const fetchUserProgress = async () => {
     try {
-      const userDocRef = doc(db, "users", isAuth.uid); // Reference to the user's document
-      const progressCollectionRef = collection(userDocRef, "progress"); // Reference to the progress subcollection
+      const userDocRef = doc(db, "users", isAuth.uid);
+      const progressCollectionRef = collection(userDocRef, "progress");
       const progressSnapshot = await getDocs(progressCollectionRef);
       const progressData = progressSnapshot.docs.map((doc) => ({
         id: doc.id,

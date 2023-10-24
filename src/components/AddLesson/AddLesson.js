@@ -118,7 +118,7 @@ function AddLesson({ updateFeedback }) {
 
   useEffect(() => {
     fetchLanguages();
-    fetchLessons(); // eslint-disable-next-line react-hooks/exhaustive-deps
+    fetchLessons(); 
   }, [selectedLanguage]);
 
   return (

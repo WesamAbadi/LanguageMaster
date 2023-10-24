@@ -5,7 +5,6 @@ import SpeechRecognition, {
 } from "react-speech-recognition";
 
 function Speaking({ lessonData, markLessonCompleted, languageCode }) {
-  const [inputText, setInputText] = useState("");
   const [comparisonResult, setComparisonResult] = useState(null);
   const dmp = new diff_match_patch();
 
@@ -36,16 +35,13 @@ function Speaking({ lessonData, markLessonCompleted, languageCode }) {
       markLessonCompleted();
     }
 
-    // Render the differences with highlights
     const diffElements = differences.map((diff, index) => {
       const key = `${diff[0]}_${index}`;
       let className = "neutral";
 
       if (diff[0] === -1) {
-        // Incorrect part
         className = "difference-wrong";
       } else if (diff[0] === 0) {
-        // Correct part
         className = "difference-correct";
       }
 
@@ -55,8 +51,6 @@ function Speaking({ lessonData, markLessonCompleted, languageCode }) {
         </span>
       );
     });
-
-    // Set the comparison result in state
     setComparisonResult(
       <div>
         <p>Matching Percentage: {Math.round(matchPercentage)}%</p>

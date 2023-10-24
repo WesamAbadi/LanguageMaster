@@ -1,4 +1,3 @@
-// LessonPage.js
 import React, { useState, useEffect } from "react";
 import { doc, getDoc, setDoc, collection } from "firebase/firestore";
 import { db, auth } from "../config/firebase-config";

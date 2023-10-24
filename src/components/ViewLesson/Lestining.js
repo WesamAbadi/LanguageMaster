@@ -29,16 +29,13 @@ function Listening({ lessonData, markLessonCompleted }) {
       markLessonCompleted();
     }
 
-    // Render the differences with highlights
     const diffElements = differences.map((diff, index) => {
       const key = `${diff[0]}_${index}`;
       let className = "neutral";
 
       if (diff[0] === -1) {
-        // Incorrect part
         className = "difference-wrong";
       } else if (diff[0] === 0) {
-        // Correct part
         className = "difference-correct";
       }
 
@@ -49,7 +46,6 @@ function Listening({ lessonData, markLessonCompleted }) {
       );
     });
 
-    // Set the comparison result in state
     setComparisonResult(
       <div>
         <p>Matching Percentage: {Math.round(matchPercentage)}%</p>
