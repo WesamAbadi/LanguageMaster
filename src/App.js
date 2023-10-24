@@ -74,7 +74,6 @@ function App() {
     }
   };
   if (loading) {
-    // Render a loading indicator while waiting for the data to load
     return <div>Loading...</div>;
   }
   return (
