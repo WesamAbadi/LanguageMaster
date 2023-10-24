@@ -62,7 +62,6 @@ function LanguagePage() {
         id: languageDocSnapshot.id,
         data: languageDocSnapshot.data() || null, // Set to an empty object if data() is undefined
       };
-      console.log("progress2 is: ", progressData);
       setProgress(progressData);
     } catch (error) {
       console.error("Error fetching user progress:", error);
@@ -76,7 +75,6 @@ function LanguagePage() {
   useEffect(() => {
     fetchLanguagesAndLessons();
     fetchUserProgress();
-    console.log("progress is: ", progress);
   }, []);
 
   return (

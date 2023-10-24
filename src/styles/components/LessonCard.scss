@@ -5,23 +5,29 @@
   background: #0e0e0e;
   animation: popup 0.5s;
   position: relative;
-  p{
+  p {
     color: white;
     text-align: center;
   }
 
   &.completed {
     ::before {
-      content: "✔";
+      content: "Done ✔";
       position: absolute;
       top: 5px;
       right: 10px;
-      font-size: 15px;
-      color: gold;
+      font-size: 13px;
+      color: #5db92678;
+      font-weight: 100;
+      opacity: 1;
+      transition: opacity 0.15s ease;
     }
   }
-  &:hover{
+  &:hover {
     border: rgba(255, 255, 255, 0.158) solid 1px;
+    ::before {
+      opacity: 0.3;
+    }
   }
 }
 

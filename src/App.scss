@@ -57,9 +57,11 @@ nav {
   justify-content: space-between;
   align-items: center;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 2;
 
   a {
-    color: #ffffff;
+    color: #ffffffa8;
     text-decoration: none;
     margin: 0 10px;
     transition: color 0.3s;
@@ -102,7 +104,7 @@ nav {
       text-indent: -9999px;
       width: 70px;
       height: 32px;
-      background: grey;
+      background: #80808047;
       display: block;
       border-radius: 100px;
       position: relative;
