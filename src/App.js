@@ -8,12 +8,12 @@ import {
   Navigate,
   useNavigate,
 } from "react-router-dom";
-import { FaPuzzlePiece, FaRegCircleQuestion, FaGear } from "react-icons/fa6";
-
 
 import { auth, googleProvider, db } from "./config/firebase-config";
 import { signInWithPopup, signOut } from "firebase/auth";
 import { doc, setDoc, getDoc, collection } from "firebase/firestore";
+
+import { FaPuzzlePiece, FaRegCircleQuestion, FaGear } from "react-icons/fa6";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Admin from "./pages/Admin";
@@ -21,6 +21,7 @@ import LanguagePage from "./pages/LanguagePage";
 import LessonPage from "./pages/LessonPage";
 import Landing from "./pages/Landing";
 import Soon from "./pages/Soon";
+import OverlayBox from "./components/Home/OverlayBox";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -89,15 +90,19 @@ function App() {
         </div>
         {user ? (
           <div className="flex">
-            <button className="icons">
-              <FaRegCircleQuestion />
-            </button>
-            <button className="icons">
-              <FaPuzzlePiece />
-            </button>
-            <button className="icons">
-              <FaGear />
-            </button>
+            <OverlayBox
+              icon={<FaRegCircleQuestion />}
+              content={<div>Content for Circle</div>}
+            />
+            <OverlayBox
+              icon={<FaPuzzlePiece />}
+              content={<div>Content for Puzzle Piece</div>}
+            />
+            <OverlayBox
+              icon={<FaGear />}
+              content={<div>Content for Gear</div>}
+            />
+
             <button className="login-button" onClick={signOutUser}>
               Sign out
             </button>

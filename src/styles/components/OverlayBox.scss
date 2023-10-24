@@ -1,0 +1,15 @@
+.overlay-container {
+  position: relative;
+  .overlay-content {
+    background: gray;
+    border-radius: 2rem;
+    padding: 1rem;
+    width: 17rem;
+    height: 13rem;
+    opacity: 0.6;
+    position: absolute;
+    top: 3rem;
+    left: -16rem;
+    color: white;
+  }
+}
