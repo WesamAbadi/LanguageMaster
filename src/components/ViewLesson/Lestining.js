@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { diff_match_patch } from "diff-match-patch";
 import AudioPlayer from "./AudioPlayer";
+import "../../styles/components/Lestining.scss"
 
 const dmp = new diff_match_patch();
 

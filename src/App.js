@@ -32,6 +32,12 @@ function App() {
   const [user, setUser] = useState(null);
   const isAdminUser = user !== null && user.admin === true;
   const [loading, setLoading] = useState(true);
+  const initialCheckboxes = [
+    { id: "AI assistant", isChecked: false },
+    { id: "Popup translation", isChecked: false },
+    { id: "Music player", isChecked: false },
+  ];
+  const [checkboxes, setCheckboxes] = useState(initialCheckboxes);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -66,6 +72,13 @@ function App() {
     };
   }, []);
 
+  useEffect(() => {
+    const savedCheckboxes = localStorage.getItem("checkboxes");
+    if (savedCheckboxes) {
+      setCheckboxes(JSON.parse(savedCheckboxes));
+    }
+  }, []);
+
   const signInWithGoogle = async () => {
     try {
       await signInWithPopup(auth, googleProvider);
@@ -83,6 +96,22 @@ function App() {
       console.error("Error signing out:", error);
     }
   };
+
+  const handleCheckboxChange = (id) => {
+    const updatedCheckboxes = checkboxes.map((checkbox) => {
+      if (checkbox.id === id) {
+        return { ...checkbox, isChecked: !checkbox.isChecked };
+      }
+      return checkbox;
+    });
+    setCheckboxes(updatedCheckboxes);
+    saveCheckboxesToLocalStorage(updatedCheckboxes);
+  };
+
+  const saveCheckboxesToLocalStorage = (checkboxes) => {
+    localStorage.setItem("checkboxes", JSON.stringify(checkboxes));
+  };
+
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -101,7 +130,23 @@ function App() {
             />
             <OverlayBox
               icon={<FaPuzzlePiece />}
-              content={<div>Extensions</div>}
+              content={
+                <div className="extensions-container">
+                  <p>Extensions</p>
+                  {checkboxes.map((checkbox) => (
+                    <div className="extension" key={checkbox.id}>
+                      <p>{`${checkbox.id} ${checkbox.isChecked ? "" : ""}`}</p>
+                      <input
+                        type="checkbox"
+                        id={checkbox.id}
+                        checked={checkbox.isChecked}
+                        onChange={() => handleCheckboxChange(checkbox.id)}
+                      />
+                      <label htmlFor={checkbox.id}>Toggle {checkbox.id}</label>
+                    </div>
+                  ))}
+                </div>
+              }
             />
             <OverlayBox icon={<FaGear />} content={<div>Settings</div>} />
             <OverlayBox

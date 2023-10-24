@@ -37,9 +37,9 @@ function Home({ isAuth }) {
     }
   };
 
-    const toggleDisplay = () => {
-      setDisplayAll(!displayAll);
-    };
+  const toggleDisplay = () => {
+    setDisplayAll(!displayAll);
+  };
 
   useEffect(() => {
     if (!isAuth) {
@@ -60,25 +60,43 @@ function Home({ isAuth }) {
         <div className="suggestion-card">
           <h3>Pick up where you left off</h3>
           <div className="buttons-row">
-            {progress.map((language, index) => (
-              <Link to={`/${language.id}`} meta={language.id} key={language.id}>
-                <button>{language.id}</button>
-              </Link>
-            ))}
+            {progress.length > 0 ? (
+              progress.map((language, index) => (
+                <Link
+                  to={`/${language.id}`}
+                  meta={language.id}
+                  key={language.id}
+                >
+                  <button>{language.id}</button>
+                </Link>
+              ))
+            ) : (
+              <p>You have no progress :/</p>
+            )}
+            {progress.length > 3 && (
+              <button className="show-more" onClick={toggleDisplay}>
+                {displayAll ? "Show Less -" : "Show More +"}
+              </button>
+            )}
           </div>
         </div>
+
         <div className="suggestion-card">
           <h3>Explore new languages</h3>
           <div className="buttons-row">
-            {itemsToShow.map((language, index) => (
-              <Link
-                to={`/${language.data.title}`}
-                meta={language.id}
-                key={language.id}
-              >
-                <button>{language.data.title}</button>
-              </Link>
-            ))}
+            {itemsToShow.length > 0 ? (
+              itemsToShow.map((language, index) => (
+                <Link
+                  to={`/${language.data.title}`}
+                  meta={language.id}
+                  key={language.id}
+                >
+                  <button>{language.data.title}</button>
+                </Link>
+              ))
+            ) : (
+              <p>No languages found :/</p>
+            )}
             {languages.length > 3 && (
               <button className="show-more" onClick={toggleDisplay}>
                 {displayAll ? "Show Less -" : "Show More +"}
