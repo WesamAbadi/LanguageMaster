@@ -52,7 +52,9 @@ function Home({ isAuth }) {
 
   return (
     <div className="home">
-      <h2>LOGO</h2>
+      <div className="logo">
+        <img src={require("../assets/img/logo-cut.png")} alt="logo" />
+      </div>
       <h2>
         Welcome again, {isAuth.name ? isAuth.name.split(" ")[0] + "!" : "Guest"}
       </h2>

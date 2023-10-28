@@ -60,6 +60,28 @@ nav {
   position: relative;
   z-index: 2;
 
+  .flex {
+    display: flex;
+    align-items: center;
+    a {
+      padding: 0;
+    }
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      &.active {
+        img {
+          filter: contrast(1);
+          max-height: 40px;
+        }
+      }
+      img {
+        max-height: 30px;
+        margin-right: 5px;
+        filter: contrast(0);
+      }
+    }
+  }
   a {
     color: #ffffffa8;
     text-decoration: none;

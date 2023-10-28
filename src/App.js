@@ -118,8 +118,9 @@ function App() {
   return (
     <div>
       <nav>
-        <div>
-          <NavLink to={user ? "/Home" : "/"}>Home</NavLink>
+        <div className="flex" >
+            <NavLink className="logo" to={user ? "/Home" : "/"}><img src={require("./assets/img/logo-cut.png")} alt="logo" />
+            Home</NavLink>
           {user && <NavLink to="/Admin">Admin</NavLink>}
         </div>
         {user ? (

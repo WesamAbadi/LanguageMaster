@@ -1,0 +1,39 @@
+.hero {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .hero-content {
+    display: inline-grid;
+    justify-items: center;
+    .logo {
+		display: grid;
+		justify-items: center;
+      img {
+		max-height: 100px;
+      }
+      h2 {
+        margin-top: 0;
+        text-align: center;
+      }
+    }
+    .languages-row {
+      display: grid;
+      grid-auto-flow: column;
+      margin: 30px 0;
+      gap: 10px;
+      .language-box {
+        img {
+          max-height: 60px;
+          border: 10px solid #101010;
+          border-radius: 4rem;
+        }
+        p {
+          margin: 0;
+          text-decoration: none;
+          color: white;
+        }
+      }
+    }
+  }
+}
