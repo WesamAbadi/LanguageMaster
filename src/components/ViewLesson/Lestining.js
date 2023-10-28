@@ -63,24 +63,23 @@ function Listening({ lessonData, markLessonCompleted }) {
   };
 
   return (
-    <div>
-      <h3>Title: {lessonData.title}</h3>
-      <audio controls>
-        <source src={lessonData.mp3} />
-        Your browser does not support the audio element.
-      </audio>
-      <AudioPlayer />
-      <p>{lessonData.type}</p>
-      <textarea
-        name=""
-        id=""
-        cols="30"
-        rows="5"
-        value={inputText}
-        onChange={handleInputChange}
-      ></textarea>
-      <button onClick={compareAndHighlight}>Submit</button>
-      {comparisonResult}
+    <div className="lesson">
+      <div className="lestining">
+        <audio controls>
+          <source src={lessonData.mp3} />
+          Your browser does not support the audio element.
+        </audio>
+        <textarea
+          name=""
+          id=""
+          cols="30"
+          rows="5"
+          value={inputText}
+          onChange={handleInputChange}
+        ></textarea>
+        <button onClick={compareAndHighlight}>Submit</button>
+        {comparisonResult}
+      </div>
     </div>
   );
 }

@@ -50,13 +50,11 @@ body {
 }
 
 nav {
-  backdrop-filter: blur(10px);
   border-radius: 10px;
   padding: 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   position: relative;
   z-index: 2;
 
@@ -72,13 +70,15 @@ nav {
       &.active {
         img {
           filter: contrast(1);
-          max-height: 40px;
+          max-height: 30px;
+          transition: max-height 0.2s, filter 0.3s;
         }
       }
       img {
-        max-height: 30px;
+        max-height: 25px;
         margin-right: 5px;
         filter: contrast(0);
+        transition: max-height 0.2s, filter 0.3s;
       }
     }
   }
@@ -144,7 +144,7 @@ nav {
       }
       &:active {
         &:after {
-          width: 130px;
+          width: 60px;
         }
       }
     }

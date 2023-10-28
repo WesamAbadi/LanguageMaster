@@ -1,0 +1,15 @@
+.lesson-header {
+  .info {
+    padding: 0 5%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+  .seperator {
+    border-bottom: 4px solid #ffffff14;
+    width: 60%;
+    border-radius: 2rem;
+    margin: auto;
+    margin-bottom: 4rem;
+  }
+}

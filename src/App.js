@@ -133,7 +133,7 @@ function App() {
               icon={<FaPuzzlePiece />}
               content={
                 <div className="extensions-container">
-                  <p>Extensions</p>
+                  <p>Extensions (soon)</p>
                   {checkboxes.map((checkbox) => (
                     <div className="extension" key={checkbox.id}>
                       <p>{`${checkbox.id} ${checkbox.isChecked ? "" : ""}`}</p>

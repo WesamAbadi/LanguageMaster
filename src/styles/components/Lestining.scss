@@ -1,9 +1,22 @@
-.difference-correct {
-    color: green;
-}
-.difference-wrong {
-    color: red;
-}
-.neutral {
-    color: white;
+.lesson {
+  display: flex;
+  justify-content: center;
+  .lestining {
+    display: grid;
+    justify-items: center;
+    gap: 30px;
+    audio {
+      border: solid #494949 6px;
+      border-radius: 2rem;
+    }
+    .difference-correct {
+      color: green;
+    }
+    .difference-wrong {
+      color: red;
+    }
+    .neutral {
+      color: white;
+    }
+  }
 }

@@ -4,6 +4,7 @@ import { db, auth } from "../config/firebase-config";
 import { useParams } from "react-router-dom";
 import Lestining from "../components/ViewLesson/Lestining";
 import Speaking from "../components/ViewLesson/Speaking";
+import "../styles/pages/LessonPage.scss";
 function LessonPage() {
   const { languageName, lessonId } = useParams();
   const [lessonData, setLessonData] = useState(null);
@@ -117,11 +118,19 @@ function LessonPage() {
 
   return (
     <div className="lesson-page">
-      {!isCompleted && (
-        <button onClick={() => markLessonCompleted()}>Mark as completed</button>
-      )}
-      {isCompleted && <p>Lesson is already completed</p>}
-      <h1>{lessonId}</h1>
+      <div className="lesson-header">
+        <div className="info">
+          <h3>Lesson: {lessonId}</h3>
+          <h3>Title: {lessonData.title}</h3>
+          {isCompleted && <p>Lesson is already completed</p>}
+          {!isCompleted && (
+            <button onClick={() => markLessonCompleted()}>
+              Mark as completed
+            </button>
+          )}
+        </div>
+        <div className="seperator"></div>
+      </div>
       {lessonData.type === "lestining" && (
         <Lestining
           lessonData={lessonData}

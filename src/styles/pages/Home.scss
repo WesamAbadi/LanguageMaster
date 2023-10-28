@@ -4,7 +4,7 @@
   }
   .logo {
     img {
-      max-height: 100px;
+      max-height: 80px;
       filter: drop-shadow(8px 9px 9px black);
     }
   }
@@ -35,6 +35,7 @@
           background: #1e1f20;
           border-radius: 2rem;
           margin: 5px;
+          text-transform: capitalize;
           &.show-more {
             background: #878787a1;
             color: #ffffffb3;
