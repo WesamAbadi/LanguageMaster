@@ -9,14 +9,24 @@
       border: solid #494949 6px;
       border-radius: 2rem;
     }
-    .difference-correct {
-      color: green;
+    textarea {
+      width: 671px;
+      height: 174px;
+      font-size: 18px;
+      font-family: "Manrope";
+      border-radius: 2rem;
+      padding: 1rem;
     }
-    .difference-wrong {
-      color: red;
-    }
-    .neutral {
-      color: white;
+    .comparison {
+      .difference-correct {
+        color: green;
+      }
+      .difference-wrong {
+        color: red;
+      }
+      .neutral {
+        color: white;
+      }
     }
   }
 }

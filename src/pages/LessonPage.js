@@ -119,6 +119,8 @@ function LessonPage() {
   return (
     <div className="lesson-page">
       <div className="lesson-header">
+      <div className="back">
+        <a href={`/${languageName}`}>↩ Back to lessons</a></div>
         <div className="info">
           <h3>Lesson: {lessonId}</h3>
           <h3>Title: {lessonData.title}</h3>

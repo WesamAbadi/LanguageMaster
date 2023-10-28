@@ -78,7 +78,9 @@ function Listening({ lessonData, markLessonCompleted }) {
           onChange={handleInputChange}
         ></textarea>
         <button onClick={compareAndHighlight}>Submit</button>
+        <div className="comparison">
         {comparisonResult}
+        </div>
       </div>
     </div>
   );

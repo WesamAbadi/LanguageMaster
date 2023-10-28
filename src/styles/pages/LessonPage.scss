@@ -1,4 +1,17 @@
 .lesson-header {
+  .back {
+    a {
+      text-decoration: none;
+      color: white;
+      font-size: 13px;
+      transition: font-size 0.2s, color 0.3s;
+    }
+    a:hover {
+        font-size: 14px;
+        color: #ffffffb3;
+        transition: font-size 0.2s, color 0.3s;
+    }
+  }
   .info {
     padding: 0 5%;
     display: flex;
