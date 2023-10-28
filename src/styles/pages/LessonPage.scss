@@ -1,5 +1,14 @@
 .lesson-header {
   .back {
+    display: flex;
+    justify-content: space-between;
+    .lesson-type {
+      font-size: 10px;
+      font-weight: 100;
+      margin-left: 15px;
+      color: #ffffff52;
+      text-transform: capitalize;
+    }
     a {
       text-decoration: none;
       color: white;
@@ -7,9 +16,9 @@
       transition: font-size 0.2s, color 0.3s;
     }
     a:hover {
-        font-size: 14px;
-        color: #ffffffb3;
-        transition: font-size 0.2s, color 0.3s;
+      font-size: 14px;
+      color: #ffffffb3;
+      transition: font-size 0.2s, color 0.3s;
     }
   }
   .info {
@@ -24,5 +33,16 @@
     border-radius: 2rem;
     margin: auto;
     margin-bottom: 4rem;
+  }
+}
+.comparison {
+  .difference-correct {
+    color: green;
+  }
+  .difference-wrong {
+    color: red;
+  }
+  .neutral {
+    color: white;
   }
 }

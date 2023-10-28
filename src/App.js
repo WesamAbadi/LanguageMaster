@@ -53,7 +53,7 @@ function App() {
         } else {
           try {
             const newUserData = {
-              name: authUser.displayName, // Access displayName from authUser
+              name: authUser.displayName,
               admin: false,
             };
             await setDoc(userDocRef, newUserData);

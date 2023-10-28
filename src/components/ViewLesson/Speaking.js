@@ -3,6 +3,7 @@ import { diff_match_patch } from "diff-match-patch";
 import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
+import "../../styles/components/Speaking.scss";
 
 function Speaking({ lessonData, markLessonCompleted, languageCode }) {
   const [comparisonResult, setComparisonResult] = useState(null);
@@ -61,7 +62,6 @@ function Speaking({ lessonData, markLessonCompleted, languageCode }) {
         ) : (
           <p>Keep trying!</p>
         )}
-
         {diffElements}
       </div>
     );
@@ -69,26 +69,35 @@ function Speaking({ lessonData, markLessonCompleted, languageCode }) {
 
   return (
     <div>
-      Speaking
-      <div>
-        <p>Microphone: {listening ? "on" : "off"}</p>
-        <button
-          onClick={() =>
-            SpeechRecognition.startListening({
-              continuous: true,
-              language: languageCode,
-            })
-          }
-        >
-          Start
-        </button>
-        <button onClick={SpeechRecognition.stopListening}>Stop</button>
+      <div className="speech-container">
+        <p>
+          Microphone:{" "}
+          {listening ? (
+            <span className="mic-on">Recording</span>
+          ) : (
+            <span className="mic-off">Off</span>
+          )}
+        </p>
+        {transcript && <p>{transcript}</p>}{" "}
+        {listening ? (
+          <button onClick={SpeechRecognition.stopListening}>Stop 🛑</button>
+        ) : (
+          <button
+            onClick={() =>
+              SpeechRecognition.startListening({
+                continuous: true,
+                language: languageCode,
+              })
+            }
+          >
+            Start
+          </button>
+        )}
         <button onClick={resetTranscript}>Reset</button>
-        <p>{transcript}</p>
       </div>
       <br />
       <button onClick={compareAndHighlight}>Submit</button>
-      {comparisonResult}
+      <div className="comparison">{comparisonResult}</div>
     </div>
   );
 }

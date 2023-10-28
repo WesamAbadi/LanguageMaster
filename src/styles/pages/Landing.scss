@@ -7,10 +7,11 @@
     display: inline-grid;
     justify-items: center;
     .logo {
-		display: grid;
-		justify-items: center;
+      display: grid;
+      justify-items: center;
       img {
-		max-height: 100px;
+        max-height: 100px;
+        animation: logo 0.7s;
       }
       h2 {
         margin-top: 0;
@@ -35,5 +36,21 @@
         }
       }
     }
+  }
+}
+
+@keyframes logo {
+  0% {
+    opacity: 0.8;
+    filter: contrast(0);
+    transform: scale(0.8);
+  }
+  75% {
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 1;
+    filter: contrast(1);
+    transform: scale(1);
   }
 }

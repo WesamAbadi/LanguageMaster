@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import Lestining from "../components/ViewLesson/Lestining";
 import Speaking from "../components/ViewLesson/Speaking";
 import "../styles/pages/LessonPage.scss";
+import { FaRegFlag } from "react-icons/fa6";
 function LessonPage() {
   const { languageName, lessonId } = useParams();
   const [lessonData, setLessonData] = useState(null);
@@ -119,8 +120,17 @@ function LessonPage() {
   return (
     <div className="lesson-page">
       <div className="lesson-header">
-      <div className="back">
-        <a href={`/${languageName}`}>↩ Back to lessons</a></div>
+        <div className="back">
+          <div>
+            <div className="lesson-type">{lessonData.type} lesson</div>
+            <a href={`/${languageName}`}>↩ Back to lessons</a>
+          </div>
+          <div className="feedback">
+            <a href="/feedback">
+              Report/Feedback <FaRegFlag />
+            </a>
+          </div>
+        </div>
         <div className="info">
           <h3>Lesson: {lessonId}</h3>
           <h3>Title: {lessonData.title}</h3>
