@@ -70,6 +70,10 @@ function Speaking({ lessonData, markLessonCompleted, languageCode }) {
   return (
     <div>
       <div className="speech-container">
+        <p>Read the following script:</p>
+        <div className="script">
+          <p>{lessonData.content}</p>
+        </div>
         <p>
           Microphone:{" "}
           {listening ? (

@@ -1,4 +1,11 @@
 .speech-container{
+    .script{
+        border: solid white 1px;
+        border-radius: 2rem;
+        width: fit-content;
+        padding: .8rem;
+        margin: auto;
+    }
     .mic-on{
         color: green ;
         font-weight: bold;
