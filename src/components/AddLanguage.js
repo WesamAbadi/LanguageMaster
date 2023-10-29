@@ -6,7 +6,7 @@ import "../styles/components/AddLanguage.scss";
 function AddLanguage({ updateFeedback }) {
   const [languageName, setLanguageName] = useState("");
   const [languageDescription, setLanguageDescription] = useState("DESCRIPTION");
-  const [languageCode, selectedLanguageCode] = useState("en");
+  const [languageCode, setLanguageCode] = useState("en");
   const [languageImage, setLanguageImage] = useState(
     "https://superpalestinian.com/cdn/shop/products/image_09032836-9067-40fb-ae76-1c1de1cbc1ef.png?v=1669664967&width=1946"
   );
@@ -43,7 +43,7 @@ function AddLanguage({ updateFeedback }) {
           type="text"
           placeholder="Language code"
           value={languageCode}
-          onChange={(e) => setLanguageName(e.target.value)}
+          onChange={(e) => setLanguageCode(e.target.value)}
           className="language-input"
         />
         <a
