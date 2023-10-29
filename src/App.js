@@ -118,9 +118,11 @@ function App() {
   return (
     <div>
       <nav>
-        <div className="flex" >
-            <NavLink className="logo" to={user ? "/Home" : "/"}><img src={require("./assets/img/logo-cut.png")} alt="logo" />
-            Home</NavLink>
+        <div className="flex">
+          <NavLink className="logo" to={user ? "/Home" : "/"}>
+            <img src={require("./assets/img/logo-cut.png")} alt="logo" />
+            Home
+          </NavLink>
           {user && <NavLink to="/Admin">Admin</NavLink>}
         </div>
         {user ? (
@@ -172,7 +174,10 @@ function App() {
       <div className="content-container">
         <Routes>
           <Route path="*" element={<Navigate to="/" replace />} />
-          <Route path="/" element={<Landing />} />
+          <Route
+            path="/"
+            element={<Landing user={user} signInWithGoogle={signInWithGoogle} />}
+          />
           <Route path="/Login" element={<Login />} />
           <Route
             path="/Home"

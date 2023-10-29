@@ -1,14 +1,15 @@
 import React from "react";
 import "../styles/pages/Landing.scss";
-function Landing() {
+function Landing(props) {
+  const { user, signInWithGoogle } = props;
   return (
     <div>
       <main>
         <section className="hero">
           <div className="hero-content">
             <div className="logo">
-            <img src={require("../assets/img/logo-cut.png")} alt="logo" />
-            <h2>Language Master</h2>
+              <img src={require("../assets/img/logo-cut.png")} alt="logo" />
+              <h2>Language Master</h2>
             </div>
             <h3>Learn a New Language Today!</h3>
             <p>
@@ -46,9 +47,15 @@ function Landing() {
                 </div>
               </div>
             </a>
-            <a href="/home" className="cta-button">
-              <button>Start by signing here!</button>
-            </a>
+            {user ? (
+              <a href="/home" className="cta-button">
+                <button>Start!</button>
+              </a>
+            ) : (
+              <button className="login-button" onClick={signInWithGoogle}>
+                Start by signing here!
+              </button>
+            )}
           </div>
         </section>
       </main>

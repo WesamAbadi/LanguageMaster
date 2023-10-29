@@ -1,13 +1,20 @@
-.speech-container{
-    .script{
-        border: solid white 1px;
-        border-radius: 2rem;
-        width: fit-content;
-        padding: .8rem;
-        margin: auto;
+.speaking-container {
+  display: grid;
+  justify-items: center;
+
+  .speech-container {
+    display: grid;
+    justify-items: center;
+    .script {
+      border: solid white 1px;
+      border-radius: 2rem;
+      width: fit-content;
+      padding: 0.8rem;
+      margin: auto;
     }
-    .mic-on{
-        color: green ;
-        font-weight: bold;
+    .mic-on {
+      color: green;
+      font-weight: bold;
     }
+  }
 }

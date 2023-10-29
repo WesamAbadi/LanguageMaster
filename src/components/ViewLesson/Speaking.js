@@ -68,7 +68,7 @@ function Speaking({ lessonData, markLessonCompleted, languageCode }) {
   };
 
   return (
-    <div>
+    <div className="speaking-container">
       <div className="speech-container">
         <p>Read the following script:</p>
         <div className="script">
@@ -82,22 +82,24 @@ function Speaking({ lessonData, markLessonCompleted, languageCode }) {
             <span className="mic-off">Off</span>
           )}
         </p>
-        {transcript && <p>{transcript}</p>}{" "}
-        {listening ? (
-          <button onClick={SpeechRecognition.stopListening}>Stop 🛑</button>
-        ) : (
-          <button
-            onClick={() =>
-              SpeechRecognition.startListening({
-                continuous: true,
-                language: languageCode,
-              })
-            }
-          >
-            Start
-          </button>
-        )}
-        <button onClick={resetTranscript}>Reset</button>
+        <div className="action-buttons">
+          {transcript && <p>{transcript}</p>}{" "}
+          {listening ? (
+            <button onClick={SpeechRecognition.stopListening}>Stop 🛑</button>
+          ) : (
+            <button
+              onClick={() =>
+                SpeechRecognition.startListening({
+                  continuous: true,
+                  language: languageCode,
+                })
+              }
+            >
+              Start
+            </button>
+          )}
+          <button onClick={resetTranscript}>Reset</button>
+        </div>
       </div>
       <br />
       <button onClick={compareAndHighlight}>Submit</button>
