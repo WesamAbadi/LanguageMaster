@@ -143,7 +143,7 @@ function LessonPage() {
         </div>
         <div className="seperator"></div>
       </div>
-      {lessonData.type === "Listening" && (
+      {lessonData.type === "listening" && (
         <Listening
           lessonData={lessonData}
           markLessonCompleted={markLessonCompleted}

@@ -12,6 +12,10 @@
     textarea {
       width: 671px;
       height: 174px;
+      min-width: 199px;
+      min-height: 40px;
+      max-width: 700px;
+      max-height: 320px;
       font-size: 18px;
       font-family: "Manrope";
       border-radius: 2rem;
