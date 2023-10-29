@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { doc, getDoc, setDoc, collection } from "firebase/firestore";
 import { db, auth } from "../config/firebase-config";
 import { useParams } from "react-router-dom";
-import Lestining from "../components/ViewLesson/Lestining";
+import Listening from "../components/ViewLesson/Listening";
 import Speaking from "../components/ViewLesson/Speaking";
 import "../styles/pages/LessonPage.scss";
 import { FaRegFlag } from "react-icons/fa6";
@@ -143,8 +143,8 @@ function LessonPage() {
         </div>
         <div className="seperator"></div>
       </div>
-      {lessonData.type === "lestining" && (
-        <Lestining
+      {lessonData.type === "Listening" && (
+        <Listening
           lessonData={lessonData}
           markLessonCompleted={markLessonCompleted}
         />

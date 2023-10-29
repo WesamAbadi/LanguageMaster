@@ -1,6 +1,6 @@
 import React from "react";
 
-function Lestining({
+function Listening({
   newLessonTitle,
   newLessonContent,
   newLessonMp3,
@@ -41,4 +41,4 @@ function Lestining({
   );
 }
 
-export default Lestining;
+export default Listening;

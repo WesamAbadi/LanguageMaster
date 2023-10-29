@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { diff_match_patch } from "diff-match-patch";
 import AudioPlayer from "./AudioPlayer";
-import "../../styles/components/Lestining.scss";
+import "../../styles/components/Listening.scss";
 
 const dmp = new diff_match_patch();
 
@@ -64,7 +64,7 @@ function Listening({ lessonData, markLessonCompleted }) {
 
   return (
     <div className="lesson">
-      <div className="lestining">
+      <div className="listening">
         <audio controls>
           <source src={lessonData.mp3} />
           Your browser does not support the audio element.

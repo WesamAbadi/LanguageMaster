@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { doc, setDoc, getDocs, collection } from "firebase/firestore";
 import { db } from "../../config/firebase-config";
-import Lestining from "./Lestining";
+import Listening from "./Listening";
 import Speaking from "./Speaking";
 import LessonCard from "../ViewLesson/LessonCard";
 import TabSwitch from "../TabSwitch";
 
 function AddLesson({ updateFeedback }) {
   const [activeTab, setActiveTab] = useState(-5);
-  const tabNames = ["Lestining", "speaking", "Quiz"];
+  const tabNames = ["listening", "speaking", "Quiz"];
 
   const [languages, setLanguages] = useState([]);
   const [selectedLanguage, setSelectedLanguage] = useState("");
@@ -76,7 +76,7 @@ function AddLesson({ updateFeedback }) {
 
         let lessonType = null;
         if (activeTab === 0) {
-          lessonType = "lestining";
+          lessonType = "listening";
         } else if (activeTab === 1) {
           lessonType = "speaking";
         }
@@ -175,7 +175,7 @@ function AddLesson({ updateFeedback }) {
       />
 
       {activeTab === 0 ? (
-        <Lestining
+        <Listening
           newLessonTitle={newLessonTitle}
           newLessonContent={newLessonContent}
           newLessonMp3={newLessonMp3}
