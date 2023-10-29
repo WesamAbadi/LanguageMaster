@@ -82,8 +82,8 @@ function Speaking({ lessonData, markLessonCompleted, languageCode }) {
             <span className="mic-off">Off</span>
           )}
         </p>
-        <div className="action-buttons">
           {transcript && <p>{transcript}</p>}{" "}
+        <div className="action-buttons">
           {listening ? (
             <button onClick={SpeechRecognition.stopListening}>Stop 🛑</button>
           ) : (
@@ -102,7 +102,15 @@ function Speaking({ lessonData, markLessonCompleted, languageCode }) {
         </div>
       </div>
       <br />
-      <button onClick={compareAndHighlight}>Submit</button>
+      <button
+        onClick={() => {
+          compareAndHighlight();
+          SpeechRecognition.stopListening();
+        }}
+      >
+        Submit
+      </button>
+
       <div className="comparison">{comparisonResult}</div>
     </div>
   );
