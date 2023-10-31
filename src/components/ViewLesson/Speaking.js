@@ -21,7 +21,7 @@ function Speaking({ lessonData, markLessonCompleted, languageCode }) {
   }
 
   const compareAndHighlight = () => {
-    const content = lessonData.content;
+    const content = lessonData.content.toLowerCase();
     const differences = dmp.diff_main(transcript, content);
     dmp.diff_cleanupSemantic(differences);
 
@@ -58,7 +58,7 @@ function Speaking({ lessonData, markLessonCompleted, languageCode }) {
         {Math.round(matchPercentage) === 100 ? (
           <p>Perfecto!</p>
         ) : Math.round(matchPercentage) >= 70 ? (
-          <p>Good job! You can do better!</p>
+          <p>Good job! But you can do better!</p>
         ) : (
           <p>Keep trying!</p>
         )}

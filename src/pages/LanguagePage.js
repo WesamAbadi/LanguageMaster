@@ -13,7 +13,7 @@ function LanguagePage() {
   let navigate = useNavigate();
 
   const [activeTab, setActiveTab] = useState(1);
-  const tabNames = ["Campaign", "Lessons List"];
+  const tabNames = ["Alphabet", "Campaign", "Lessons List"];
 
   const fetchLanguagesAndLessons = async () => {
     try {
@@ -88,6 +88,8 @@ function LanguagePage() {
         tabs={tabNames}
       />
       {activeTab === 0 ? (
+        <p>Alphabet soon..</p>
+      ) : activeTab === 1 ? (
         <p>Campaign soon..</p>
       ) : (
         <div className="lessons">

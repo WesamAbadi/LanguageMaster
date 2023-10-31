@@ -55,7 +55,7 @@ function Listening({ lessonData, markLessonCompleted }) {
         {Math.round(matchPercentage) === 100 ? (
           <p>Perfecto!</p>
         ) : Math.round(matchPercentage) >= 70 ? (
-          <p>Good job! You can do better!</p>
+          <p>Good job! But you can do better!</p>
         ) : (
           <p>Keep trying!</p>
         )}
