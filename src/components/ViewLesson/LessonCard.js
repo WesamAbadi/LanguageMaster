@@ -10,7 +10,11 @@ function LessonCard({ lesson, languageName, isCompleted }) {
           className={`lesson-card ${lesson.data.type}-lesson ${isCompleted ? "completed" : ""}`}
           key={lesson.id}
         >
-          <p>Title: {lesson.data.title}</p>
+          <div className="lesson-card-header">
+            <p>{lesson.id}</p>
+            <p className="done">✔ Done</p>
+          </div>
+          <p className="lesson-title">Title: {lesson.data.title}</p>
           <p className="lesson-type">Type: {lesson.data.type}</p>
         </div>
       </Link>

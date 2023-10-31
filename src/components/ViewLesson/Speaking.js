@@ -21,14 +21,18 @@ function Speaking({ lessonData, markLessonCompleted, languageCode }) {
   }
 
   const compareAndHighlight = () => {
-    const content = lessonData.content.toLowerCase();
-    const differences = dmp.diff_main(transcript, content);
+    const content = lessonData.content
+      .replace(/[^a-zA-Z\s]/g, "")
+      .toLowerCase();
+    const transcript2 = transcript.replace(/[^a-zA-Z\s]/g, "").toLowerCase();
+
+    const differences = dmp.diff_main(transcript2, content);
     dmp.diff_cleanupSemantic(differences);
 
     const matchPercentage = (
       (1 -
         dmp.diff_levenshtein(differences) /
-          Math.max(transcript.length, content.length)) *
+          Math.max(transcript2.length, content.length)) *
       100
     ).toFixed(2);
 
@@ -82,7 +86,7 @@ function Speaking({ lessonData, markLessonCompleted, languageCode }) {
             <span className="mic-off">Off</span>
           )}
         </p>
-          {transcript && <p>{transcript}</p>}{" "}
+        {transcript && <p>{transcript}</p>}{" "}
         <div className="action-buttons">
           {listening ? (
             <button onClick={SpeechRecognition.stopListening}>Stop 🛑</button>
