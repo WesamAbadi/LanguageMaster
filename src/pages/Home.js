@@ -61,7 +61,10 @@ function Home({ isAuth }) {
       <p> Start your learinng journey with us, let's get started! </p>
       <div className="card-row">
         <div className="suggestion-card">
-          <h3>Pick up where you left off</h3>
+          <h3>
+            <span className="span-highlight pick">Pick up</span> where
+            you left off
+          </h3>
           <div className="buttons-row">
             {progress.length > 0 ? (
               progress.map((language, index) => (
@@ -85,7 +88,10 @@ function Home({ isAuth }) {
         </div>
 
         <div className="suggestion-card">
-          <h3>Explore new languages</h3>
+          <h3>
+            <span className="span-highlight explore">Explore</span> new
+            languages
+          </h3>
           <div className="buttons-row">
             {itemsToShow.length > 0 ? (
               itemsToShow.map((language, index) => (
@@ -108,7 +114,10 @@ function Home({ isAuth }) {
           </div>
         </div>
         <div className="suggestion-card">
-          <h3>Create content & give feedback</h3>
+          <h3>
+            <span className="span-highlight create">Create</span> content & give
+            feedback
+          </h3>
           <div className="buttons-row">
             <button>Get Started</button>
             <button>Get Started</button>
