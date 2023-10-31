@@ -20,6 +20,14 @@
       color: #ffffffb3;
       transition: font-size 0.2s, color 0.3s;
     }
+
+    .feedback {
+      cursor: not-allowed;
+      a {
+        pointer-events: none;
+        color: gray;
+      }
+    }
   }
   .info {
     padding: 0 5%;
@@ -44,5 +52,12 @@
   }
   .neutral {
     color: white;
+    display: none;
+  }
+  .passed {
+    .neutral {
+      color: white;
+      display: unset;
+    }
   }
 }

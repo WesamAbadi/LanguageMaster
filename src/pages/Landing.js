@@ -16,7 +16,7 @@ function Landing(props) {
               Start your language journey with us. Interactive lessons, expert
               tutors, and more.
             </p>
-            <a href="/home">
+            <a href="#">
               <div className="languages-row">
                 <div className="language-box">
                   <img src={require("../assets/img/en_us.png")} alt="English" />

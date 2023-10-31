@@ -8,6 +8,7 @@ const dmp = new diff_match_patch();
 function Listening({ lessonData, markLessonCompleted }) {
   const [inputText, setInputText] = useState("");
   const [comparisonResult, setComparisonResult] = useState(null);
+  const [matchPercentage, setMatchPercentage] = useState(null);
 
   const handleInputChange = (event) => {
     setInputText(event.target.value);
@@ -24,6 +25,8 @@ function Listening({ lessonData, markLessonCompleted }) {
           Math.max(inputText.length, content.length)) *
       100
     ).toFixed(2);
+
+    setMatchPercentage(matchPercentage);
 
     if (matchPercentage >= 70) {
       markLessonCompleted();
@@ -56,7 +59,6 @@ function Listening({ lessonData, markLessonCompleted }) {
         ) : (
           <p>Keep trying!</p>
         )}
-
         {diffElements}
       </div>
     );
@@ -65,6 +67,8 @@ function Listening({ lessonData, markLessonCompleted }) {
   return (
     <div className="lesson">
       <div className="listening">
+        <h3>Type what you hear.</h3>
+
         <audio controls>
           <source src={lessonData.mp3} />
           Your browser does not support the audio element.
@@ -79,7 +83,13 @@ function Listening({ lessonData, markLessonCompleted }) {
         ></textarea>
         <button onClick={compareAndHighlight}>Submit</button>
         <div className="comparison">
-        {comparisonResult}
+          <div
+            className={`answer-compared ${
+              Math.round(matchPercentage) >= 70 ? "passed" : ""
+            }`}
+          >
+            {comparisonResult}
+          </div>
         </div>
       </div>
     </div>

@@ -176,9 +176,14 @@ function App() {
           <Route path="*" element={<Navigate to="/" replace />} />
           <Route
             path="/"
-            element={<Landing user={user} signInWithGoogle={signInWithGoogle} />}
+            element={
+              <Landing user={user} signInWithGoogle={signInWithGoogle} />
+            }
           />
-          <Route path="/Login" element={<Login />} />
+          <Route
+            path="/Login"
+            element={<Login user={user} signInWithGoogle={signInWithGoogle} />}
+          />
           <Route
             path="/Home"
             element={user ? <Home isAuth={user} /> : <Navigate to="/Login" />}
