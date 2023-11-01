@@ -126,7 +126,9 @@ function LessonPage() {
             <a href={`/${languageName}`}>↩ Back to lessons</a>
           </div>
           <div>
-            <a href={`/${languageName}/${lessonId + 1}`}>Next lesson ↪</a>
+            <a href={`/${languageName}/${parseInt(lessonId) + 1}`}>
+              Next lesson ↪
+            </a>
           </div>
         </div>
         <div className="info">
@@ -162,7 +164,7 @@ function LessonPage() {
       )}
 
       <div className="lesson-footer">
-          <div className="lesson-type">{lessonData.type} lesson</div>
+        <div className="lesson-type">{lessonData.type} lesson</div>
         <div className="feedback">
           <a href="/feedback">
             Report/Feedback <FaRegFlag />
