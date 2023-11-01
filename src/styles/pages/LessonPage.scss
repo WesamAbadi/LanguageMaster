@@ -1,14 +1,10 @@
+.content-container {
+  position: relative;
+}
 .lesson-header {
   .back {
     display: flex;
     justify-content: space-between;
-    .lesson-type {
-      font-size: 10px;
-      font-weight: 100;
-      margin-left: 15px;
-      color: #ffffff52;
-      text-transform: capitalize;
-    }
     a {
       text-decoration: none;
       color: white;
@@ -19,14 +15,6 @@
       font-size: 14px;
       color: #ffffffb3;
       transition: font-size 0.2s, color 0.3s;
-    }
-
-    .feedback {
-      cursor: not-allowed;
-      a {
-        pointer-events: none;
-        color: gray;
-      }
     }
   }
   .info {
@@ -58,6 +46,26 @@
     .neutral {
       color: white;
       display: unset;
+    }
+  }
+}
+
+.lesson-footer {
+  position: absolute;
+  bottom: 2%;
+  user-select: none;
+  .lesson-type {
+    font-size: 10px;
+    font-weight: 100;
+    color: #ffffff52;
+    text-transform: capitalize;
+  }
+  .feedback {
+    cursor: not-allowed;
+    a {
+      font-size: 14px;
+      pointer-events: none;
+      color: gray;
     }
   }
 }

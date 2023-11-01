@@ -123,13 +123,10 @@ function LessonPage() {
       <div className="lesson-header">
         <div className="back">
           <div>
-            <div className="lesson-type">{lessonData.type} lesson</div>
             <a href={`/${languageName}`}>↩ Back to lessons</a>
           </div>
-          <div className="feedback">
-            <a href="/feedback">
-              Report/Feedback <FaRegFlag />
-            </a>
+          <div>
+            <a href={`/${languageName}/${lessonId + 1}`}>Next lesson ↪</a>
           </div>
         </div>
         <div className="info">
@@ -163,6 +160,15 @@ function LessonPage() {
           markLessonCompleted={markLessonCompleted}
         />
       )}
+
+      <div className="lesson-footer">
+          <div className="lesson-type">{lessonData.type} lesson</div>
+        <div className="feedback">
+          <a href="/feedback">
+            Report/Feedback <FaRegFlag />
+          </a>
+        </div>
+      </div>
     </div>
   );
 }
