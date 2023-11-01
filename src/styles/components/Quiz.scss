@@ -1,0 +1,34 @@
+.quiz {
+  display: grid;
+  justify-items: center;
+  gap: 30px;
+  .options {
+    display: flex;
+    justify-content: center;
+    padding: 8;
+    .option {
+      padding: 8px;
+      user-select: none;
+    }
+  }
+  span {
+    color: white;
+    transition: color 0.5s;
+    &.dragged-answer {
+      font-weight: bold;
+      color: gray;
+    }
+    &.incorrect-answer {
+      color: red;
+    }
+    &.correct-answer {
+      color: #00cd00;
+    }
+  }
+  .final-result {
+    .correct-text {
+      font-size: 110%;
+      transition: fade 0.3s;
+    }
+  }
+}

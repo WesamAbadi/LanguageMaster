@@ -6,6 +6,7 @@ import Listening from "../components/ViewLesson/Listening";
 import Speaking from "../components/ViewLesson/Speaking";
 import "../styles/pages/LessonPage.scss";
 import { FaRegFlag } from "react-icons/fa6";
+import Quiz from "../components/ViewLesson/Quiz";
 function LessonPage() {
   const { languageName, lessonId } = useParams();
   const [lessonData, setLessonData] = useState(null);
@@ -154,6 +155,12 @@ function LessonPage() {
           lessonData={lessonData}
           markLessonCompleted={markLessonCompleted}
           languageCode={languageCode}
+        />
+      )}
+      {lessonData.type === "quiz" && (
+        <Quiz
+          lessonData={lessonData}
+          markLessonCompleted={markLessonCompleted}
         />
       )}
     </div>
