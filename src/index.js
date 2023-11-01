@@ -11,11 +11,9 @@ const root = createRoot(rootElement);
 document.addEventListener("DOMContentLoaded", function (event) {
   if (!container) {
     root.render(
-      <React.StrictMode>
         <Router>
           <App />
         </Router>
-      </React.StrictMode>,
     );
   }
 });

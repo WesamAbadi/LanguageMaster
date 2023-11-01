@@ -185,7 +185,6 @@ function AddLesson({ updateFeedback }) {
         />
       ) : activeTab === 1 ? (
         <p>
-          {" "}
           <Speaking
             newLessonTitle={newLessonTitle}
             newLessonContent={newLessonContent}

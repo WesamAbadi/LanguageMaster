@@ -79,14 +79,14 @@ function Speaking({ lessonData, markLessonCompleted, languageCode }) {
           <p>{lessonData.content}</p>
         </div>
         <p>
-          Microphone:{" "}
+          Microphone:
           {listening ? (
             <span className="mic-on">Recording</span>
           ) : (
             <span className="mic-off">Off</span>
           )}
         </p>
-        {transcript && <p>{transcript}</p>}{" "}
+        {transcript && <p>{transcript}</p>}
         <div className="action-buttons">
           {listening ? (
             <button onClick={SpeechRecognition.stopListening}>Stop 🛑</button>
