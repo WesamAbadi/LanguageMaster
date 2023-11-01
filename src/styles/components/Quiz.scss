@@ -29,6 +29,10 @@
     .correct-text {
       font-size: 110%;
       transition: fade 0.3s;
+      .correct-option{
+        text-decoration: underline;
+        color: #00cd00;
+      }
     }
   }
 }

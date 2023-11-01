@@ -75,10 +75,14 @@ const Quiz = () => {
       const field = emptyFields[i];
       const position = parseInt(field.match(/\d+/)[0]);
       const correctOption = initialOptions[position - 1];
-      modifiedText = modifiedText.replace(field, correctOption);
+
+      // Wrap the correct option in a span with a class
+      const correctOptionWithClass = `<span class="correct-option">${correctOption}</span>`;
+
+      modifiedText = modifiedText.replace(field, correctOptionWithClass);
     }
 
-    return modifiedText;
+    return <div dangerouslySetInnerHTML={{ __html: modifiedText }} />;
   };
 
   const resetQuiz = () => {
@@ -179,7 +183,7 @@ const Quiz = () => {
                   Sorry, some answers are incorrect. <br />
                   Here are the correct answers:
                 </p>
-                <div className="correct-text">"{getCorrectText()}"</div>
+                <div className="correct-text">{getCorrectText()}</div>
               </div>
             )}
           </div>
