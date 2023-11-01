@@ -14,9 +14,15 @@
   span {
     color: white;
     transition: color 0.5s;
+
     &.dragged-answer {
       font-weight: bold;
       color: gray;
+      color: #00cd00;
+      background: #00000033;
+      border: solid 1px #ffffff52;
+      border-radius: 5px;
+      padding: 2px;
     }
     &.incorrect-answer {
       color: red;
@@ -29,9 +35,12 @@
     .correct-text {
       font-size: 110%;
       transition: fade 0.3s;
-      .correct-option{
-        text-decoration: underline;
+      .correct-option {
         color: #00cd00;
+        background: #00000033;
+        border: solid 1px #ffffff52;
+        border-radius: 5px;
+        padding: 2px;
       }
     }
   }
