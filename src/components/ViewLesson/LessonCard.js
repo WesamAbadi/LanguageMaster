@@ -4,7 +4,7 @@ import "../../styles/components/LessonCard.scss";
 
 function LessonCard({ lesson, languageName, isCompleted }) {
   return (
-    <div>
+    <div meta={lesson.id}>
       <Link to={`/${languageName}/${lesson.id}`} key={lesson.id}>
         <div
           className={`lesson-card ${lesson.data.type}-lesson ${isCompleted ? "completed" : ""}`}

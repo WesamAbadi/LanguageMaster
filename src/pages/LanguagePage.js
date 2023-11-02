@@ -10,6 +10,7 @@ function LanguagePage() {
   const { languageName } = useParams();
   const [lessons, setLessons] = useState([]);
   const [progress, setProgress] = useState([]);
+  const [Campaigns, setCampaigns] = useState([]);
   let navigate = useNavigate();
 
   const [activeTab, setActiveTab] = useState(1);
@@ -23,29 +24,35 @@ function LanguagePage() {
         id: doc.id,
         data: doc.data(),
       }));
-      const languageExists = languagesData.some(
+      console.log(languagesData);
+      const languageExists = languagesData.find(
         (language) => language.data.title === languageName
       );
       if (!languageExists) {
         navigate("/");
-      }
-      const lessonsCollectionRef = collection(db, "lessons");
-      const languageDocRef = doc(
-        lessonsCollectionRef,
-        languageName.toLowerCase()
-      );
-      const lessonsRef = collection(languageDocRef, "lessons");
-      const lessonsSnapshot = await getDocs(lessonsRef);
-      const lessonsData = lessonsSnapshot.docs.map((doc) => ({
-        id: doc.id,
-        data: doc.data(),
-      }));
-      setLessons(lessonsData);
+      } else {
+        const campaignData = languageExists.data.campaign;
+        console.log(campaignData);
+        setCampaigns(campaignData);
+        const lessonsCollectionRef = collection(db, "lessons");
+        const languageDocRef = doc(
+          lessonsCollectionRef,
+          languageName.toLowerCase()
+        );
 
-      return {
-        languages: languagesData,
-        lessons: lessonsData,
-      };
+        const lessonsRef = collection(languageDocRef, "lessons");
+        const lessonsSnapshot = await getDocs(lessonsRef);
+        const lessonsData = lessonsSnapshot.docs.map((doc) => ({
+          id: doc.id,
+          data: doc.data(),
+        }));
+        setLessons(lessonsData);
+
+        return {
+          languages: languagesData,
+          lessons: lessonsData,
+        };
+      }
     } catch (error) {
       console.error("Error fetching languages and lessons:", error);
     }
@@ -90,7 +97,41 @@ function LanguagePage() {
       {activeTab === 0 ? (
         <p>Alphabet soon..</p>
       ) : activeTab === 1 ? (
-        <p>Campaign soon..</p>
+        <div className="campaign">
+          {Campaigns &&
+            Object.keys(Campaigns).map((level, levelIndex) => (
+              <div level={level} key={levelIndex}>
+                <h3>Level {level}</h3>
+                <div className="lessons-in-level">
+                  {Campaigns[level].map((lessonNumber, lessonIndex) => {
+                    const matchingLessons = lessons.filter(
+                      (lessonItem) =>
+                        parseInt(lessonItem.id, 10) === lessonNumber
+                    );
+                    return (
+                      <div
+                        className={`lesson${lessonNumber} lesson-in-level`}
+                        key={lessonIndex}
+                      >
+                        {matchingLessons.map((lessonItem) => (
+                          <LessonCard
+                            lesson={lessonItem}
+                            languageName={languageName}
+                            key={lessonItem.id}
+                            isCompleted={
+                              progress.data && progress.data.lessons
+                                ? progress.data.lessons.includes(lessonItem.id)
+                                : null
+                            }
+                          />
+                        ))}
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            ))}
+        </div>
       ) : (
         <div className="lessons">
           {lessons.length ? (
