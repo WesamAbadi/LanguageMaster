@@ -98,11 +98,11 @@ function LanguagePage() {
         <p>Alphabet soon..</p>
       ) : activeTab === 1 ? (
         <div className="campaign">
-          {Campaigns &&
+          {Campaigns && Object.keys(Campaigns).length > 0 ? (
             Object.keys(Campaigns).map((level, levelIndex) => (
               <div level={level} key={levelIndex}>
                 <h3>Level {level}</h3>
-                <div className="lessons-in-level">
+                <div className="lessons">
                   {Campaigns[level].map((lessonNumber, lessonIndex) => {
                     const matchingLessons = lessons.filter(
                       (lessonItem) =>
@@ -130,7 +130,10 @@ function LanguagePage() {
                   })}
                 </div>
               </div>
-            ))}
+            ))
+          ) : (
+            <p>No campaigns available for this language.</p>
+          )}
         </div>
       ) : (
         <div className="lessons">

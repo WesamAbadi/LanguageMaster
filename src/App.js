@@ -156,6 +156,10 @@ function App() {
               icon={<FaCircleUser />}
               content={
                 <div className="user-info">
+                  <div className="xp">
+                    <p>level 2</p>
+                    <p>~400xp</p>
+                  </div>
                   <p>{user.email}</p>
                   <p>{user.name}</p>
                   <button className="login-button" onClick={signOutUser}>
