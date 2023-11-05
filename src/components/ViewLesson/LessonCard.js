@@ -7,7 +7,9 @@ function LessonCard({ lesson, languageName, isCompleted }) {
     <div meta={lesson.id}>
       <Link to={`/${languageName}/${lesson.id}`} key={lesson.id}>
         <div
-          className={`lesson-card ${lesson.data.type}-lesson ${isCompleted ? "completed" : ""}`}
+          className={`lesson-card ${lesson.data.type}-lesson ${
+            isCompleted ? "completed" : ""
+          }`}
           key={lesson.id}
         >
           <div className="lesson-card-header">

@@ -62,8 +62,8 @@ function Home({ isAuth }) {
       <div className="card-row">
         <div className="suggestion-card">
           <h3>
-            <span className="span-highlight pick">Pick up</span> where
-            you left off
+            <span className="span-highlight pick">Pick up</span> where you left
+            off
           </h3>
           <div className="buttons-row">
             {progress.length > 0 ? (

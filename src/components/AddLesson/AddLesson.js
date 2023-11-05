@@ -97,7 +97,6 @@ function AddLesson({ updateFeedback }) {
           await setDoc(lessonDocRef, newLessonData);
         }
 
-
         setNewLessonTitle("");
         setNewLessonContent("");
         setNewLessonMp3("");
@@ -118,7 +117,7 @@ function AddLesson({ updateFeedback }) {
 
   useEffect(() => {
     fetchLanguages();
-    fetchLessons(); 
+    fetchLessons();
   }, [selectedLanguage]);
 
   return (

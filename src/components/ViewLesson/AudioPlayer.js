@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../../styles/components/AudioPlayer.scss";
 
-
 const AudioPlayer = () => {
   const [audio] = useState(new Audio());
   const [isPlaying, setIsPlaying] = useState(false);

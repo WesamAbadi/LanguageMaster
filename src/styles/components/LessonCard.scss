@@ -5,7 +5,7 @@
   background: #0e0e0e;
   animation: popup 0.5s;
   position: relative;
-       transition: margin 0.3s;
+  transition: margin 0.3s;
   p {
     color: white;
     text-align: center;
@@ -44,7 +44,7 @@
   &:hover {
     border: rgba(255, 255, 255, 0.158) solid 1px;
     margin: 10px 0px;
-     transition: margin 0.3s;
+    transition: margin 0.3s;
     .lesson-title {
       color: white;
     }

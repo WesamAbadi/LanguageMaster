@@ -12,12 +12,11 @@
       img {
         max-height: 100px;
         animation: logo 0.7s;
-		transform: scale(1.0);    
-		transition: transform 0.3s;
-		&:hover {
-          transform: scale(1.06);    
-		  transition: transform 0.3s;
-
+        transform: scale(1);
+        transition: transform 0.3s;
+        &:hover {
+          transform: scale(1.06);
+          transition: transform 0.3s;
         }
       }
       h2 {

@@ -11,9 +11,9 @@ const root = createRoot(rootElement);
 document.addEventListener("DOMContentLoaded", function (event) {
   if (!container) {
     root.render(
-        <Router>
-          <App />
-        </Router>
+      <Router>
+        <App />
+      </Router>
     );
   }
 });
