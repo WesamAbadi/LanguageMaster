@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import "../../styles/components/Quiz.scss";
 
-const Quiz = () => {
-  let text = "I like to [2] pizza and cola [5] breakfast";
-  const initialOptions = ["eating", "eat", "ate", "to", "for", "in"];
+const Quiz = ({ lessonData, markLessonCompleted }) => {
+  let text = lessonData.text;
+  const initialOptions = lessonData.options;
   const [answers, setAnswers] = useState({});
   const emptyFields = text.match(/\[\d+\]/g);
   const [showResult, setShowResult] = useState(false);
@@ -59,6 +59,7 @@ const Quiz = () => {
       if (userAnswer === correctAnswer) {
         emptyFieldElement.classList.add("correct-answer");
         emptyFieldElement.classList.remove("incorrect-answer");
+        markLessonCompleted();
       } else {
         emptyFieldElement.classList.add("incorrect-answer");
         emptyFieldElement.classList.remove("correct-answer");
