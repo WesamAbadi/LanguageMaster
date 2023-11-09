@@ -1,8 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import AddLanguage from "../components/AddLanguage";
 import AddLesson from "../components/AddLesson/AddLesson";
 import TabSwitch from "../components/TabSwitch";
 import "../styles/pages/Admin.scss";
+import ManageUsers from "../components/AddLesson/ManageUsers";
+import { doc, setDoc, getDoc, collection, updateDoc } from "firebase/firestore";
+import { db } from "../config/firebase-config";
 
 function Admin({ user }) {
   const [activeTab, setActiveTab] = useState(-5);
@@ -21,6 +24,26 @@ function Admin({ user }) {
 
   const handleTabChange = (direction) => {
     setActiveTab(direction);
+  };
+
+  const requestAdmin = async () => {
+    try {
+      const userDocRef = doc(db, "users", user.uid);
+      const userDocSnapshot = await getDoc(userDocRef);
+
+      if (userDocSnapshot.exists()) {
+        await updateDoc(userDocRef, {
+          requestedAdminRights: true,
+        });
+
+        updateFeedback("Admin rights request submitted.", "success");
+      } else {
+        updateFeedback("User document not found.", "error");
+      }
+    } catch (error) {
+      console.error("Error requesting admin rights:", error);
+      updateFeedback("Error requesting admin rights.", "error");
+    }
   };
 
   const isAdminUser = user !== null && user.admin === true;
@@ -42,7 +65,7 @@ function Admin({ user }) {
           ) : activeTab === 2 ? (
             <p>SOON</p>
           ) : activeTab === 3 ? (
-            <p>SOON</p>
+            <ManageUsers />
           ) : (
             <p>Please select a tab</p>
           )}
@@ -69,7 +92,9 @@ function Admin({ user }) {
           <p>You do not have permission to access this page.</p>
           <p>
             If you want to be an Admin at Language Master,
-              <a href="#"><button>APPLY HERE</button></a>
+            <a href="#">
+              <button onClick={requestAdmin}>APPLY HERE</button>
+            </a>
           </p>
         </div>
       )}
