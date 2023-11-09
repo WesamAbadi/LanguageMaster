@@ -6,7 +6,7 @@ import {
   collection,
   updateDoc,
 } from "firebase/firestore";
-import { db } from "../../config/firebase-config";
+import { db } from "../config/firebase-config";
 
 function ManageUsers() {
   const [data, setData] = React.useState([]);
