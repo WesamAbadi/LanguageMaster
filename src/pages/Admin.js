@@ -4,8 +4,9 @@ import AddLesson from "../components/AddLesson/AddLesson";
 import TabSwitch from "../components/TabSwitch";
 import "../styles/pages/Admin.scss";
 import ManageUsers from "../components/ManageUsers";
-import { doc, setDoc, getDoc, collection, updateDoc } from "firebase/firestore";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "../config/firebase-config";
+import ManagerFeedback from "../components/ManagerFeedback";
 
 function Admin({ user }) {
   const [activeTab, setActiveTab] = useState(-5);
@@ -63,7 +64,7 @@ function Admin({ user }) {
           ) : activeTab === 1 ? (
             <AddLesson updateFeedback={updateFeedback} />
           ) : activeTab === 2 ? (
-            <p>SOON</p>
+            <ManagerFeedback />
           ) : activeTab === 3 ? (
             <ManageUsers />
           ) : (
