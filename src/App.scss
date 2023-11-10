@@ -40,11 +40,13 @@ body {
   color: $color_4;
 }
 .lessons {
-  display: grid;
-  grid-auto-flow: column;
-  grid-template-columns: repeat(4, 1fr);
+  display: flex;
+  flex-wrap: wrap;
+  .lesson-in-level {
+    flex-grow: 1;
+    flex-basis: 200px;
+  }
 }
-
 .lesson-type {
   font-weight: bold;
 }
@@ -169,5 +171,15 @@ nav {
   }
   100% {
     opacity: 1;
+  }
+}
+@media screen and (max-width: 768px) {
+  nav {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .content-container {
+    margin: 1rem 0rem;
+    padding: 0.5rem;
   }
 }

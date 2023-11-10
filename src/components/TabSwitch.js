@@ -3,6 +3,7 @@ import "../styles/components/TabSwithch.scss";
 
 function TabSwitch({ activeTab, onTabChange, tabs }) {
   document.documentElement.style.setProperty("--num-tabs", tabs.length);
+
   const handleTabClick = (tabIndex) => {
     onTabChange(tabIndex);
   };
@@ -23,7 +24,9 @@ function TabSwitch({ activeTab, onTabChange, tabs }) {
         <div
           className={`tab-indicator`}
           style={{
-            transform: `translateX(calc(${activeTab} * 100%))`,
+            transform: `translate${
+              window.innerWidth <= 768 ? "Y" : "X"
+            }(calc(${activeTab} * 100%))`,
           }}
         />
       </div>
