@@ -12,6 +12,8 @@ function LessonPage() {
   const [lessonData, setLessonData] = useState(null);
   const [isCompleted, setIsCompleted] = useState(false);
   const [languageCode, setlanguageCode] = useState(null);
+  const [isFeedbackVisible, setIsFeedbackVisible] = useState(false);
+  const [feedback, setFeedback] = useState(false);
 
   const fetchLesson = async () => {
     try {
@@ -108,6 +110,31 @@ function LessonPage() {
     }
   };
 
+  const submitFeedback = async () => {
+    if (auth.currentUser && auth.currentUser.uid) {
+      try {
+        const feedbackRef = doc(db, "feedbacks", feedback);
+        const feedbackData = {
+          lessonTitle: lessonData.title,
+          lessonId: lessonId,
+          language: languageName,
+          content: feedback,
+          userid: auth.currentUser.uid,
+          userName: auth.currentUser.displayName,
+          time: new Date(),
+        };
+        await setDoc(feedbackRef, feedbackData);
+        console.log("Feedback submitted successfully");
+        setIsFeedbackVisible(false);
+      } catch (error) {
+        console.error("Error submitting feedback:", error);
+      }
+    }
+  };
+
+  const showFeedback = () => {
+    setIsFeedbackVisible(true);
+  };
   useEffect(() => {
     fetchLesson();
     checkIfCompleted();
@@ -165,10 +192,20 @@ function LessonPage() {
 
       <div className="lesson-footer">
         <div className="lesson-type">{lessonData.type} lesson</div>
-        <div className="feedback">
+        <div onClick={showFeedback} className="feedback">
           <a href="/feedback">
             Report/Feedback <FaRegFlag />
           </a>
+          <div
+            className={`feedback-form ${isFeedbackVisible ? "visible" : ""}`}
+          >
+            <input
+              onChange={(e) => setFeedback(e.target.value)}
+              placeholder="Write your feedback here"
+              type="text"
+            />
+            <button onClick={submitFeedback}>Submit</button>
+          </div>
         </div>
       </div>
     </div>

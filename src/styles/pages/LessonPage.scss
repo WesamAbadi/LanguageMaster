@@ -62,11 +62,23 @@
     text-transform: capitalize;
   }
   .feedback {
-    cursor: not-allowed;
     a {
       font-size: 14px;
       pointer-events: none;
       color: gray;
+    }
+    input {
+      padding: 5px;
+      margin: 1rem;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    .feedback-form {
+      display: none;
+      &.visible {
+        display: block;
+      }
     }
   }
 }

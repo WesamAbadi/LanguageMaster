@@ -78,3 +78,25 @@ option {
     gap: 10px;
   }
 }
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 20px;
+  border-radius: 2rem;
+
+  th,
+  td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+    a {
+      color: white;
+      text-decoration: underline;
+    }
+    div {
+      text-align: center;
+      margin-top: 50px;
+    }
+  }
+}

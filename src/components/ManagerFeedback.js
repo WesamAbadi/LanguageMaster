@@ -26,7 +26,7 @@ function ManagerFeedback() {
   };
   useEffect(() => {
     fetchFeedbacks();
-  })
+  });
 
   return (
     <div>
@@ -34,22 +34,26 @@ function ManagerFeedback() {
       <table>
         <thead>
           <tr>
-            <th>Name</th>
-            <th>ID</th>
-            <th>Admin</th>
-            <th>Request to be admin?</th>
+            <th>UserId</th>
+            <th>User Name</th>
+            <th>Feedback</th>
+            <th>Lesson</th>
+            <th>Time</th>
           </tr>
         </thead>
         <tbody>
           {data.map((item) => (
             <tr key={item.id}>
-              <td>{item.data.name}</td>
-              <td>{item.id}</td>
-              <td>{item.data.admin.toString()}</td>
+              <td>{item.data.userid}</td>
+              <td>{item.data.userName}</td>
+              <td>{item.data.content}</td>
               <td>
-                {item.data.requestedAdminRights
-                  ? item.data.requestedAdminRights.toString()
-                  : "false"}
+                <a href={`/${item.data.language}/${item.data.lessonId}`}>
+                  {item.data.lessonTitle}
+                </a>
+              </td>
+              <td>
+                {new Date(item.data.time.seconds * 1000).toLocaleString()}
               </td>
             </tr>
           ))}
