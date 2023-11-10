@@ -10,16 +10,28 @@
       border-radius: 2rem;
     }
     textarea {
-      width: 671px;
-      height: 174px;
       min-width: 199px;
       min-height: 40px;
       max-width: 700px;
       max-height: 320px;
-      font-size: 18px;
       font-family: "Manrope";
       border-radius: 2rem;
       padding: 1rem;
     }
+  }
+}
+@media screen and (min-width: 769px) {
+  textarea {
+    width: 671px;
+    height: 174px;
+    font-size: 18px;
+  }
+}
+@media screen and (max-width: 768px) {
+  textarea {
+    font-size: 15px;
+  }
+  audio {
+    width: -webkit-fill-available;
   }
 }

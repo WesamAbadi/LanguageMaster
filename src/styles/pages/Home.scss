@@ -28,7 +28,6 @@ $gradient-border: linear-gradient(45deg, $gradient1);
   }
 
   .card-row {
-    display: grid;
     grid-auto-flow: column;
     grid-template-columns: repeat(3, 1fr);
     min-height: 264px;
@@ -96,5 +95,29 @@ $gradient-border: linear-gradient(45deg, $gradient1);
   100% {
     opacity: 1;
     background-position: -200% 50%;
+  }
+}
+@media screen and (min-width: 769px) {
+  .home .card-row {
+    display: grid;
+  }
+}
+@media screen and (max-width: 768px) {
+  .logo {
+    display: flex;
+    justify-content: center;
+  }
+  h2 {
+    font-size: x-large !important;
+    text-align: center;
+  }
+  .home .card-row {
+    .suggestion-card {
+      margin: 0.5rem;
+      padding: 0.5rem;
+      .buttons-row {
+        display: block;
+      }
+    }
   }
 }

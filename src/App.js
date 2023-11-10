@@ -113,7 +113,7 @@ function App() {
   };
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div style={{ color: "white" }}>Loading...</div>;
   }
   return (
     <div>
