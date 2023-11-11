@@ -1,7 +1,6 @@
 import "./App.scss";
 import { useState, useEffect } from "react";
 import {
-  BrowserRouter as Router,
   Routes,
   Route,
   NavLink,
@@ -30,7 +29,6 @@ import OverlayBox from "./components/Home/OverlayBox";
 
 function App() {
   const [user, setUser] = useState(null);
-  const isAdminUser = user !== null && user.admin === true;
   const [loading, setLoading] = useState(true);
   const initialCheckboxes = [
     { id: "AI assistant", isChecked: false },
@@ -42,20 +40,27 @@ function App() {
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(async (authUser) => {
+      console.log("Auth state changed...");
       if (authUser) {
+        console.log("Auth user:", authUser);
         setUser(authUser);
         const userRef = collection(db, "users");
         const userDocRef = doc(userRef, authUser.uid);
         const userDoc = await getDoc(userDocRef);
         if (userDoc.exists()) {
+          console.log("Getting User data from Firestore");
           const userData = userDoc.data();
           setUser({ ...authUser, ...userData });
         } else {
           try {
+            console.log("User data from Auth");
             const newUserData = {
               name: authUser.displayName,
               admin: false,
+              createdAt: authUser.createdAt,
+              photoURL: authUser.photoURL,
             };
+            console.log("New user data");
             await setDoc(userDocRef, newUserData);
           } catch (error) {
             console.error("Error fetching user data from Firestore:", error);
@@ -180,7 +185,7 @@ function App() {
             />
             <OverlayBox icon={<FaGear />} content={<div>Settings</div>} />
             <OverlayBox
-              icon={<FaCircleUser />}
+              icon={<img className="user-img" src={user.photoURL} alt="" />}
               content={
                 <div className="user-info">
                   <div className="xp">

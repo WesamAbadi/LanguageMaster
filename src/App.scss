@@ -100,6 +100,11 @@ nav {
     &:hover {
       background: rgb(255 255 255 / 11%);
     }
+    .user-img {
+      height: 1.5em;
+      width: 1.5em;
+      border-radius: 2rem;
+    }
   }
 
   a.active {

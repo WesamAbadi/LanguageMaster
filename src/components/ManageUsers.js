@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  doc,
-  setDoc,
-  getDocs,
-  collection,
-  updateDoc,
-} from "firebase/firestore";
+import { doc, getDocs, collection, updateDoc } from "firebase/firestore";
 import { db } from "../config/firebase-config";
 
 function ManageUsers() {
@@ -49,16 +43,18 @@ function ManageUsers() {
             <th>Name</th>
             <th>ID</th>
             <th>Admin</th>
-            <th>Request to be admin?</th>
+            <th>Requested to be admin?</th>
             <th>Action</th>
           </tr>
         </thead>
         <tbody>
           {data.map((item) => (
             <tr key={item.id}>
-              <td>{item.data.name}</td>
+              <td>
+                <img src="" alt="" />
+                {item.data.name}</td>
               <td>{item.id}</td>
-              <td>{item.data.admin.toString()}</td>
+              <td className="main">{item.data.admin.toString()}</td>
               <td>
                 {item.data.requestedAdminRights
                   ? item.data.requestedAdminRights.toString()

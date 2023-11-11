@@ -1,11 +1,5 @@
 import React, { useEffect } from "react";
-import {
-  doc,
-  setDoc,
-  getDocs,
-  collection,
-  updateDoc,
-} from "firebase/firestore";
+import { getDocs, collection } from "firebase/firestore";
 import { db } from "../config/firebase-config";
 
 function ManagerFeedback() {
@@ -46,7 +40,7 @@ function ManagerFeedback() {
             <tr key={item.id}>
               <td>{item.data.userid}</td>
               <td>{item.data.userName}</td>
-              <td>{item.data.content}</td>
+              <td className="main">{item.data.content}</td>
               <td>
                 <a href={`/${item.data.language}/${item.data.lessonId}`}>
                   {item.data.lessonTitle}
