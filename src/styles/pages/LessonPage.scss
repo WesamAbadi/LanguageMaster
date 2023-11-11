@@ -62,22 +62,39 @@
     text-transform: capitalize;
   }
   .feedback {
-    a {
-      font-size: 14px;
-      pointer-events: none;
-      color: gray;
+    .feedback-text {
+      cursor: pointer;
     }
+    font-size: 14px;
+    color: gray;
+
     input {
       padding: 5px;
-      margin: 1rem;
       margin-bottom: 10px;
       border: 1px solid #ccc;
       border-radius: 4px;
+      height: 1px;
+      font-size: 1px;
+      transition: height 0.2s, font-size 0.2s;
     }
+
     .feedback-form {
-      display: none;
+      opacity: 0;
+      transition: opacity 0.2s;
+      button {
+        font-size: 0px;
+        padding: 0px;
+      }
       &.visible {
-        display: block;
+        opacity: 1;
+        input {
+          height: unset;
+          font-size: unset;
+        }
+        button {
+          font-size: 13px;
+          padding: 8px 12px;
+        }
       }
     }
   }

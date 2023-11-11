@@ -193,9 +193,9 @@ function LessonPage() {
       <div className="lesson-footer">
         <div className="lesson-type">{lessonData.type} lesson</div>
         <div onClick={showFeedback} className="feedback">
-          <a href="/feedback">
+          <div className="feedback-text">
             Report/Feedback <FaRegFlag />
-          </a>
+          </div>
           <div
             className={`feedback-form ${isFeedbackVisible ? "visible" : ""}`}
           >

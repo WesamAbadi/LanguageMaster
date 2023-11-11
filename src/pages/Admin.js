@@ -50,7 +50,7 @@ function Admin({ user }) {
   const isAdminUser = user !== null && user.admin === true;
 
   return (
-    <div>
+    <div className="admin-container">
       {isAdminUser ? (
         <div>
           <TabSwitch
