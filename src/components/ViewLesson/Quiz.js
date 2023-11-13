@@ -77,7 +77,6 @@ const Quiz = ({ lessonData, markLessonCompleted }) => {
       const position = parseInt(field.match(/\d+/)[0]);
       const correctOption = initialOptions[position - 1];
 
-      // Wrap the correct option in a span with a class
       const correctOptionWithClass = `<span class="correct-option">${correctOption}</span>`;
 
       modifiedText = modifiedText.replace(field, correctOptionWithClass);

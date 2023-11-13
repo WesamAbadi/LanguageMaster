@@ -119,7 +119,7 @@ function App() {
 
   if (loading) {
     return (
-      <div class="loading-screen">
+      <div className="loading-screen">
         <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
           <defs>
             <filter id="gooey">
@@ -138,12 +138,12 @@ function App() {
             </filter>
           </defs>
         </svg>
-        <div class="blob blob-0"></div>
-        <div class="blob blob-1"></div>
-        <div class="blob blob-2"></div>
-        <div class="blob blob-3"></div>
-        <div class="blob blob-4"></div>
-        <div class="blob blob-5"></div>
+        <div className="blob blob-0"></div>
+        <div className="blob blob-1"></div>
+        <div className="blob blob-2"></div>
+        <div className="blob blob-3"></div>
+        <div className="blob blob-4"></div>
+        <div className="blob blob-5"></div>
       </div>
     );
   }
