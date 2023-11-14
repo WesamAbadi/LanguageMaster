@@ -29,6 +29,7 @@ import OverlayBox from "./components/Home/OverlayBox";
 
 function App() {
   const [user, setUser] = useState(null);
+  const [xp, setXp] = useState(0);
   const [loading, setLoading] = useState(true);
   const initialCheckboxes = [
     { id: "AI assistant", isChecked: false },
@@ -50,6 +51,7 @@ function App() {
         if (userDoc.exists()) {
           console.log("Getting User data from Firestore");
           const userData = userDoc.data();
+          setXp(userData.xp || 0);
           setUser({ ...authUser, ...userData });
         } else {
           try {
@@ -190,7 +192,7 @@ function App() {
                 <div className="user-info">
                   <div className="xp">
                     <p>level 2</p>
-                    <p>~400xp</p>
+                    <p>{xp}xp</p>
                   </div>
                   <p>{user.email}</p>
                   <p>{user.name}</p>

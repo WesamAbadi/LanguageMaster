@@ -13,8 +13,12 @@ const Quiz = ({ lessonData, markLessonCompleted }) => {
   const [availableOptions, setAvailableOptions] = useState(initialOptions);
   const [combinedUserAnswers, setCombinedUserAnswers] = useState("");
   const [aiResponse, setAiResponse] = useState("");
+  const [aiText, setAiText] = useState("EXPLAIN");
   const [loading, setLoading] = useState(false);
   const apiKey = process.env.REACT_APP_RAPIDAPI_KEY;
+  const aiAssistant = JSON.parse(localStorage.getItem("checkboxes")).find(
+    (item) => item.id === "AI assistant"
+  ).isChecked;
 
   const fetchData = async (msg) => {
     console.log("fetching data... user message:", msg);
@@ -42,6 +46,7 @@ const Quiz = ({ lessonData, markLessonCompleted }) => {
       const response = await axios.request(options);
       console.log(response.data);
       setAiResponse(response.data.data.conversation.output);
+      setAiText("Regenerate");
     } catch (error) {
       console.error(error);
     } finally {
@@ -237,30 +242,30 @@ const Quiz = ({ lessonData, markLessonCompleted }) => {
                   Here are the correct answers:
                 </p>
                 <div className="correct-text">{getCorrectText()}</div>
-                <div className="explain-button">
-                  <button
-                    onClick={() => fetchData(combinedUserAnswers)}
-                    className="button-animation"
-                    disabled={loading}
-                  >
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    {loading ? (
-                      <>Loading...</>
-                    ) : (
-                      <>
-                        EXPLAIN
-                        <br />
-                        <div className="note">
-                        powered by AI
-                        </div>
-                      </>
-                    )}
-                  </button>
-                  {aiResponse && !loading && <p>{aiResponse}</p>}
-                </div>
+                {aiAssistant && (
+                  <div className="explain-button">
+                    <button
+                      onClick={() => fetchData(combinedUserAnswers)}
+                      className="button-animation"
+                      disabled={loading}
+                    >
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                      {loading ? (
+                        <>Loading...</>
+                      ) : (
+                        <>
+                          {aiText}
+                          <br />
+                          <div className="note">powered by AI</div>
+                        </>
+                      )}
+                    </button>
+                    {aiResponse && !loading && <p>{aiResponse}</p>}
+                  </div>
+                )}
               </div>
             )}
           </div>

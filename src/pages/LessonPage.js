@@ -39,6 +39,7 @@ function LessonPage() {
 
   const markLessonCompleted = async () => {
     setIsCompleted(true);
+    console.log("Lesson completed:");
     await markAsCompleted();
   };
 
@@ -71,9 +72,11 @@ function LessonPage() {
         const userDocRef = doc(db, "users", auth.currentUser.uid);
         const progressCollectionRef = collection(userDocRef, "progress");
         const languageDocRef = doc(progressCollectionRef, languageName);
-
         const languageDocSnapshot = await getDoc(languageDocRef);
         let lessonsArray = [];
+        const userDocSnapshot = await getDoc(userDocRef);
+        const currentXp = userDocSnapshot.data()?.xp || 0;
+        const newXp = currentXp + 30;
 
         if (languageDocSnapshot.exists()) {
           lessonsArray = languageDocSnapshot.data().lessons || [];
@@ -81,8 +84,10 @@ function LessonPage() {
 
         if (!lessonsArray.includes(lessonId)) {
           lessonsArray.push(lessonId);
-          await setDoc(languageDocRef, { lessons: lessonsArray });
           setIsCompleted(true);
+          await setDoc(languageDocRef, { lessons: lessonsArray });
+          await setDoc(userDocRef, { xp: newXp }, { merge: true });
+          console.log("Xp increased by 10. New XP:", newXp);
         } else {
           console.log("Lesson already completed");
         }
