@@ -14,6 +14,7 @@ function LessonPage() {
   const [languageCode, setlanguageCode] = useState(null);
   const [isFeedbackVisible, setIsFeedbackVisible] = useState(false);
   const [feedback, setFeedback] = useState(false);
+  const [xpGain, setXpGain] = useState(30);
 
   const fetchLesson = async () => {
     try {
@@ -39,7 +40,6 @@ function LessonPage() {
 
   const markLessonCompleted = async () => {
     setIsCompleted(true);
-    console.log("Lesson completed:");
     await markAsCompleted();
   };
 
@@ -69,14 +69,19 @@ function LessonPage() {
   const markAsCompleted = async () => {
     try {
       if (auth.currentUser && auth.currentUser.uid) {
+        if (lessonData.type === "listening") setXpGain(30);
+        else if (lessonData.type === "speaking") setXpGain(50);
+        else if (lessonData.type === "quiz") setXpGain(100);
+
         const userDocRef = doc(db, "users", auth.currentUser.uid);
         const progressCollectionRef = collection(userDocRef, "progress");
         const languageDocRef = doc(progressCollectionRef, languageName);
         const languageDocSnapshot = await getDoc(languageDocRef);
         let lessonsArray = [];
+
         const userDocSnapshot = await getDoc(userDocRef);
         const currentXp = userDocSnapshot.data()?.xp || 0;
-        const newXp = currentXp + 30;
+        const newXp = currentXp + xpGain;
 
         if (languageDocSnapshot.exists()) {
           lessonsArray = languageDocSnapshot.data().lessons || [];
@@ -86,8 +91,9 @@ function LessonPage() {
           lessonsArray.push(lessonId);
           setIsCompleted(true);
           await setDoc(languageDocRef, { lessons: lessonsArray });
+
           await setDoc(userDocRef, { xp: newXp }, { merge: true });
-          console.log("Xp increased by 30. New XP:", newXp);
+          console.log(`Xp increased by ${xpGain}. New XP:`, newXp);
           const xpAnimationElement = document.getElementById("xpAnimation");
           xpAnimationElement.style.display = "block";
 
@@ -218,6 +224,9 @@ function LessonPage() {
             <button onClick={submitFeedback}>Submit</button>
           </div>
         </div>
+      </div>
+      <div id="xpAnimation" class="xp-animation">
+        +{xpGain} XP
       </div>
     </div>
   );

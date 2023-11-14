@@ -41,6 +41,7 @@ function ManageUsers() {
         <thead>
           <tr>
             <th>Name</th>
+            <th>XP</th>
             <th>ID</th>
             <th>Admin</th>
             <th>Requested to be admin?</th>
@@ -50,9 +51,8 @@ function ManageUsers() {
         <tbody>
           {data.map((item) => (
             <tr key={item.id}>
-              <td>
-                <img src="" alt="" />
-                {item.data.name}</td>
+              <td>{item.data.name}</td>
+              <td>{item.data.xp !== undefined ? item.data.xp : 0}</td>
               <td>{item.id}</td>
               <td className="main">{item.data.admin.toString()}</td>
               <td>

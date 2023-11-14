@@ -61,6 +61,7 @@ function App() {
               admin: false,
               createdAt: authUser.createdAt,
               photoURL: authUser.photoURL,
+              xp: 0,
             };
             console.log("New user data");
             await setDoc(userDocRef, newUserData);
@@ -202,9 +203,6 @@ function App() {
                 </div>
               }
             />
-            <div id="xpAnimation" class="xp-animation">
-              +30 XP
-            </div>
           </div>
         ) : (
           <button className="login-button" onClick={signInWithGoogle}>

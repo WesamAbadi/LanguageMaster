@@ -64,20 +64,6 @@ nav {
     display: flex;
     align-items: center;
 
-    .xp-animation {
-      display: none;
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background-color: #4caf50;
-      color: #fff;
-      padding: 20px;
-      border-radius: 2rem;
-      font-size: 18px;
-      animation: xpAnimation 2.5s ease-in-out;
-    }
-
     a {
       padding: 0;
     }
@@ -302,26 +288,6 @@ nav {
   }
 }
 
-@keyframes xpAnimation {
-  0% {
-    opacity: 1;
-    top: 50%;
-    left: 50%;
-  }
-  50% {
-    opacity: 1;
-    top: 50%;
-    left: 50%;
-  }
-  75% {
-    opacity: 0.6;
-  }
-  100% {
-    opacity: 0;
-    top: 0%;
-    left: 100%;
-  }
-}
 @media screen and (max-width: 768px) {
   nav {
     flex-wrap: wrap;
