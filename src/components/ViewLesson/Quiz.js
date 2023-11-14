@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import "../../styles/components/Quiz.scss";
 
@@ -10,7 +11,43 @@ const Quiz = ({ lessonData, markLessonCompleted }) => {
   const [showResult, setShowResult] = useState(false);
   const [isCorrect, setIsCorrect] = useState(false);
   const [availableOptions, setAvailableOptions] = useState(initialOptions);
+  const [combinedUserAnswers, setCombinedUserAnswers] = useState("");
+  const [aiResponse, setAiResponse] = useState("");
+  const [loading, setLoading] = useState(false);
+  const apiKey = process.env.REACT_APP_RAPIDAPI_KEY;
 
+  const fetchData = async (msg) => {
+    console.log("fetching data... user message:", msg);
+
+    setLoading(true);
+    const options = {
+      method: "POST",
+      url: "https://harley-the-chatbot.p.rapidapi.com/talk/bot",
+      headers: {
+        "content-type": "application/json",
+        "x-rapidapi-ua": "RapidAPI-Playground",
+
+        Accept: "application/json",
+        "X-RapidAPI-Key": apiKey,
+        "X-RapidAPI-Host": "harley-the-chatbot.p.rapidapi.com",
+      },
+      data: {
+        client: "",
+        bot: "harley",
+        message: `why is this sentence gramarly incorrect, answer shortly, ${msg}`,
+      },
+    };
+
+    try {
+      const response = await axios.request(options);
+      console.log(response.data);
+      setAiResponse(response.data.data.conversation.output);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
   const handleDragEnd = (result) => {
     if (!result.destination) return;
 
@@ -40,15 +77,20 @@ const Quiz = ({ lessonData, markLessonCompleted }) => {
     setIsCorrect(true);
 
     const segments = text.split(/\[(\d+)\]/);
+    let combinedUserAnswers = "";
 
     for (let i = 1; i < segments.length; i += 2) {
       const position = parseInt(segments[i]);
       const correctAnswer = initialOptions[position - 1];
       const userAnswer = answers[`[${position}]`];
 
-      console.log(
-        `User answer for option ${position}: ${userAnswer} while correct is ${correctAnswer}`
-      );
+      // console.log(
+      //   `User answer for option ${position}: ${userAnswer} while correct is ${correctAnswer}`
+      // );
+      const combinedSegment = userAnswer
+        ? segments[i - 1] + userAnswer
+        : segments[i - 1];
+      combinedUserAnswers += combinedSegment;
 
       const fieldIndex = Math.floor(i / 2);
       const emptyField = `emptyField${fieldIndex}`;
@@ -66,6 +108,10 @@ const Quiz = ({ lessonData, markLessonCompleted }) => {
         setIsCorrect(false);
       }
     }
+
+    combinedUserAnswers = combinedUserAnswers += segments[segments.length - 1];
+    console.log(`Combined User Answers: ${combinedUserAnswers}`);
+    setCombinedUserAnswers(combinedUserAnswers);
     setShowResult(true);
   };
 
@@ -184,6 +230,28 @@ const Quiz = ({ lessonData, markLessonCompleted }) => {
                   Here are the correct answers:
                 </p>
                 <div className="correct-text">{getCorrectText()}</div>
+                <div className="explain-button">
+                  <button
+                    onClick={() => fetchData(combinedUserAnswers)}
+                    className="button-animation"
+                    disabled={loading}
+                  >
+                    {loading ? (
+                      <>Loading...</>
+                    ) : (
+                      <>
+                        EXPLAIN
+                        <br />
+                        powered by AI
+                      </>
+                    )}
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </button>
+                  {aiResponse && !loading && <p>{aiResponse}</p>}
+                </div>
               </div>
             )}
           </div>
