@@ -55,7 +55,7 @@
     .explain-button {
       display: grid;
       justify-items: center;
-      margin: 3rem 20%;
+      margin: 2rem 20%;
       font-size: 15px;
       .note {
         color: #a3a3a3;
@@ -121,6 +121,7 @@
           color: var(--white-color);
           border-radius: 5px;
           box-shadow: var(--box-shadow);
+          margin: 0.3rem;
         }
       }
     }
