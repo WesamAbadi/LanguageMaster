@@ -53,8 +53,12 @@
 
 .lesson-footer {
   position: absolute;
-  bottom: 2%;
+  bottom: -3.3%;
+  transition: 1s;
   user-select: none;
+  &.visible {
+    bottom: 1%;
+  }
   .lesson-type {
     font-size: 10px;
     font-weight: 100;

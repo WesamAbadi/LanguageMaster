@@ -103,7 +103,7 @@ function AddLesson({ updateFeedback }) {
         }
         if (lessonType === "quiz") {
           console.log("newLessonOptions: ", newLessonOptions);
-          const optionsArray = newLessonOptions.split(", ");
+          const optionsArray = newLessonOptions.split(",");
 
           const newLessonData = {
             title: newLessonTitle,

@@ -190,7 +190,7 @@ function LessonPage() {
         />
       )}
 
-      <div className="lesson-footer">
+      <div className={`lesson-footer ${isFeedbackVisible ? "visible" : ""}`}>
         <div className="lesson-type">{lessonData.type} lesson</div>
         <div onClick={showFeedback} className="feedback">
           <div className="feedback-text">
