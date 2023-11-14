@@ -77,12 +77,17 @@ const Quiz = ({ lessonData, markLessonCompleted }) => {
     setIsCorrect(true);
 
     const segments = text.split(/\[(\d+)\]/);
+    var emptyFields = false;
     let combinedUserAnswers = "";
 
     for (let i = 1; i < segments.length; i += 2) {
       const position = parseInt(segments[i]);
       const correctAnswer = initialOptions[position - 1];
       const userAnswer = answers[`[${position}]`];
+      if (!userAnswer) {
+        emptyFields = true;
+        break;
+      }
 
       // console.log(
       //   `User answer for option ${position}: ${userAnswer} while correct is ${correctAnswer}`
@@ -112,7 +117,9 @@ const Quiz = ({ lessonData, markLessonCompleted }) => {
     combinedUserAnswers = combinedUserAnswers += segments[segments.length - 1];
     console.log(`Combined User Answers: ${combinedUserAnswers}`);
     setCombinedUserAnswers(combinedUserAnswers);
-    setShowResult(true);
+    if (!emptyFields) {
+      setShowResult(true);
+    }
   };
 
   const getCorrectText = () => {
