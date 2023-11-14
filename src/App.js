@@ -202,6 +202,9 @@ function App() {
                 </div>
               }
             />
+            <div id="xpAnimation" class="xp-animation">
+              +30 XP
+            </div>
           </div>
         ) : (
           <button className="login-button" onClick={signInWithGoogle}>

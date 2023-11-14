@@ -87,7 +87,13 @@ function LessonPage() {
           setIsCompleted(true);
           await setDoc(languageDocRef, { lessons: lessonsArray });
           await setDoc(userDocRef, { xp: newXp }, { merge: true });
-          console.log("Xp increased by 10. New XP:", newXp);
+          console.log("Xp increased by 30. New XP:", newXp);
+          const xpAnimationElement = document.getElementById("xpAnimation");
+          xpAnimationElement.style.display = "block";
+
+          setTimeout(() => {
+            xpAnimationElement.style.display = "none";
+          }, 2500);
         } else {
           console.log("Lesson already completed");
         }
