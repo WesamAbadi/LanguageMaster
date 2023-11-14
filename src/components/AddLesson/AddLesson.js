@@ -5,6 +5,7 @@ import Listening from "./Listening";
 import Speaking from "./Speaking";
 import LessonCard from "../ViewLesson/LessonCard";
 import TabSwitch from "../TabSwitch";
+import Quiz from "./Quiz";
 
 function AddLesson({ updateFeedback }) {
   const [activeTab, setActiveTab] = useState(-5);
@@ -17,6 +18,7 @@ function AddLesson({ updateFeedback }) {
   const [newLessonTitle, setNewLessonTitle] = useState("");
   const [newLessonMp3, setNewLessonMp3] = useState("");
   const [newLessonContent, setNewLessonContent] = useState("");
+  const [newLessonOptions, setNewLessonOptions] = useState("");
 
   const handleLanguageChange = (languageId) => {
     setSelectedLanguage(languageId);
@@ -79,15 +81,10 @@ function AddLesson({ updateFeedback }) {
           lessonType = "listening";
         } else if (activeTab === 1) {
           lessonType = "speaking";
+        } else if (activeTab === 2) {
+          lessonType = "quiz";
         }
-        if (lessonType === "speaking") {
-          const newLessonData = {
-            title: newLessonTitle,
-            content: newLessonContent,
-            type: lessonType,
-          };
-          await setDoc(lessonDocRef, newLessonData);
-        } else {
+        if (lessonType === "listening") {
           const newLessonData = {
             title: newLessonTitle,
             content: newLessonContent,
@@ -96,10 +93,31 @@ function AddLesson({ updateFeedback }) {
           };
           await setDoc(lessonDocRef, newLessonData);
         }
+        if (lessonType === "speaking") {
+          const newLessonData = {
+            title: newLessonTitle,
+            content: newLessonContent,
+            type: lessonType,
+          };
+          await setDoc(lessonDocRef, newLessonData);
+        }
+        if (lessonType === "quiz") {
+          console.log("newLessonOptions: ", newLessonOptions);
+          const optionsArray = newLessonOptions.split(", ");
+
+          const newLessonData = {
+            title: newLessonTitle,
+            content: newLessonContent,
+            type: lessonType,
+            options: optionsArray,
+          };
+          await setDoc(lessonDocRef, newLessonData);
+        }
 
         setNewLessonTitle("");
         setNewLessonContent("");
         setNewLessonMp3("");
+        setNewLessonOptions("");
         fetchLessons();
         updateFeedback("Lesson added successfully!", "success");
       } else {
@@ -192,12 +210,19 @@ function AddLesson({ updateFeedback }) {
           />
         </p>
       ) : activeTab === 2 ? (
-        <p>SOON</p>
+        <Quiz
+          newLessonTitle={newLessonTitle}
+          newLessonContent={newLessonContent}
+          newLessonOptions={newLessonOptions}
+          setNewLessonTitle={setNewLessonTitle}
+          setNewLessonContent={setNewLessonContent}
+          setNewLessonOptions={setNewLessonOptions}
+        />
       ) : (
         <p>Please select a tab</p>
       )}
 
-      {[0, 1].includes(activeTab) && (
+      {[0, 1, 2].includes(activeTab) && (
         <button className="add-lesson-button" onClick={createLesson}>
           Add new lesson
         </button>

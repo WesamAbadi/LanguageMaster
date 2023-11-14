@@ -4,7 +4,7 @@ import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import "../../styles/components/Quiz.scss";
 
 const Quiz = ({ lessonData, markLessonCompleted }) => {
-  let text = lessonData.text;
+  let text = lessonData.content;
   const initialOptions = lessonData.options;
   const [answers, setAnswers] = useState({});
   const emptyFields = text.match(/\[\d+\]/g);
@@ -34,7 +34,7 @@ const Quiz = ({ lessonData, markLessonCompleted }) => {
       data: {
         client: "",
         bot: "harley",
-        message: `why is this sentence gramarly incorrect, answer shortly, ${msg}`,
+        message: `why is the following sentence grammatically incorrect, answer shortly, ${msg}`,
       },
     };
 
@@ -243,19 +243,21 @@ const Quiz = ({ lessonData, markLessonCompleted }) => {
                     className="button-animation"
                     disabled={loading}
                   >
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
                     {loading ? (
                       <>Loading...</>
                     ) : (
                       <>
                         EXPLAIN
                         <br />
+                        <div className="note">
                         powered by AI
+                        </div>
                       </>
                     )}
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
                   </button>
                   {aiResponse && !loading && <p>{aiResponse}</p>}
                 </div>

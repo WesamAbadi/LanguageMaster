@@ -53,6 +53,11 @@
       display: grid;
       justify-items: center;
       margin: 5%;
+      font-size: 15px;
+      .note {
+        color: #a3a3a3;
+        font-size: 9px;
+      }
 
       .button-animation {
         position: relative;
