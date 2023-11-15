@@ -24,7 +24,6 @@ function LanguagePage() {
         id: doc.id,
         data: doc.data(),
       }));
-      console.log(languagesData);
       const languageExists = languagesData.find(
         (language) => language.data.title === languageName
       );
@@ -32,7 +31,6 @@ function LanguagePage() {
         navigate("/");
       } else {
         const campaignData = languageExists.data.campaign;
-        console.log(campaignData);
         setCampaigns(campaignData);
         const lessonsCollectionRef = collection(db, "lessons");
         const languageDocRef = doc(

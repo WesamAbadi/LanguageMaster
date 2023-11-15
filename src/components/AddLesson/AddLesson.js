@@ -102,7 +102,6 @@ function AddLesson({ updateFeedback }) {
           await setDoc(lessonDocRef, newLessonData);
         }
         if (lessonType === "quiz") {
-          console.log("newLessonOptions: ", newLessonOptions);
           const optionsArray = newLessonOptions.split(",");
 
           const newLessonData = {

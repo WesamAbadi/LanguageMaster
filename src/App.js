@@ -41,9 +41,7 @@ function App() {
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(async (authUser) => {
-      console.log("Auth state changed...");
       if (authUser) {
-        console.log("Auth user:", authUser);
         setUser(authUser);
         const userRef = collection(db, "users");
         const userDocRef = doc(userRef, authUser.uid);
@@ -55,7 +53,6 @@ function App() {
           setUser({ ...authUser, ...userData });
         } else {
           try {
-            console.log("User data from Auth");
             const newUserData = {
               name: authUser.displayName,
               admin: false,

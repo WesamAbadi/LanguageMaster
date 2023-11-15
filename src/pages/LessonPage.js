@@ -119,7 +119,6 @@ function LessonPage() {
         if (language.data.title === languageName) {
           if (language.data.code) {
             setlanguageCode(language.data.code);
-            console.log(language.data.code);
           }
           break;
         }
@@ -225,7 +224,7 @@ function LessonPage() {
           </div>
         </div>
       </div>
-      <div id="xpAnimation" class="xp-animation">
+      <div id="xpAnimation" className="xp-animation">
         +{xpGain} XP
       </div>
     </div>

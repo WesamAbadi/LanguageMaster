@@ -23,8 +23,6 @@ const Quiz = ({ lessonData, markLessonCompleted }) => {
 
   const fetchData = async (msg) => {
     setShowStyle(true);
-    console.log("show style: ", showStyle);
-
     console.log("fetching data... user message:", msg);
 
     setLoading(true);
@@ -48,17 +46,14 @@ const Quiz = ({ lessonData, markLessonCompleted }) => {
 
     try {
       const response = await axios.request(options);
-      console.log(response.data);
-      setShowStyle(false);
       setAiResponse(response.data.data.conversation.output);
-      setAiText("Regenerate");
     } catch (error) {
+      setAiResponse("Error generating response, try again later.");
       console.error(error);
     } finally {
+      setAiText("Regenerate");
+      setShowStyle(false);
       setLoading(false);
-      // setTimeout(() => {
-      //   fetchData(msg);
-      // }, 2000);
     }
   };
   const handleDragEnd = (result) => {
@@ -101,10 +96,6 @@ const Quiz = ({ lessonData, markLessonCompleted }) => {
         emptyFields = true;
         break;
       }
-
-      // console.log(
-      //   `User answer for option ${position}: ${userAnswer} while correct is ${correctAnswer}`
-      // );
       const combinedSegment = userAnswer
         ? segments[i - 1] + userAnswer
         : segments[i - 1];
@@ -119,16 +110,17 @@ const Quiz = ({ lessonData, markLessonCompleted }) => {
       if (userAnswer === correctAnswer) {
         emptyFieldElement.classList.add("correct-answer");
         emptyFieldElement.classList.remove("incorrect-answer");
-        markLessonCompleted();
       } else {
         emptyFieldElement.classList.add("incorrect-answer");
         emptyFieldElement.classList.remove("correct-answer");
         setIsCorrect(false);
       }
     }
+    if (isCorrect && !emptyFields) {
+      markLessonCompleted();
+    }
 
     combinedUserAnswers = combinedUserAnswers += segments[segments.length - 1];
-    console.log(`Combined User Answers: ${combinedUserAnswers}`);
     setCombinedUserAnswers(combinedUserAnswers);
     if (!emptyFields) {
       setShowResult(true);
