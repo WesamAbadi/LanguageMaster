@@ -52,7 +52,7 @@
   }
   .comparison {
     .difference-correct {
-      color: green;
+      color: #0ccd0c;
     }
     .difference-wrong {
       color: red;
@@ -147,10 +147,14 @@
   }
   75% {
     opacity: 0.6;
+    padding: 20px;
+    font-size: 18px;
   }
   100% {
     opacity: 0;
     top: 0%;
     left: 100%;
+    padding: 5px;
+    font-size: 5px;
   }
 }

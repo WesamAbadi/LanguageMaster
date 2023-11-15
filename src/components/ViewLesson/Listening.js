@@ -83,13 +83,24 @@ function Listening({ lessonData, markLessonCompleted }) {
         ></textarea>
         <button onClick={compareAndHighlight}>Submit</button>
         <div className="comparison">
-          <div
-            className={`answer-compared ${
-              Math.round(matchPercentage) >= 70 ? "passed" : ""
-            }`}
-          >
-            {comparisonResult}
-          </div>
+          {matchPercentage !== null && comparisonResult && (
+            <div
+              className={`answer-compared ${
+                Math.round(matchPercentage) >= 70 ? "passed" : ""
+              }`}
+            >
+              {comparisonResult}
+              <div className="guide">
+                <table>
+                  <tr>
+                    <td style={{ color: "#0ccd0c" }}>Correct</td>
+                    <td style={{ color: "red" }}>Incorrect</td>
+                    <td style={{ color: "white" }}>Missing</td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>
