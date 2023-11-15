@@ -55,8 +55,10 @@
     .explain-button {
       display: grid;
       justify-items: center;
-      margin: 2rem 20%;
+      border-top: 1px solid #ffffff3d;
       font-size: 15px;
+      margin: 2rem 20%;
+      padding-top: 2rem;
       .note {
         color: #a3a3a3;
         font-size: 9px;

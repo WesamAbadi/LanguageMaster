@@ -1,125 +1,144 @@
 .content-container {
   position: relative;
 }
-.lesson-header {
-  .back {
-    display: flex;
-    justify-content: space-between;
-    a {
-      text-decoration: none;
-      color: white;
-      font-size: 13px;
-      transition: font-size 0.2s, color 0.3s;
-    }
-    a:hover {
-      font-size: 14px;
-      color: #ffffffb3;
-      transition: font-size 0.2s, color 0.3s;
-    }
-  }
-  .info {
-    padding: 0 5%;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-evenly;
-  }
-  .seperator {
-    border-bottom: 4px solid #ffffff14;
-    width: 60%;
-    border-radius: 2rem;
-    margin: auto;
-    margin-bottom: 4rem;
-  }
-}
-.comparison {
-  .difference-correct {
-    color: green;
-  }
-  .difference-wrong {
-    color: red;
-  }
-  .neutral {
-    color: white;
-    display: none;
-  }
-  .passed {
-    .neutral {
-      color: white;
-      display: unset;
-    }
-  }
-}
+
 .xp-animation {
   display: none;
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: #4caf50;
+  background-color: #4d9362;
   color: #fff;
   padding: 20px;
+  border: 3px solid white;
   border-radius: 2rem;
   font-size: 18px;
   animation: xpAnimation 2.5s ease-in-out;
+  z-index: 10;
 }
-.lesson-footer {
-  position: absolute;
-  bottom: -3.3%;
-  transition: 1s;
-  user-select: none;
-  &.visible {
-    bottom: 1%;
-  }
-  .lesson-type {
-    font-size: 10px;
-    font-weight: 100;
-    color: #ffffff52;
-    text-transform: capitalize;
-  }
-  .feedback {
-    .feedback-text {
-      cursor: pointer;
-    }
-    font-size: 14px;
-    color: gray;
-
-    input {
-      padding: 5px;
-      margin-bottom: 10px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      height: 1px;
-      font-size: 1px;
-      transition: height 0.2s, font-size 0.2s;
-    }
-
-    .feedback-form {
-      opacity: 0;
-      transition: opacity 0.2s;
-      button {
-        font-size: 0px;
-        padding: 0px;
+.lesson-page {
+  transition: filter 0.4s;
+  .lesson-header {
+    .back {
+      display: flex;
+      justify-content: space-between;
+      a {
+        text-decoration: none;
+        color: white;
+        font-size: 13px;
+        transition: font-size 0.2s, color 0.3s;
       }
-      &.visible {
-        opacity: 1;
-        input {
-          height: unset;
-          font-size: unset;
-        }
+      a:hover {
+        font-size: 14px;
+        color: #ffffffb3;
+        transition: font-size 0.2s, color 0.3s;
+      }
+    }
+    .info {
+      padding: 0 5%;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-evenly;
+    }
+    .seperator {
+      border-bottom: 4px solid #ffffff14;
+      width: 60%;
+      border-radius: 2rem;
+      margin: auto;
+      margin-bottom: 4rem;
+    }
+  }
+  .comparison {
+    .difference-correct {
+      color: green;
+    }
+    .difference-wrong {
+      color: red;
+    }
+    .neutral {
+      color: white;
+      display: none;
+    }
+    .passed {
+      .neutral {
+        color: white;
+        display: unset;
+      }
+    }
+  }
+  .lesson-footer {
+    position: absolute;
+    bottom: -3.3%;
+    transition: 1s;
+    transition: opacity 0.2s;
+    user-select: none;
+    &.visible {
+      bottom: 1%;
+    }
+    .lesson-type {
+      font-size: 10px;
+      font-weight: 100;
+      color: #ffffff52;
+      text-transform: capitalize;
+    }
+    .feedback {
+      .feedback-text {
+        cursor: pointer;
+      }
+      font-size: 14px;
+      color: gray;
+
+      input {
+        padding: 5px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        height: 1px;
+        font-size: 1px;
+        transition: height 0.2s, font-size 0.2s;
+      }
+
+      .feedback-form {
+        opacity: 0;
+        transition: opacity 0.2s;
         button {
-          font-size: 13px;
-          padding: 8px 12px;
+          font-size: 0px;
+          padding: 0px;
+        }
+        &.visible {
+          opacity: 1;
+          input {
+            height: unset;
+            font-size: unset;
+          }
+          button {
+            font-size: 13px;
+            padding: 8px 12px;
+          }
         }
       }
     }
   }
+  &.blur {
+    .lesson-footer {
+      opacity: 0;
+      transition: 0.3s;
+    }
+    filter: blur(8px);
+    transition: filter 0.4s;
+  }
 }
+
 @keyframes xpAnimation {
   0% {
-    opacity: 1;
+    opacity: 0;
     top: 50%;
     left: 50%;
+  }
+  15% {
+    opacity: 1;
   }
   50% {
     opacity: 1;

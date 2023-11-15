@@ -15,6 +15,7 @@ function LessonPage() {
   const [isFeedbackVisible, setIsFeedbackVisible] = useState(false);
   const [feedback, setFeedback] = useState(false);
   const [xpGain, setXpGain] = useState(30);
+  const [xpAnimationActive, setXpAnimationActive] = useState(false);
 
   const fetchLesson = async () => {
     try {
@@ -94,6 +95,7 @@ function LessonPage() {
 
           await setDoc(userDocRef, { xp: newXp }, { merge: true });
           console.log(`Xp increased by ${xpGain}. New XP:`, newXp);
+          simulateXPAnimation();
           const xpAnimationElement = document.getElementById("xpAnimation");
           xpAnimationElement.style.display = "block";
 
@@ -151,6 +153,14 @@ function LessonPage() {
   const showFeedback = () => {
     setIsFeedbackVisible(true);
   };
+
+  const simulateXPAnimation = () => {
+    setXpAnimationActive(true);
+    setTimeout(() => {
+      setXpAnimationActive(false);
+    }, 2500);
+  };
+
   useEffect(() => {
     fetchLesson();
     checkIfCompleted();
@@ -162,70 +172,71 @@ function LessonPage() {
   }
 
   return (
-    <div className="lesson-page">
-      <div className="lesson-header">
-        <div className="back">
-          <div>
-            <a href={`/${languageName}`}>↩ Back to lessons</a>
-          </div>
-          <div>
-            <a href={`/${languageName}/${parseInt(lessonId) + 1}`}>
-              Next lesson ↪
-            </a>
-          </div>
-        </div>
-        <div className="info">
-          <h3>Lesson: {lessonId}</h3>
-          <h3>Title: {lessonData.title}</h3>
-          {isCompleted && <p>Lesson is already completed</p>}
-          {!isCompleted && (
-            <button onClick={() => markLessonCompleted()}>
-              Mark as completed
-            </button>
-          )}
-        </div>
-        <div className="seperator"></div>
-      </div>
-      {lessonData.type === "listening" && (
-        <Listening
-          lessonData={lessonData}
-          markLessonCompleted={markLessonCompleted}
-        />
-      )}
-      {lessonData.type === "speaking" && (
-        <Speaking
-          lessonData={lessonData}
-          markLessonCompleted={markLessonCompleted}
-          languageCode={languageCode}
-        />
-      )}
-      {lessonData.type === "quiz" && (
-        <Quiz
-          lessonData={lessonData}
-          markLessonCompleted={markLessonCompleted}
-        />
-      )}
-
-      <div className={`lesson-footer ${isFeedbackVisible ? "visible" : ""}`}>
-        <div className="lesson-type">{lessonData.type} lesson</div>
-        <div onClick={showFeedback} className="feedback">
-          <div className="feedback-text">
-            Report/Feedback <FaRegFlag />
-          </div>
-          <div
-            className={`feedback-form ${isFeedbackVisible ? "visible" : ""}`}
-          >
-            <input
-              onChange={(e) => setFeedback(e.target.value)}
-              placeholder="Write your feedback here"
-              type="text"
-            />
-            <button onClick={submitFeedback}>Submit</button>
-          </div>
-        </div>
-      </div>
+    <div>
       <div id="xpAnimation" className="xp-animation">
         +{xpGain} XP
+      </div>
+      <div className={`lesson-page ${xpAnimationActive ? "blur" : ""}`}>
+        <div className="lesson-header">
+          <div className="back">
+            <div>
+              <a href={`/${languageName}`}>↩ Back to lessons</a>
+            </div>
+            <div>
+              <a href={`/${languageName}/${parseInt(lessonId) + 1}`}>
+                Next lesson ↪
+              </a>
+            </div>
+          </div>
+          <div className="info">
+            <h3>Lesson: {lessonId}</h3>
+            <h3>Title: {lessonData.title}</h3>
+            {isCompleted && <p>Lesson is already completed</p>}
+            {!isCompleted && (
+              <button onClick={() => markLessonCompleted()}>
+                Mark as completed
+              </button>
+            )}
+          </div>
+          <div className="seperator"></div>
+        </div>
+        {lessonData.type === "listening" && (
+          <Listening
+            lessonData={lessonData}
+            markLessonCompleted={markLessonCompleted}
+          />
+        )}
+        {lessonData.type === "speaking" && (
+          <Speaking
+            lessonData={lessonData}
+            markLessonCompleted={markLessonCompleted}
+            languageCode={languageCode}
+          />
+        )}
+        {lessonData.type === "quiz" && (
+          <Quiz
+            lessonData={lessonData}
+            markLessonCompleted={markLessonCompleted}
+          />
+        )}
+        <div className={`lesson-footer ${isFeedbackVisible ? "visible" : ""}`}>
+          <div className="lesson-type">{lessonData.type} lesson</div>
+          <div onClick={showFeedback} className="feedback">
+            <div className="feedback-text">
+              Report/Feedback <FaRegFlag />
+            </div>
+            <div
+              className={`feedback-form ${isFeedbackVisible ? "visible" : ""}`}
+            >
+              <input
+                onChange={(e) => setFeedback(e.target.value)}
+                placeholder="Write your feedback here"
+                type="text"
+              />
+              <button onClick={submitFeedback}>Submit</button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
