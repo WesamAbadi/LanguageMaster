@@ -14,6 +14,7 @@ const Quiz = ({ lessonData, markLessonCompleted }) => {
   const [combinedUserAnswers, setCombinedUserAnswers] = useState("");
   const [aiResponse, setAiResponse] = useState("");
   const [aiText, setAiText] = useState("EXPLAIN");
+  const [showStyle, setShowStyle] = useState(false);
   const [loading, setLoading] = useState(false);
   const apiKey = process.env.REACT_APP_RAPIDAPI_KEY;
   const aiAssistant = JSON.parse(localStorage.getItem("checkboxes")).find(
@@ -21,6 +22,9 @@ const Quiz = ({ lessonData, markLessonCompleted }) => {
   ).isChecked;
 
   const fetchData = async (msg) => {
+    setShowStyle(true);
+    console.log("show style: ", showStyle);
+
     console.log("fetching data... user message:", msg);
 
     setLoading(true);
@@ -45,12 +49,16 @@ const Quiz = ({ lessonData, markLessonCompleted }) => {
     try {
       const response = await axios.request(options);
       console.log(response.data);
+      setShowStyle(false);
       setAiResponse(response.data.data.conversation.output);
       setAiText("Regenerate");
     } catch (error) {
       console.error(error);
     } finally {
       setLoading(false);
+      // setTimeout(() => {
+      //   fetchData(msg);
+      // }, 2000);
     }
   };
   const handleDragEnd = (result) => {
@@ -256,7 +264,9 @@ const Quiz = ({ lessonData, markLessonCompleted }) => {
                       <span></span>
                       <span></span>
                       {loading ? (
-                        <>Loading...</>
+                        <>
+                          <div style={{ padding: ".4rem" }}>Loading...</div>
+                        </>
                       ) : (
                         <>
                           {aiText}
@@ -265,8 +275,13 @@ const Quiz = ({ lessonData, markLessonCompleted }) => {
                         </>
                       )}
                     </button>
-                    <div className="aiResponse-container">
-                      {aiResponse && !loading && <p>{aiResponse}</p>}
+                    <div
+                      className={
+                        "aiResponse-container " +
+                        (showStyle ? "fadeout" : "fadein")
+                      }
+                    >
+                      {aiResponse && <p>{aiResponse}</p>}
                     </div>
                   </div>
                 )}
