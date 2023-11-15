@@ -36,9 +36,31 @@ function App() {
     { id: "Popup translation", isChecked: false },
     { id: "Music player", isChecked: false },
   ];
+  const initialSettings = { language: "English", number: 1 };
+
   const [checkboxes, setCheckboxes] = useState(initialCheckboxes);
+  const [theme, setTheme] = useState({ isChecked: true });
+  const [settings, setSettings] = useState(initialSettings);
+  const [openIndex, setOpenIndex] = useState(null);
+
+  const faqItems = [
+    {
+      question: "Is this a beta version?",
+      answer: "Yes, this is a beta version.",
+    },
+    { question: "How can I contribute?", answer: "You can contribute by..." },
+    { question: "How can I report bugs?", answer: "To report bugs, please..." },
+    { question: "Is it free?", answer: "Yes, it is free to use." },
+    {
+      question: "How can I contact support?",
+      answer: "You can contact support by...",
+    },
+  ];
   const navigate = useNavigate();
 
+  const handleToggle = (index) => {
+    setOpenIndex((prevIndex) => (prevIndex === index ? null : index));
+  };
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(async (authUser) => {
       if (authUser) {
@@ -79,9 +101,11 @@ function App() {
 
   useEffect(() => {
     const savedCheckboxes = localStorage.getItem("checkboxes");
-    if (savedCheckboxes) {
-      setCheckboxes(JSON.parse(savedCheckboxes));
-    }
+    const savedSettings = localStorage.getItem("settings");
+    const savedTheme = localStorage.getItem("theme");
+    if (savedCheckboxes) setCheckboxes(JSON.parse(savedCheckboxes));
+    if (savedSettings) setSettings(JSON.parse(savedSettings));
+    if (savedTheme) setTheme(JSON.parse(savedTheme));
   }, []);
 
   const signInWithGoogle = async () => {
@@ -112,9 +136,36 @@ function App() {
     setCheckboxes(updatedCheckboxes);
     saveCheckboxesToLocalStorage(updatedCheckboxes);
   };
+  const handleLanguageChange = (event) => {
+    const newSettings = { ...settings, language: event.target.value };
+    setSettings(newSettings);
+    saveSettingsToLocalStorage(newSettings);
+  };
 
+  const handleNumberChange = (event) => {
+    const newSettings = {
+      ...settings,
+      number: parseInt(event.target.value, 10),
+    };
+    setSettings(newSettings);
+    saveSettingsToLocalStorage(newSettings);
+  };
+  const handleThemeChange = (event) => {
+    const newTheme = {
+      ...theme,
+      isChecked: !theme.isChecked,
+    };
+    setTheme(newTheme);
+    saveThemeToLocalStorage(newTheme);
+  };
   const saveCheckboxesToLocalStorage = (checkboxes) => {
     localStorage.setItem("checkboxes", JSON.stringify(checkboxes));
+  };
+  const saveSettingsToLocalStorage = (settings) => {
+    localStorage.setItem("settings", JSON.stringify(settings));
+  };
+  const saveThemeToLocalStorage = (theme) => {
+    localStorage.setItem("theme", JSON.stringify(theme));
   };
 
   if (loading) {
@@ -161,16 +212,39 @@ function App() {
           <div className="flex">
             <OverlayBox
               icon={<FaRegCircleQuestion />}
-              content={<div>FAQ</div>}
+              content={
+                <div>
+                  <p>FAQ</p>
+                  <ul>
+                    {faqItems.map((item, index) => (
+                      <li key={index}>
+                        <button onClick={() => handleToggle(index)}>
+                          {item.question}
+                        </button>
+                        {openIndex === index && <p>{item.answer}</p>}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              }
             />
             <OverlayBox
               icon={<FaPuzzlePiece />}
               content={
                 <div className="extensions-container">
-                  <p>Extensions (soon)</p>
+                  <p>Extensions</p>
                   {checkboxes.map((checkbox) => (
-                    <div className="extension" key={checkbox.id}>
-                      <p>{`${checkbox.id} ${checkbox.isChecked ? "" : ""}`}</p>
+                    <div
+                      className="extension checkbox-element"
+                      key={checkbox.id}
+                    >
+                      {checkbox.id === "AI assistant" ? (
+                        <p>AI assistant (Beta)</p>
+                      ) : checkbox.id === "Popup translation" ? (
+                        <p>Popup chat (soon)</p>
+                      ) : (
+                        <p>Music player (soon)</p>
+                      )}
                       <input
                         type="checkbox"
                         id={checkbox.id}
@@ -183,7 +257,62 @@ function App() {
                 </div>
               }
             />
-            <OverlayBox icon={<FaGear />} content={<div>Settings</div>} />
+            <OverlayBox
+              icon={<FaGear />}
+              content={
+                <div>
+                  BETA
+                  <div
+                    style={{ border: "1px solid white" }}
+                    className="ai-settings"
+                  >
+                    <label>
+                      AI Language:
+                      <select
+                        value={settings.language}
+                        onChange={handleLanguageChange}
+                      >
+                        <option value="English">English (Recommended)</option>
+                        <option value="Spanish">Spanish</option>
+                        <option value="Hungarian">Hungarian</option>
+                        <option value="Arabic">Arabic</option>
+                      </select>
+                    </label>
+
+                    <br />
+
+                    <label>
+                      Num of generated answers:
+                      <select
+                        value={settings.number}
+                        onChange={handleNumberChange}
+                      >
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                      </select>
+                    </label>
+                  </div>
+                  <div
+                    style={{ border: "1px solid green" }}
+                    className="ui-settings"
+                  >
+                    <div className="checkbox-element">
+                      <p>{`Theme: ${theme.isChecked ? "Dark" : "Light"}`}</p>
+                      <input
+                        type="checkbox"
+                        id="toggleTheme"
+                        checked={theme.isChecked}
+                        onChange={() => handleThemeChange(theme.isChecked)}
+                      />
+                      <label htmlFor="toggleTheme">
+                        Toggle {theme.isChecked}
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              }
+            />
             <OverlayBox
               icon={<img className="user-img" src={user.photoURL} alt="" />}
               content={

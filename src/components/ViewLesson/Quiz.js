@@ -20,11 +20,26 @@ const Quiz = ({ lessonData, markLessonCompleted }) => {
   const aiAssistant = JSON.parse(localStorage.getItem("checkboxes")).find(
     (item) => item.id === "AI assistant"
   ).isChecked;
-
+  const aiAssistantLanguage = JSON.parse(
+    localStorage.getItem("settings")
+  ).language;
   const fetchData = async (msg) => {
+    let aiMessage = "";
+    const EnglishExplain = `why is the following sentence grammatically incorrect, answer shortly, "${msg}"`;
+    const HungarianExplain = `miért nem helyes a következő mondat nyelvtanilag, válaszolj röviden, "${msg}"`;
+    const SpanishExplain = `¿Por qué la siguiente oración es gramaticalmente incorrecta? Responda brevemente, "${msg}"`;
+    const ArabicExplain = `لماذا الجملة التالية غير صحيحة نحويا، "${msg}"`;
+    if (aiAssistantLanguage === "English") {
+      aiMessage = EnglishExplain;
+    } else if (aiAssistantLanguage === "Hungarian") {
+      aiMessage = HungarianExplain;
+    } else if (aiAssistantLanguage === "Spanish") {
+      aiMessage = SpanishExplain;
+    } else if (aiAssistantLanguage === "Arabic") {
+      aiMessage = ArabicExplain;
+    }
     setShowStyle(true);
     console.log("fetching data... user message:", msg);
-
     setLoading(true);
     const options = {
       method: "POST",
@@ -40,7 +55,7 @@ const Quiz = ({ lessonData, markLessonCompleted }) => {
       data: {
         client: "",
         bot: "harley",
-        message: `why is the following sentence grammatically incorrect, answer shortly, ${msg}`,
+        message: `${aiMessage}`,
       },
     };
 

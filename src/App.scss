@@ -114,17 +114,8 @@ nav {
     background: rgba(0, 0, 0, 0.3);
     border-radius: 5px;
   }
-}
 
-.extensions-container {
-  display: grid;
-  .extension {
-    display: grid;
-    grid-auto-flow: column;
-    grid-template-columns: repeat(1, 1fr);
-    justify-items: start;
-    margin: 10px;
-
+  .checkbox-element {
     input[type="checkbox"] {
       height: 0;
       width: 0;
@@ -169,6 +160,17 @@ nav {
         }
       }
     }
+  }
+}
+
+.extensions-container {
+  display: grid;
+  .extension {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: repeat(1, 1fr);
+    justify-items: start;
+    margin: 10px;
   }
 }
 .loading-screen {
