@@ -148,6 +148,8 @@ const Quiz = ({ lessonData, markLessonCompleted }) => {
     setAvailableOptions(initialOptions);
     setShowResult(false);
     setIsCorrect(false);
+    setAiResponse("");
+    setAiText("EXPLAIN");
     const elementsWithClasses = document.querySelectorAll(
       ".correct-answer, .incorrect-answer"
     );
@@ -263,7 +265,9 @@ const Quiz = ({ lessonData, markLessonCompleted }) => {
                         </>
                       )}
                     </button>
-                    {aiResponse && !loading && <p>{aiResponse}</p>}
+                    <div className="aiResponse-container">
+                      {aiResponse && !loading && <p>{aiResponse}</p>}
+                    </div>
                   </div>
                 )}
               </div>

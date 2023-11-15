@@ -61,6 +61,21 @@
         color: #a3a3a3;
         font-size: 9px;
       }
+      .aiResponse-container {
+        p {
+          display: inline-block;
+          opacity: 0;
+          transform: translateY(1em);
+          animation: fadeInUp 0.5s forwards;
+        }
+
+        @keyframes fadeInUp {
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+      }
 
       .button-animation {
         font-family: "Manrope";
