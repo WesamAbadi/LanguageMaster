@@ -94,6 +94,11 @@ function App() {
       setLoading(false);
     });
 
+    const settingsJson = localStorage.getItem("settings");
+    if (!settingsJson) {
+      localStorage.setItem("settings", JSON.stringify(settings));
+    }
+
     return () => {
       unsubscribe();
     };
