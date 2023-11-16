@@ -178,6 +178,13 @@ option {
     justify-items: center;
     align-items: center;
   }
+  .add-lesson-button {
+    display: flex;
+    justify-content: center;
+    button{
+          border: 3px solid #93ffcda8;
+    }
+  }
 }
 table {
   border-collapse: collapse;

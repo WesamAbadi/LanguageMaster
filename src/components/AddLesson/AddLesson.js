@@ -249,9 +249,11 @@ function AddLesson({ updateFeedback }) {
           <p>Please select a tab</p>
         )}
         {[0, 1, 2].includes(activeTab) && (
-          <button className="add-lesson-button" onClick={createOrUpdateLesson}>
-            {editLessonId ? "Update" : "Add"} lesson
-          </button>
+          <div className="add-lesson-button">
+            <button onClick={createOrUpdateLesson}>
+              {editLessonId ? "Update" : "Add"} lesson
+            </button>
+          </div>
         )}
       </div>
     </div>

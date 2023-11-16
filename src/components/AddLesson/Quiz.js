@@ -8,32 +8,16 @@ function Quiz({
   setNewLessonContent,
   setNewLessonOptions,
 }) {
-  // Convert options to an array
   const optionsArray = newLessonOptions
     .split(",")
     .map((option) => option.trim());
 
-  const [selectedOptions, setSelectedOptions] = useState(
-    Array(optionsArray.length).fill(0)
-  );
+  const [selectedOptions] = useState(Array(optionsArray.length).fill(0));
 
   const options = optionsArray.map((option, index) => (
     <div key={index}>
       <span>{`${index + 1}: `}</span>
-      <select
-        value={selectedOptions[index]}
-        onChange={(event) => {
-          const updatedOptions = [...selectedOptions];
-          updatedOptions[index] = parseInt(event.target.value, 10);
-          setSelectedOptions(updatedOptions);
-        }}
-      >
-        {optionsArray.map((opt, i) => (
-          <option key={i} value={i}>
-            {opt}
-          </option>
-        ))}
-      </select>
+      <p>{option}</p>
     </div>
   ));
 
@@ -42,13 +26,18 @@ function Quiz({
     return `[${selectedOptions[index]}]`;
   });
 
-  const addOption = () => {
-    const newOption = prompt("Enter a new option:");
-    if (newOption) {
-      const updatedOptionsArray = [...optionsArray, newOption.trim()];
-      setNewLessonOptions(updatedOptionsArray.join(","));
-    }
+  const getFinalSentence = () => {
+    let matchIndex = 0;
+    const finalSentence = newLessonContent.replace(/\[\d+\]/g, (match) => {
+      const index = parseInt(match.slice(1, -1), 10);
+      const replacement = `[${optionsArray[index - 1] || ""}]`;
+      matchIndex++;
+      return replacement;
+    });
+    return finalSentence;
   };
+
+  const quizAnswer = `${newLessonTitle}: ${renderedText}`;
 
   return (
     <div className="quiz-grid">
@@ -85,9 +74,12 @@ function Quiz({
           <label>Lesson options</label>
         </div>
       </div>
-      <div className="quiz-options">
-        {options}
-        {/* <button onClick={addOption}>Add Option</button> */}
+      <div>
+        <div className="quiz-options">{options}</div>
+        <div>
+          The Quiz answered: <br /> {getFinalSentence()}
+        </div>
+        {/* <div>The Quiz answered: {quizAnswer}</div> */}
       </div>
     </div>
   );
