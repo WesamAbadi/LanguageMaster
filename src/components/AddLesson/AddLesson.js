@@ -23,7 +23,7 @@ function AddLesson({ updateFeedback }) {
 
   const handleLanguageChange = (languageId) => {
     setSelectedLanguage(languageId);
-    setEditLessonId(null); // Reset edit mode when changing language
+    setEditLessonId(null);
   };
 
   const handleLessonEdit = (lessonId) => {
@@ -45,6 +45,14 @@ function AddLesson({ updateFeedback }) {
     } else if (selectedLesson.data.type === "listening") {
       setActiveTab(0);
     }
+  };
+
+  const exitEditmode = () => {
+    setEditLessonId(null);
+    setNewLessonTitle("");
+    setNewLessonContent("");
+    setNewLessonMp3("");
+    setNewLessonOptions("");
   };
 
   const fetchLanguages = async () => {
@@ -212,7 +220,13 @@ function AddLesson({ updateFeedback }) {
       </div>
       <div className="lesson-feilds">
         <div className="section-title">
-          <h3>{editLessonId ? "Edit" : "Add"} a lesson</h3>
+          <h3>
+            {editLessonId ? (
+              <button onClick={exitEditmode}>Exit edit mode</button>
+            ) : (
+              "Add a lesson"
+            )}
+          </h3>
         </div>
         <TabSwitch
           activeTab={activeTab}
