@@ -90,22 +90,33 @@ function AddLesson({ updateFeedback }) {
 
         const lessonDocRef = doc(lessonsRef, lessonId);
 
+        let newLessonData;
         let lessonType = null;
+
         if (activeTab === 0) {
           lessonType = "listening";
+          newLessonData = {
+            title: newLessonTitle,
+            content: newLessonContent,
+            mp3: newLessonMp3,
+            type: lessonType,
+          };
         } else if (activeTab === 1) {
           lessonType = "speaking";
+          newLessonData = {
+            title: newLessonTitle,
+            content: newLessonContent,
+            type: lessonType,
+          };
         } else if (activeTab === 2) {
           lessonType = "quiz";
+          newLessonData = {
+            title: newLessonTitle,
+            content: newLessonContent,
+            options: newLessonOptions ? newLessonOptions.split(",") : [],
+            type: lessonType,
+          };
         }
-
-        const newLessonData = {
-          title: newLessonTitle,
-          content: newLessonContent,
-          mp3: newLessonMp3,
-          options: newLessonOptions ? newLessonOptions.split(",") : [],
-          type: lessonType,
-        };
 
         await setDoc(lessonDocRef, newLessonData);
 
@@ -174,9 +185,7 @@ function AddLesson({ updateFeedback }) {
                       onChange={() => handleLanguageChange(language.id)}
                       checked={selectedLanguage === language.id}
                     />
-                    <div className="radio">
-                    {language.data.title}
-                    </div>
+                    <div className="radio">{language.data.title}</div>
                   </label>
                 </div>
               ))}
@@ -201,52 +210,50 @@ function AddLesson({ updateFeedback }) {
           )}
         </div>
       </div>
-
-      <div className="section-title">
-        <h3>{editLessonId ? "Edit" : "Add"} a lesson</h3>
-      </div>
-      <TabSwitch
-        activeTab={activeTab}
-        onTabChange={handleTabChange}
-        tabs={tabNames}
-      />
-
-      {activeTab === 0 ? (
-        <Listening
-          newLessonTitle={newLessonTitle}
-          newLessonContent={newLessonContent}
-          newLessonMp3={newLessonMp3}
-          setNewLessonTitle={setNewLessonTitle}
-          setNewLessonContent={setNewLessonContent}
-          setNewLessonMp3={setNewLessonMp3}
+      <div className="lesson-feilds">
+        <div className="section-title">
+          <h3>{editLessonId ? "Edit" : "Add"} a lesson</h3>
+        </div>
+        <TabSwitch
+          activeTab={activeTab}
+          onTabChange={handleTabChange}
+          tabs={tabNames}
         />
-      ) : activeTab === 1 ? (
-        <p>
+
+        {activeTab === 0 ? (
+          <Listening
+            newLessonTitle={newLessonTitle}
+            newLessonContent={newLessonContent}
+            newLessonMp3={newLessonMp3}
+            setNewLessonTitle={setNewLessonTitle}
+            setNewLessonContent={setNewLessonContent}
+            setNewLessonMp3={setNewLessonMp3}
+          />
+        ) : activeTab === 1 ? (
           <Speaking
             newLessonTitle={newLessonTitle}
             newLessonContent={newLessonContent}
             setNewLessonTitle={setNewLessonTitle}
             setNewLessonContent={setNewLessonContent}
           />
-        </p>
-      ) : activeTab === 2 ? (
-        <Quiz
-          newLessonTitle={newLessonTitle}
-          newLessonContent={newLessonContent}
-          newLessonOptions={newLessonOptions}
-          setNewLessonTitle={setNewLessonTitle}
-          setNewLessonContent={setNewLessonContent}
-          setNewLessonOptions={setNewLessonOptions}
-        />
-      ) : (
-        <p>Please select a tab</p>
-      )}
-
-      {[0, 1, 2].includes(activeTab) && (
-        <button className="add-lesson-button" onClick={createOrUpdateLesson}>
-          {editLessonId ? "Update" : "Add"} lesson
-        </button>
-      )}
+        ) : activeTab === 2 ? (
+          <Quiz
+            newLessonTitle={newLessonTitle}
+            newLessonContent={newLessonContent}
+            newLessonOptions={newLessonOptions}
+            setNewLessonTitle={setNewLessonTitle}
+            setNewLessonContent={setNewLessonContent}
+            setNewLessonOptions={setNewLessonOptions}
+          />
+        ) : (
+          <p>Please select a tab</p>
+        )}
+        {[0, 1, 2].includes(activeTab) && (
+          <button className="add-lesson-button" onClick={createOrUpdateLesson}>
+            {editLessonId ? "Update" : "Add"} lesson
+          </button>
+        )}
+      </div>
     </div>
   );
 }

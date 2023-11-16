@@ -9,35 +9,37 @@ function Listening({
   setNewLessonMp3,
 }) {
   return (
-    <div>
-      <div>
-        <label>Lesson title:</label>
+    <div className="add-lesson-type">
+      <div className="input-field">
         <input
           type="text"
-          placeholder="Lesson title"
+          required
+          spellCheck="true"
           value={newLessonTitle}
           onChange={(event) => setNewLessonTitle(event.target.value)}
         />
+        <label>Lesson title</label>
       </div>
-      <div>
-        <label>Lesson MP3 file URL:</label>
+      <div className="input-field">
         <input
-          type="url"
-          placeholder="Lesson MP3 file URL"
+          required
+          spellCheck="false"
           value={newLessonMp3}
           onChange={(event) => setNewLessonMp3(event.target.value)}
         />
+        <label>Lesson MP3 file URL</label>
         <a target="_blank" href="https://jukehost.co.uk/library/upload">
-          upload here
+          <button>upload here</button>
         </a>
       </div>
-      <div>
-        <label>Lesson content:</label>
+      <div className="input-field">
         <textarea
-          placeholder="Lesson content"
+          required
+          spellCheck="true"
           value={newLessonContent}
           onChange={(event) => setNewLessonContent(event.target.value)}
         />
+        <label>Lesson content:</label>
       </div>
     </div>
   );

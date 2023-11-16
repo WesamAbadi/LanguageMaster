@@ -19,7 +19,7 @@ function Quiz({
 
   const options = optionsArray.map((option, index) => (
     <div key={index}>
-      <label>{`Option ${index + 1}:`}</label>
+      <span>{`${index + 1}: `}</span>
       <select
         value={selectedOptions[index]}
         onChange={(event) => {
@@ -51,42 +51,44 @@ function Quiz({
   };
 
   return (
-    <div>
-      <div>
-        <label>Lesson title:</label>
-        <input
-          type="text"
-          placeholder="Lesson title"
-          value={newLessonTitle}
-          onChange={(event) => setNewLessonTitle(event.target.value)}
-        />
-      </div>
+    <div className="quiz-grid">
+      <div className="add-lesson-type">
+        <div className="input-field">
+          <input
+            type="text"
+            required
+            spellCheck="true"
+            value={newLessonTitle}
+            onChange={(event) => setNewLessonTitle(event.target.value)}
+          />
+          <label>Lesson title</label>
+        </div>
 
-      <div>
-        <label>Lesson text:</label>
-        <input
-          type="text"
-          placeholder="Lesson text"
-          value={renderedText}
-          onChange={(event) => setNewLessonContent(event.target.value)}
-        />
+        <div className="input-field">
+          <input
+            type="text"
+            required
+            spellCheck="true"
+            value={renderedText}
+            onChange={(event) => setNewLessonContent(event.target.value)}
+          />
+          <label>Lesson text</label>
+        </div>
+        <div className="input-field">
+          <input
+            type="text"
+            required
+            spellCheck="true"
+            value={newLessonOptions}
+            onChange={(event) => setNewLessonOptions(event.target.value)}
+          />
+          <label>Lesson options</label>
+        </div>
       </div>
-      <div>
-        <label>Lesson options:</label>
-        <input
-          type="text"
-          placeholder="Lesson options"
-          value={newLessonOptions}
-          onChange={(event) => setNewLessonOptions(event.target.value)}
-        />
-      </div>
-
-      <div>
-        <label>Options:</label>
+      <div className="quiz-options">
         {options}
+        {/* <button onClick={addOption}>Add Option</button> */}
       </div>
-
-      <button onClick={addOption}>Add Option</button>
     </div>
   );
 }

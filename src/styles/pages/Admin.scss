@@ -105,7 +105,80 @@ option {
     }
   }
 }
+.lesson-feilds {
+  .input-field {
+    position: relative;
+    width: fit-content;
+    margin-bottom: 1rem;
+    input {
+      width: 350px;
+      height: 60px;
+      border-radius: 6px;
+      font-size: 18px;
+      padding: 0 15px;
+      border: 2px solid #fff;
+      background: transparent;
+      color: #fff;
+      outline: none;
+    }
+    textarea {
+      border-radius: 6px;
+      font-size: 18px;
+      padding: 10px 15px;
+      border: 2px solid #fff;
+      background: transparent;
+      color: #fff;
+      outline: none;
+    }
+    label {
+      position: absolute;
+      top: 50%;
+      left: 15px;
+      transform: translateY(-50%);
+      color: #fff;
+      font-size: 19px;
+      pointer-events: none;
+      transition: 0.3s;
+      border-radius: 1rem;
+    }
 
+    textarea:focus,
+    input:focus {
+      border: 2px solid #ffcc00;
+    }
+    textarea:focus ~ label,
+    textarea:valid ~ label,
+    input:focus ~ label,
+    input:valid ~ label {
+      top: 0;
+      left: 15px;
+      font-size: 16px;
+      padding: 0 5px;
+      background: #353842;
+    }
+  }
+  .quiz-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 20px;
+    .quiz-options {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+      gap: 10px;
+      > div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  }
+  .add-lesson-type {
+    display: grid;
+    justify-items: center;
+    align-items: center;
+  }
+}
 table {
   border-collapse: collapse;
   width: 100%;

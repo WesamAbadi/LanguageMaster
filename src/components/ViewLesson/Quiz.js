@@ -174,7 +174,7 @@ const Quiz = ({ lessonData, markLessonCompleted }) => {
   };
 
   const textWithBlanks = text.split(/(\[\d+\])/g).map((part, index) => {
-    if (emptyFields.includes(part)) {
+    if (emptyFields && emptyFields.includes(part)) {
       return (
         <Droppable
           key={index}

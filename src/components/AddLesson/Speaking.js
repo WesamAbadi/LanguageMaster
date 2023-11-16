@@ -7,23 +7,25 @@ function Speaking({
   setNewLessonContent,
 }) {
   return (
-    <div>
-      <div>
-        <label>Lesson title:</label>
+    <div className="add-lesson-type">
+      <div className="input-field">
         <input
           type="text"
-          placeholder="Lesson title"
+          required
+          spellCheck="true"
           value={newLessonTitle}
           onChange={(event) => setNewLessonTitle(event.target.value)}
         />
+        <label>Lesson title</label>
       </div>
-      <div>
-        <label>Lesson content:</label>
+      <div className="input-field">
         <textarea
-          placeholder="Lesson content"
+          required
+          spellCheck="true"
           value={newLessonContent}
           onChange={(event) => setNewLessonContent(event.target.value)}
         />
+        <label>Lesson content</label>
       </div>
     </div>
   );
