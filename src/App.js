@@ -64,6 +64,7 @@ function App() {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(async (authUser) => {
       if (authUser) {
+        console.log(authUser);
         setUser(authUser);
         const userRef = collection(db, "users");
         const userDocRef = doc(userRef, authUser.uid);
@@ -78,7 +79,9 @@ function App() {
             const newUserData = {
               name: authUser.displayName,
               admin: false,
-              createdAt: authUser.createdAt,
+              createdAt: new Date(
+                parseInt(authUser.metadata.createdAt)
+              ).toLocaleString(),
               photoURL: authUser.photoURL,
               xp: 0,
             };
@@ -94,13 +97,13 @@ function App() {
       setLoading(false);
     });
 
-    const settingsJson = localStorage.getItem("settings");
-    if (!settingsJson) {
-      localStorage.setItem("settings", JSON.stringify(settings));
-    }
-
+    
     return () => {
       unsubscribe();
+      const settingsJson = localStorage.getItem("settings");
+      if (!settingsJson) {
+        localStorage.setItem("settings", JSON.stringify(settings));
+      }
     };
   }, []);
 
