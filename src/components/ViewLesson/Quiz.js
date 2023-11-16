@@ -20,9 +20,19 @@ const Quiz = ({ lessonData, markLessonCompleted }) => {
   const aiAssistant = JSON.parse(localStorage.getItem("checkboxes")).find(
     (item) => item.id === "AI assistant"
   ).isChecked;
-  const aiAssistantLanguage = JSON.parse(
-    localStorage.getItem("settings")
-  ).language;
+
+  const settingsJson = localStorage.getItem("settings");
+  let aiAssistantLanguage;
+
+  if (settingsJson) {
+    const settings = JSON.parse(settingsJson);
+    if (settings && settings.language) {
+      aiAssistantLanguage = settings.language;
+    } else {
+      aiAssistantLanguage = "English";
+    }
+  }
+
   const fetchData = async (msg) => {
     let aiMessage = "";
     const EnglishExplain = `why is the following sentence grammatically incorrect, answer shortly, "${msg}"`;
