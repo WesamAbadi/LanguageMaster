@@ -1,17 +1,39 @@
-import React, { useState } from "react";
-import { doc, setDoc } from "firebase/firestore";
+import React, { useState, useEffect } from "react";
+import { doc, setDoc, getDoc } from "firebase/firestore";
 import { db } from "../config/firebase-config";
 import "../styles/components/AddLanguage.scss";
+import LanguageList from "./LanguageList";
 
 function AddLanguage({ updateFeedback }) {
   const [languageName, setLanguageName] = useState("");
   const [languageDescription, setLanguageDescription] = useState("DESCRIPTION");
   const [languageCode, setLanguageCode] = useState("en");
   const [languageImage, setLanguageImage] = useState(
-    "https://superpalestinian.com/cdn/shop/products/image_09032836-9067-40fb-ae76-1c1de1cbc1ef.png?v=1669664967&width=1946"
+    "https://via.placeholder.com/150"
   );
+  const [isEditMode, setIsEditMode] = useState(false);
+  const [editLanguageData, setEditLanguageData] = useState(null);
 
-  const createLanguage = async () => {
+  useEffect(() => {
+    // If editLanguageData is provided, set the component in edit mode
+    if (editLanguageData) {
+      setLanguageName(editLanguageData.title || "");
+      setLanguageDescription(editLanguageData.description || "");
+      setLanguageCode(editLanguageData.code || "en");
+      setLanguageImage(editLanguageData.image || "");
+      setIsEditMode(true);
+    }
+  }, [editLanguageData]);
+
+  const selectLanguageForEdit = (selectedLanguage) => {
+    setEditLanguageData(selectedLanguage);
+    setLanguageName(selectedLanguage.title || "");
+    setLanguageDescription(selectedLanguage.description || "");
+    setLanguageCode(selectedLanguage.code || "en");
+    setLanguageImage(selectedLanguage.image || "");
+    setIsEditMode(true);
+  };
+  const createOrUpdateLanguage = async () => {
     try {
       const languageRef = doc(db, "languages", languageName.toLowerCase());
       const languageData = {
@@ -20,17 +42,43 @@ function AddLanguage({ updateFeedback }) {
         image: languageImage,
         code: languageCode,
       };
-      await setDoc(languageRef, languageData);
+
+      if (isEditMode) {
+        // If in edit mode, get the existing document first
+        const docSnap = await getDoc(languageRef);
+        if (docSnap.exists()) {
+          await setDoc(languageRef, languageData);
+          updateFeedback("Language updated successfully!", "success");
+        } else {
+          updateFeedback("Language not found for editing.", "error");
+        }
+      } else {
+        // If not in edit mode, create a new document
+        await setDoc(languageRef, languageData);
+        updateFeedback("Language added successfully!", "success");
+      }
+
+      // Reset form fields after creating or updating language
       setLanguageName("");
-      updateFeedback("Language added successfully!", "success");
+      setLanguageDescription("DESCRIPTION");
+      setLanguageCode("en");
+      setLanguageImage(
+        "https://superpalestinian.com/cdn/shop/products/image_09032836-9067-40fb-ae76-1c1de1cbc1ef.png?v=1669664967&width=1946"
+      );
+      setIsEditMode(false);
     } catch (error) {
-      updateFeedback("Error adding language. Please try again.", "error");
+      updateFeedback(
+        "Error adding/updating language. Please try again.",
+        "error"
+      );
     }
   };
 
   return (
     <div className="add-language-container">
-      <h4>Add a new language to the system</h4>
+      <LanguageList onSelectLanguage={selectLanguageForEdit} />
+
+      <h4>{isEditMode ? "Edit" : "Add"} a language to the system</h4>
       <input
         type="text"
         placeholder="Language name"
@@ -67,8 +115,8 @@ function AddLanguage({ updateFeedback }) {
         onChange={(e) => setLanguageImage(e.target.value)}
         className="language-input"
       />
-      <button onClick={createLanguage} className="add-button">
-        Add
+      <button onClick={createOrUpdateLanguage} className="add-button">
+        {isEditMode ? "Update" : "Add"}
       </button>
     </div>
   );

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { doc, setDoc, getDocs, collection } from "firebase/firestore";
+import { doc, setDoc, getDocs, collection, getDoc } from "firebase/firestore";
 import { db } from "../../config/firebase-config";
 import Listening from "./Listening";
 import Speaking from "./Speaking";
@@ -9,11 +9,12 @@ import Quiz from "./Quiz";
 
 function AddLesson({ updateFeedback }) {
   const [activeTab, setActiveTab] = useState(-5);
-  const tabNames = ["listening", "speaking", "Quiz"];
+  const [tabNames] = useState(["listening", "speaking", "Quiz"]);
 
   const [languages, setLanguages] = useState([]);
   const [selectedLanguage, setSelectedLanguage] = useState("");
   const [lessons, setLessons] = useState([]);
+  const [editLessonId, setEditLessonId] = useState(null);
 
   const [newLessonTitle, setNewLessonTitle] = useState("");
   const [newLessonMp3, setNewLessonMp3] = useState("");
@@ -22,6 +23,28 @@ function AddLesson({ updateFeedback }) {
 
   const handleLanguageChange = (languageId) => {
     setSelectedLanguage(languageId);
+    setEditLessonId(null); // Reset edit mode when changing language
+  };
+
+  const handleLessonEdit = (lessonId) => {
+    setEditLessonId(lessonId);
+    const selectedLesson = lessons.find((lesson) => lesson.id === lessonId);
+    console.log(selectedLesson);
+    if (selectedLesson) {
+      setNewLessonTitle(selectedLesson.data.title || "");
+      setNewLessonContent(selectedLesson.data.content || "");
+      setNewLessonMp3(selectedLesson.data.mp3 || "");
+      setNewLessonOptions(
+        selectedLesson.data.options ? selectedLesson.data.options.join(",") : ""
+      );
+    }
+    if (selectedLesson.data.type === "quiz") {
+      setActiveTab(2);
+    } else if (selectedLesson.data.type === "speaking") {
+      setActiveTab(1);
+    } else if (selectedLesson.data.type === "listening") {
+      setActiveTab(0);
+    }
   };
 
   const fetchLanguages = async () => {
@@ -56,25 +79,16 @@ function AddLesson({ updateFeedback }) {
     }
   };
 
-  const createLesson = async () => {
+  const createOrUpdateLesson = async () => {
     try {
       if (selectedLanguage && newLessonTitle && newLessonContent) {
         const lessonsCollectionRef = collection(db, "lessons");
         const languageDocRef = doc(lessonsCollectionRef, selectedLanguage);
         const lessonsRef = collection(languageDocRef, "lessons");
 
-        const querySnapshot = await getDocs(lessonsRef);
-        let highestLessonId = 0;
+        const lessonId = editLessonId || (await getNewLessonId(lessonsRef));
 
-        querySnapshot.forEach((doc) => {
-          const lessonId = parseInt(doc.id, 10);
-          if (!isNaN(lessonId) && lessonId > highestLessonId) {
-            highestLessonId = lessonId;
-          }
-        });
-
-        const newLessonId = (highestLessonId + 1).toString();
-        const lessonDocRef = doc(lessonsRef, newLessonId);
+        const lessonDocRef = doc(lessonsRef, lessonId);
 
         let lessonType = null;
         if (activeTab === 0) {
@@ -84,48 +98,49 @@ function AddLesson({ updateFeedback }) {
         } else if (activeTab === 2) {
           lessonType = "quiz";
         }
-        if (lessonType === "listening") {
-          const newLessonData = {
-            title: newLessonTitle,
-            content: newLessonContent,
-            mp3: newLessonMp3,
-            type: lessonType,
-          };
-          await setDoc(lessonDocRef, newLessonData);
-        }
-        if (lessonType === "speaking") {
-          const newLessonData = {
-            title: newLessonTitle,
-            content: newLessonContent,
-            type: lessonType,
-          };
-          await setDoc(lessonDocRef, newLessonData);
-        }
-        if (lessonType === "quiz") {
-          const optionsArray = newLessonOptions.split(",");
 
-          const newLessonData = {
-            title: newLessonTitle,
-            content: newLessonContent,
-            type: lessonType,
-            options: optionsArray,
-          };
-          await setDoc(lessonDocRef, newLessonData);
-        }
+        const newLessonData = {
+          title: newLessonTitle,
+          content: newLessonContent,
+          mp3: newLessonMp3,
+          options: newLessonOptions ? newLessonOptions.split(",") : [],
+          type: lessonType,
+        };
+
+        await setDoc(lessonDocRef, newLessonData);
 
         setNewLessonTitle("");
         setNewLessonContent("");
         setNewLessonMp3("");
         setNewLessonOptions("");
+        setEditLessonId(null);
         fetchLessons();
-        updateFeedback("Lesson added successfully!", "success");
+        setActiveTab(-5);
+        updateFeedback("Lesson added/updated successfully!", "success");
       } else {
         updateFeedback("Please fill in all the required fields.", "error");
       }
     } catch (error) {
-      console.error("Error adding lesson:", error);
-      updateFeedback("Error adding lesson. Please try again.", "error");
+      console.error("Error adding/updating lesson:", error);
+      updateFeedback(
+        "Error adding/updating lesson. Please try again.",
+        "error"
+      );
     }
+  };
+
+  const getNewLessonId = async (lessonsRef) => {
+    const querySnapshot = await getDocs(lessonsRef);
+    let highestLessonId = 0;
+
+    querySnapshot.forEach((doc) => {
+      const lessonId = parseInt(doc.id, 10);
+      if (!isNaN(lessonId) && lessonId > highestLessonId) {
+        highestLessonId = lessonId;
+      }
+    });
+
+    return (highestLessonId + 1).toString();
   };
 
   const handleTabChange = (direction) => {
@@ -135,7 +150,7 @@ function AddLesson({ updateFeedback }) {
   useEffect(() => {
     fetchLanguages();
     fetchLessons();
-  }, [selectedLanguage]);
+  }, [selectedLanguage, editLessonId]);
 
   return (
     <div>
@@ -150,15 +165,19 @@ function AddLesson({ updateFeedback }) {
             <>
               {languages.map((language) => (
                 <div key={language.id}>
-                  <input
-                    type="radio"
-                    name="languages"
-                    id={language.id}
-                    value={language.id}
-                    onChange={() => handleLanguageChange(language.id)}
-                    checked={selectedLanguage === language.id}
-                  />
-                  <label htmlFor={language.id}>{language.data.title}</label>
+                  <label htmlFor={language.id}>
+                    <input
+                      type="radio"
+                      name="languages"
+                      id={language.id}
+                      value={language.id}
+                      onChange={() => handleLanguageChange(language.id)}
+                      checked={selectedLanguage === language.id}
+                    />
+                    <div className="radio">
+                    {language.data.title}
+                    </div>
+                  </label>
                 </div>
               ))}
               <button onClick={fetchLessons}>Fetch lessons</button>
@@ -173,6 +192,8 @@ function AddLesson({ updateFeedback }) {
                 key={lesson.id}
                 lesson={lesson}
                 languageName={selectedLanguage}
+                admin={true}
+                onEdit={() => handleLessonEdit(lesson.id)}
               />
             ))
           ) : (
@@ -182,7 +203,7 @@ function AddLesson({ updateFeedback }) {
       </div>
 
       <div className="section-title">
-        <h3>Add a new lesson</h3>
+        <h3>{editLessonId ? "Edit" : "Add"} a lesson</h3>
       </div>
       <TabSwitch
         activeTab={activeTab}
@@ -222,8 +243,8 @@ function AddLesson({ updateFeedback }) {
       )}
 
       {[0, 1, 2].includes(activeTab) && (
-        <button className="add-lesson-button" onClick={createLesson}>
-          Add new lesson
+        <button className="add-lesson-button" onClick={createOrUpdateLesson}>
+          {editLessonId ? "Update" : "Add"} lesson
         </button>
       )}
     </div>

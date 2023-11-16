@@ -1,4 +1,6 @@
 $color_1: white;
+$primary-color: 13, 45, 123;
+$icon-size: 3rem;
 $background-color_1: #007bff;
 $background-color_2: #0056b3;
 $background-color_3: #f9f9f9;
@@ -76,6 +78,31 @@ option {
     justify-content: center;
     align-items: center;
     gap: 10px;
+
+    input[type="radio"] {
+      display: inline-block;
+      position: absolute;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      height: 1;
+      width: 1;
+      margin: -1;
+      padding: 0;
+      border: 0;
+      &:checked ~ .radio {
+        background-color: rgb(220 91 255 / 18%);
+      }
+    }
+    .radio {
+      display: flex;
+      justify-content: center;
+      border-radius: 0.5rem;
+      padding: 0.5rem;
+      &:hover {
+        cursor: pointer;
+        background-color: rgb(220 91 255 / 18%);
+      }
+    }
   }
 }
 
@@ -90,7 +117,7 @@ table {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: center;
-    &.main{
+    &.main {
       color: palegoldenrod;
     }
     a {
@@ -105,7 +132,7 @@ table {
 }
 
 @media screen and (max-width: 768px) {
-  .admin-container{
+  .admin-container {
     .tabs-container .tab-switch {
       .tab-indicator {
         display: none;
