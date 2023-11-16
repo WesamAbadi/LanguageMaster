@@ -97,7 +97,6 @@ function App() {
       setLoading(false);
     });
 
-    
     return () => {
       unsubscribe();
       const settingsJson = localStorage.getItem("settings");
@@ -105,6 +104,7 @@ function App() {
         localStorage.setItem("settings", JSON.stringify(settings));
       }
     };
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
@@ -112,8 +112,12 @@ function App() {
     const savedSettings = localStorage.getItem("settings");
     const savedTheme = localStorage.getItem("theme");
     if (savedCheckboxes) setCheckboxes(JSON.parse(savedCheckboxes));
+    else localStorage.setItem("checkboxes", JSON.stringify(initialCheckboxes));
     if (savedSettings) setSettings(JSON.parse(savedSettings));
+    else localStorage.setItem("settings", JSON.stringify(initialSettings));
     if (savedTheme) setTheme(JSON.parse(savedTheme));
+    else localStorage.setItem("theme", JSON.stringify(theme));
+    // eslint-disable-next-line
   }, []);
 
   const signInWithGoogle = async () => {
