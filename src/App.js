@@ -314,7 +314,13 @@ function App() {
               }
             />
             <OverlayBox
-              icon={<img className="user-img" src={user.photoURL} alt="" />}
+              icon={
+                user.photoURL ? (
+                  <img className="user-img" src={user.photoURL} alt="" />
+                ) : (
+                  <FaCircleUser />
+                )
+              }
               content={
                 <div className="user-info">
                   <div className="xp">

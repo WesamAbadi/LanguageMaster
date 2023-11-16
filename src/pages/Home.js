@@ -3,8 +3,6 @@ import { collection, getDocs, doc } from "firebase/firestore";
 import { db } from "../config/firebase-config";
 import { Link, useNavigate } from "react-router-dom";
 import "../styles/pages/Home.scss";
-
-import LanguageCard from "../components/LanguageCard";
 function Home({ isAuth }) {
   const [languages, setLanguages] = useState([]);
   const [progress, setProgress] = useState([]);
@@ -48,6 +46,7 @@ function Home({ isAuth }) {
     }
     fetchLanguages();
     fetchUserProgress();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

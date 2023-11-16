@@ -75,13 +75,11 @@ const Quiz = ({ lessonData, markLessonCompleted }) => {
     if (!result.destination) return;
 
     const sourceIndex = result.source.index;
-    const destinationIndex = result.destination.index;
 
     const sourceId = result.draggableId;
     const destinationId = result.destination.droppableId;
 
     const sourceOption = availableOptions[sourceIndex];
-    const destinationOption = availableOptions[destinationIndex];
 
     const updatedAnswers = { ...answers };
 

@@ -80,6 +80,7 @@ function LanguagePage() {
   useEffect(() => {
     fetchLanguagesAndLessons();
     fetchUserProgress();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

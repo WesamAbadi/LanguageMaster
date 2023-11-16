@@ -165,6 +165,7 @@ function LessonPage() {
     fetchLesson();
     checkIfCompleted();
     getLanguageCode();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [languageName, lessonId]);
 
   if (!lessonData) {

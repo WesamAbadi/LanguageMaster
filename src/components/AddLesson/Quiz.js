@@ -27,17 +27,13 @@ function Quiz({
   });
 
   const getFinalSentence = () => {
-    let matchIndex = 0;
     const finalSentence = newLessonContent.replace(/\[\d+\]/g, (match) => {
       const index = parseInt(match.slice(1, -1), 10);
       const replacement = `[${optionsArray[index - 1] || ""}]`;
-      matchIndex++;
       return replacement;
     });
     return finalSentence;
   };
-
-  const quizAnswer = `${newLessonTitle}: ${renderedText}`;
 
   return (
     <div className="quiz-grid">
@@ -79,7 +75,6 @@ function Quiz({
         <div>
           The Quiz answered: <br /> {getFinalSentence()}
         </div>
-        {/* <div>The Quiz answered: {quizAnswer}</div> */}
       </div>
     </div>
   );

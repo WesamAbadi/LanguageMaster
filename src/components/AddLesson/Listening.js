@@ -28,7 +28,7 @@ function Listening({
           onChange={(event) => setNewLessonMp3(event.target.value)}
         />
         <label>Lesson MP3 file URL</label>
-        <a target="_blank" href="https://jukehost.co.uk/library/upload">
+        <a target="_blank" rel="noreferrer" href="https://jukehost.co.uk/library/upload">
           <button>upload here</button>
         </a>
       </div>

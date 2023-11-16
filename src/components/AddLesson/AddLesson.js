@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { doc, setDoc, getDocs, collection, getDoc } from "firebase/firestore";
+import { doc, setDoc, getDocs, collection } from "firebase/firestore";
 import { db } from "../../config/firebase-config";
 import Listening from "./Listening";
 import Speaking from "./Speaking";
@@ -166,6 +166,7 @@ function AddLesson({ updateFeedback }) {
     setActiveTab(direction);
   };
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     fetchLanguages();
     fetchLessons();

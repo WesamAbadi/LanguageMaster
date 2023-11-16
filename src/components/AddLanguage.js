@@ -96,6 +96,7 @@ function AddLanguage({ updateFeedback }) {
         />
         <a
           target="_blank"
+          rel="noreferrer"
           href="https://github.com/JamesBrill/react-speech-recognition/blob/HEAD/docs/API.md#language-string"
         >
           <button style={{ height: "30px", width: "30px" }}>?</button>
