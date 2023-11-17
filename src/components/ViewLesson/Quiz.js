@@ -13,6 +13,7 @@ const Quiz = ({ lessonData, markLessonCompleted }) => {
   const [availableOptions, setAvailableOptions] = useState(initialOptions);
   const [combinedUserAnswers, setCombinedUserAnswers] = useState("");
   const [aiResponse, setAiResponse] = useState("");
+  const [aiResponseTrimmed, setAiResponseTrimmed] = useState("");
   const [aiText, setAiText] = useState("EXPLAIN");
   const [showStyle, setShowStyle] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -25,7 +26,7 @@ const Quiz = ({ lessonData, markLessonCompleted }) => {
   ).language;
   const fetchData = async (msg) => {
     let aiMessage = "";
-    const EnglishExplain = `why is the following sentence grammatically incorrect, answer shortly, "${msg}"`;
+    const EnglishExplain = `help me understand why is the following sentence grammatically incorrect, "${msg}"`;
     const HungarianExplain = `miért nem helyes a következő mondat nyelvtanilag, válaszolj röviden, "${msg}"`;
     const SpanishExplain = `¿Por qué la siguiente oración es gramaticalmente incorrecta? Responda brevemente, "${msg}"`;
     const ArabicExplain = `لماذا الجملة التالية غير صحيحة نحويا، "${msg}"`;
@@ -62,6 +63,7 @@ const Quiz = ({ lessonData, markLessonCompleted }) => {
     try {
       const response = await axios.request(options);
       setAiResponse(response.data.data.conversation.output);
+      setAiResponseTrimmed(response.data.data.conversation.output.split(". "));
     } catch (error) {
       setAiResponse("Error generating response, try again later.");
       console.error(error);
@@ -162,6 +164,7 @@ const Quiz = ({ lessonData, markLessonCompleted }) => {
     setShowResult(false);
     setIsCorrect(false);
     setAiResponse("");
+    setAiResponseTrimmed("");
     setAiText("EXPLAIN");
     const elementsWithClasses = document.querySelectorAll(
       ".correct-answer, .incorrect-answer"
@@ -280,13 +283,26 @@ const Quiz = ({ lessonData, markLessonCompleted }) => {
                         </>
                       )}
                     </button>
+                    <p className="aiLanguage">
+                      (AI Language: {aiAssistantLanguage})
+                    </p>
                     <div
                       className={
                         "aiResponse-container " +
                         (showStyle ? "fadeout" : "fadein")
                       }
                     >
-                      {aiResponse && <p>{aiResponse}</p>}
+                      {aiResponseTrimmed &&
+                        aiResponseTrimmed.map((sentence, index) => (
+                          <p key={index}>
+                            <span className="first-word">
+                              {sentence.split(" ")[0]}
+                            </span>{" "}
+                            {sentence
+                              .substring(sentence.indexOf(" ") + 1)
+                              .trim()}
+                          .</p>
+                        ))}
                     </div>
                   </div>
                 )}

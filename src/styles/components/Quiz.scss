@@ -68,6 +68,8 @@
           display: inline-block;
           opacity: 0;
           transform: translateY(1em);
+          margin-bottom: 0;
+          text-align: justify;
         }
         &.fadein {
           p {
@@ -142,6 +144,12 @@
           box-shadow: var(--box-shadow);
           margin: 0.3rem;
         }
+      }
+      .aiLanguage {
+        font-size: 10px;
+      }
+      .first-word {
+        color:#3fc386;
       }
     }
   }

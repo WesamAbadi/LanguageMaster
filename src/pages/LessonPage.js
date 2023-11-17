@@ -31,6 +31,9 @@ function LessonPage() {
 
         if (lessonDocSnapshot.exists()) {
           setLessonData(lessonDocSnapshot.data());
+          if (lessonDocSnapshot.data().type === "listening") setXpGain(30);
+          else if (lessonDocSnapshot.data().type === "speaking") setXpGain(50);
+          else if (lessonDocSnapshot.data().type === "quiz") setXpGain(100);
         } else {
         }
       }
@@ -70,10 +73,6 @@ function LessonPage() {
   const markAsCompleted = async () => {
     try {
       if (auth.currentUser && auth.currentUser.uid) {
-        if (lessonData.type === "listening") setXpGain(30);
-        else if (lessonData.type === "speaking") setXpGain(50);
-        else if (lessonData.type === "quiz") setXpGain(100);
-
         const userDocRef = doc(db, "users", auth.currentUser.uid);
         const progressCollectionRef = collection(userDocRef, "progress");
         const languageDocRef = doc(progressCollectionRef, languageName);
@@ -83,6 +82,7 @@ function LessonPage() {
         const userDocSnapshot = await getDoc(userDocRef);
         const currentXp = userDocSnapshot.data()?.xp || 0;
         const newXp = currentXp + xpGain;
+        const level = Math.floor(newXp / 400);
 
         if (languageDocSnapshot.exists()) {
           lessonsArray = languageDocSnapshot.data().lessons || [];
@@ -94,7 +94,9 @@ function LessonPage() {
           await setDoc(languageDocRef, { lessons: lessonsArray });
 
           await setDoc(userDocRef, { xp: newXp }, { merge: true });
+          await setDoc(userDocRef, { lvl: level }, { merge: true });
           console.log(`Xp increased by ${xpGain}. New XP:`, newXp);
+          console.log(`Level is: ${level}`);
           simulateXPAnimation();
           const xpAnimationElement = document.getElementById("xpAnimation");
           xpAnimationElement.style.display = "block";
