@@ -18,6 +18,40 @@
       border-radius: 2rem;
       padding: 1rem;
     }
+    .translation {
+      border: solid 1px;
+      border-radius: 2rem;
+      padding: 0.4rem;
+      margin-top: 1rem;
+      font-weight: 400;
+      opacity: 0.8;
+      position: relative;
+      div {
+        animation: moveText 2s linear infinite;
+        position: absolute;
+        top: -5px;
+        left: -16px;
+        border-radius: 2rem;
+        background: white;
+        color: black;
+        padding: 0rem 0.2rem;
+        &::before {
+          content: "Which means: ";
+          font-size: 0px;
+          opacity: 0;
+          transition: color 0.2s ease-in-out,  font-size 0.2s ease-in-out, opacity 0.2s ease-in-out;
+        }
+        &:hover {
+          &::before {
+            opacity: 1;
+            font-size: 14px;
+            color: black;
+          }
+          animation: none;
+          color: transparent;
+        }
+      }
+    }
   }
 }
 @media screen and (min-width: 769px) {
@@ -33,5 +67,19 @@
   }
   audio {
     width: -webkit-fill-available;
+  }
+}
+@keyframes moveText {
+  0% {
+    transform: translateY(0);
+  }
+  25% {
+    transform: translateY(-3px);
+  }
+  50% {
+    transform: translateY(0px);
+  }
+  100% {
+    transform: translateY(0px);
   }
 }

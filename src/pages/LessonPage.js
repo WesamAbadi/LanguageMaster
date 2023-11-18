@@ -207,6 +207,7 @@ function LessonPage() {
           <Listening
             lessonData={lessonData}
             markLessonCompleted={markLessonCompleted}
+            languageCode={languageCode}
           />
         )}
         {lessonData.type === "speaking" && (
