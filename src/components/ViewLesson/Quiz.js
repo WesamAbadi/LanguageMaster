@@ -13,7 +13,6 @@ const Quiz = ({ lessonData, markLessonCompleted }) => {
   const [availableOptions, setAvailableOptions] = useState(initialOptions);
   const [combinedUserAnswers, setCombinedUserAnswers] = useState("");
   const [aiResponse, setAiResponse] = useState("");
-  const [aiResponseTrimmed, setAiResponseTrimmed] = useState("");
   const [aiText, setAiText] = useState("EXPLAIN");
   const [showStyle, setShowStyle] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -62,8 +61,7 @@ const Quiz = ({ lessonData, markLessonCompleted }) => {
 
     try {
       const response = await axios.request(options);
-      setAiResponse(response.data.data.conversation.output);
-      setAiResponseTrimmed(response.data.data.conversation.output.split(". "));
+      setAiResponse(response.data.data.conversation.output.split(". "));
     } catch (error) {
       setAiResponse("Error generating response, try again later.");
       console.error(error);
@@ -164,7 +162,6 @@ const Quiz = ({ lessonData, markLessonCompleted }) => {
     setShowResult(false);
     setIsCorrect(false);
     setAiResponse("");
-    setAiResponseTrimmed("");
     setAiText("EXPLAIN");
     const elementsWithClasses = document.querySelectorAll(
       ".correct-answer, .incorrect-answer"
@@ -292,8 +289,8 @@ const Quiz = ({ lessonData, markLessonCompleted }) => {
                         (showStyle ? "fadeout" : "fadein")
                       }
                     >
-                      {aiResponseTrimmed &&
-                        aiResponseTrimmed.map((sentence, index) => (
+                      {aiResponse &&
+                        aiResponse.map((sentence, index) => (
                           <p key={index}>
                             <span className="first-word">
                               {sentence.split(" ")[0]}

@@ -338,7 +338,7 @@ function App() {
               content={
                 <div className="user-info">
                   <div className="xp">
-                    <p>Level {level}</p>
+                    <p className="level">Level {level}</p>
                     <p>|</p>
                     <p>{xp} XP</p>
                   </div>
