@@ -1,10 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { diff_match_patch } from "diff-match-patch";
-import AudioPlayer from "./AudioPlayer";
-import axios from "axios";
-import { IoLanguage } from "react-icons/io5";
-
 import "../../styles/components/Listening.scss";
+import Translator from "./Translator";
 
 const dmp = new diff_match_patch();
 
@@ -12,34 +9,6 @@ function Listening({ lessonData, markLessonCompleted, languageCode }) {
   const [inputText, setInputText] = useState("");
   const [comparisonResult, setComparisonResult] = useState(null);
   const [matchPercentage, setMatchPercentage] = useState(null);
-  const [translatedText, setTranslatedText] = useState("");
-
-  const translateContent = async () => {
-    const options = {
-      method: "GET",
-      url: "https://translated-mymemory---translation-memory.p.rapidapi.com/get",
-      params: {
-        langpair: `${languageCode}|en`,
-        q: `${lessonData.content}`,
-        mt: "1",
-        onlyprivate: "0",
-        de: "a@b.c",
-      },
-      headers: {
-        "X-RapidAPI-Key": "c75719387bmshd6e9b7bb46b8b2ep189bf2jsnc73307e6fac0",
-        "X-RapidAPI-Host":
-          "translated-mymemory---translation-memory.p.rapidapi.com",
-      },
-    };
-
-    try {
-      const response = await axios.request(options);
-      setTranslatedText(response.data.responseData.translatedText);
-      console.log("Translation successful:", response.data.responseData);
-    } catch (error) {
-      console.error("Translation error:", error);
-    }
-  };
 
   const handleInputChange = (event) => {
     setInputText(event.target.value);
@@ -91,23 +60,15 @@ function Listening({ lessonData, markLessonCompleted, languageCode }) {
           <p>Keep trying!</p>
         )}
         {diffElements}
-        {Math.round(matchPercentage) >= 70 && translatedText && (
-          <div className="translation">
-            {translatedText}{" "}
-            <div>
-              <IoLanguage />
-            </div>
-          </div>
+        {Math.round(matchPercentage) >= 70 && (
+          <Translator
+            languageCode={languageCode}
+            textToBeTranslated={lessonData.content}
+          />
         )}
       </div>
     );
   };
-
-  useEffect(() => {
-    if (languageCode != "en") {
-      translateContent();
-    }
-  }, [languageCode]);
 
   return (
     <div className="lesson">

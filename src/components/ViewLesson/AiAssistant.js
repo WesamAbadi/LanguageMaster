@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import '../../styles/components/AiAssistant.scss'
+import "../../styles/components/AiAssistant.scss";
 
 function AiAssistant({ userAnswer }) {
   const [aiResponse, setAiResponse] = useState("");
@@ -8,7 +8,6 @@ function AiAssistant({ userAnswer }) {
   const [showStyle, setShowStyle] = useState(false);
   const [loading, setLoading] = useState(false);
   const apiKey = process.env.REACT_APP_RAPIDAPI_KEY;
-  
 
   const aiAssistant = JSON.parse(localStorage.getItem("checkboxes")).find(
     (item) => item.id === "AI assistant"
