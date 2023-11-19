@@ -161,3 +161,12 @@
     font-size: 5px;
   }
 }
+
+@media screen and (max-width: 768px) {
+  .lesson-page .lesson-header .info{
+    display: grid;
+    *{
+      margin-top:0;
+    }
+  }
+}

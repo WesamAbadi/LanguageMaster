@@ -17,4 +17,9 @@
       font-weight: bold;
     }
   }
+  .comparison {
+    .neutral {
+      display: contents !important;
+    }
+  }
 }
