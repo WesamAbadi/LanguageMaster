@@ -193,27 +193,30 @@ option {
     }
   }
 }
-table {
-  border-collapse: collapse;
-  width: 100%;
-  margin-top: 20px;
-  border-radius: 2rem;
+.table-container {
+  overflow-x: auto;
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 20px;
+    border-radius: 2rem;
 
-  th,
-  td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: center;
-    &.main {
-      color: palegoldenrod;
-    }
-    a {
-      color: white;
-      text-decoration: underline;
-    }
-    div {
+    th,
+    td {
+      border: 1px solid #ddd;
+      padding: 8px;
       text-align: center;
-      margin-top: 50px;
+      &.main {
+        color: palegoldenrod;
+      }
+      a {
+        color: white;
+        text-decoration: underline;
+      }
+      div {
+        text-align: center;
+        margin-top: 50px;
+      }
     }
   }
 }
@@ -223,6 +226,19 @@ table {
     .tabs-container .tab-switch {
       .tab-indicator {
         display: none;
+      }
+    }
+    .table-container {
+      table {
+        th,
+        td {
+          font-size: 11px;
+          &.user-id {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 4rem;
+          }
+        }
       }
     }
   }

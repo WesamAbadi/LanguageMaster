@@ -35,13 +35,13 @@ function ManageUsers() {
   }, []);
 
   return (
-    <div>
+    <div className="table-container">
       <h2>Manage Users</h2>
       <table>
         <thead>
           <tr>
             <th>Name</th>
-            <th>XP</th>
+            <th>LVL / XP</th>
             <th>ID</th>
             <th>Admin</th>
             <th>Requested to be admin?</th>
@@ -52,8 +52,12 @@ function ManageUsers() {
           {data.map((item) => (
             <tr key={item.id}>
               <td>{item.data.name}</td>
-              <td>{item.data.xp !== undefined ? item.data.xp : 0}</td>
-              <td>{item.id}</td>
+              <td>
+                {item.data.lvl !== undefined ? item.data.lvl : 0}
+                <span style={{ color: "#717171" }}> / </span>
+                {item.data.xp !== undefined ? item.data.xp : 0}
+              </td>
+              <td className="user-id">{item.id}</td>
               <td className="main">{item.data.admin.toString()}</td>
               <td>
                 {item.data.requestedAdminRights

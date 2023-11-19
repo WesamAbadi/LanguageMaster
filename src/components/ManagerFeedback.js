@@ -23,7 +23,7 @@ function ManagerFeedback() {
   });
 
   return (
-    <div>
+    <div className="table-container">
       <h1>Manage Feedbacks</h1>
       <table>
         <thead>
@@ -38,7 +38,7 @@ function ManagerFeedback() {
         <tbody>
           {data.map((item) => (
             <tr key={item.id}>
-              <td>{item.data.userid}</td>
+              <td className="user-id">{item.data.userid}</td>
               <td>{item.data.userName}</td>
               <td className="main">{item.data.content}</td>
               <td>
