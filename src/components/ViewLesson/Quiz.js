@@ -13,7 +13,6 @@ const Quiz = ({ lessonData, markLessonCompleted }) => {
   const [availableOptions, setAvailableOptions] = useState(initialOptions);
   const [combinedUserAnswers, setCombinedUserAnswers] = useState("");
 
-
   const handleDragEnd = (result) => {
     if (!result.destination) return;
 
@@ -39,6 +38,7 @@ const Quiz = ({ lessonData, markLessonCompleted }) => {
 
   const checkAnswers = () => {
     setIsCorrect(true);
+    let correct = true;
 
     const segments = text.split(/\[(\d+)\]/);
     var emptyFields = false;
@@ -70,9 +70,10 @@ const Quiz = ({ lessonData, markLessonCompleted }) => {
         emptyFieldElement.classList.add("incorrect-answer");
         emptyFieldElement.classList.remove("correct-answer");
         setIsCorrect(false);
+        correct = false;
       }
     }
-    if (isCorrect && !emptyFields) {
+    if (correct && !emptyFields) {
       markLessonCompleted();
     }
 

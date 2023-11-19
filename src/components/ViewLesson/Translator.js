@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { IoLanguage } from "react-icons/io5";
-import "../../styles/components/Translator.scss"
+import "../../styles/components/Translator.scss";
 function Translator({ textToBeTranslated, languageCode }) {
   const [translatedText, setTranslatedText] = useState("");
   const apiKey = process.env.REACT_APP_RAPIDAPI_KEY;
