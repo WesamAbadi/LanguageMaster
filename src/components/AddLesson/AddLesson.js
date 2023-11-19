@@ -198,7 +198,7 @@ function AddLesson({ updateFeedback }) {
                   </label>
                 </div>
               ))}
-              <button onClick={fetchLessons}>Fetch lessons</button>
+              {/* <button onClick={fetchLessons}>Fetch lessons</button> */}
             </>
           )}
         </div>

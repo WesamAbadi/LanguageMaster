@@ -13,6 +13,7 @@ function AddLanguage({ updateFeedback }) {
   );
   const [isEditMode, setIsEditMode] = useState(false);
   const [editLanguageData, setEditLanguageData] = useState(null);
+  const [selectedLanguage, setSelectedLanguage] = useState(null);
 
   useEffect(() => {
     // If editLanguageData is provided, set the component in edit mode
@@ -26,12 +27,20 @@ function AddLanguage({ updateFeedback }) {
   }, [editLanguageData]);
 
   const selectLanguageForEdit = (selectedLanguage) => {
-    setEditLanguageData(selectedLanguage);
-    setLanguageName(selectedLanguage.title || "");
-    setLanguageDescription(selectedLanguage.description || "");
-    setLanguageCode(selectedLanguage.code || "en");
-    setLanguageImage(selectedLanguage.image || "");
-    setIsEditMode(true);
+    if (selectedLanguage) {
+      setSelectedLanguage(selectedLanguage.title);
+      setEditLanguageData(selectedLanguage);
+      setLanguageName(selectedLanguage.title || "");
+      setLanguageDescription(selectedLanguage.description || "");
+      setLanguageCode(selectedLanguage.code || "en");
+      setLanguageImage(selectedLanguage.image || "");
+      setIsEditMode(true);
+    } else {
+      setSelectedLanguage("");
+      setIsEditMode(false);
+      setLanguageName("");
+      setLanguageCode("en");
+    }
   };
   const createOrUpdateLanguage = async () => {
     try {
@@ -76,7 +85,10 @@ function AddLanguage({ updateFeedback }) {
 
   return (
     <div className="add-language-container">
-      <LanguageList onSelectLanguage={selectLanguageForEdit} />
+      <LanguageList
+        selectedLanguage={selectedLanguage}
+        onSelectLanguage={selectLanguageForEdit}
+      />
 
       <h4>{isEditMode ? "Edit" : "Add"} a language to the system</h4>
       <input
@@ -102,7 +114,7 @@ function AddLanguage({ updateFeedback }) {
           <button style={{ height: "30px", width: "30px" }}>?</button>
         </a>
       </div>
-      <input
+      {/* <input
         type="text"
         placeholder="Language description"
         value={languageDescription}
@@ -115,7 +127,7 @@ function AddLanguage({ updateFeedback }) {
         value={languageImage}
         onChange={(e) => setLanguageImage(e.target.value)}
         className="language-input"
-      />
+      /> */}
       <button onClick={createOrUpdateLanguage} className="add-button">
         {isEditMode ? "Update" : "Add"}
       </button>

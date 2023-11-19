@@ -165,11 +165,18 @@ option {
     .quiz-options {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-      gap: 10px;
+      gap: 5px;
+      margin-bottom: 4%;
       > div {
         display: flex;
         flex-direction: column;
         align-items: center;
+        border: solid 1px;
+        border-radius: 1rem;
+        padding: 3%;
+        p {
+          margin: 0;
+        }
       }
     }
   }
@@ -181,8 +188,8 @@ option {
   .add-lesson-button {
     display: flex;
     justify-content: center;
-    button{
-          border: 3px solid #93ffcda8;
+    button {
+      border: 3px solid #93ffcda8;
     }
   }
 }
