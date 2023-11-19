@@ -25,10 +25,11 @@
       }
     }
     .languages-row {
-      display: grid;
-      grid-auto-flow: column;
-      margin: 30px 0;
+      display: flex;
       gap: 10px;
+      margin: 30px 0;
+      flex-wrap: wrap;
+      justify-content: center;
       .language-box {
         img {
           max-height: 60px;
@@ -58,5 +59,15 @@
     opacity: 1;
     filter: contrast(1);
     transform: scale(1);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .languages-row{
+    .language-box{
+      img{
+        max-height: 44px;
+      }
+    }
   }
 }

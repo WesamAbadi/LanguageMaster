@@ -84,10 +84,39 @@ nav {
         transition: max-height 0.2s, filter 0.3s;
       }
     }
-    .user-info{
-      .xp{
-        .level{
+    .user-info {
+      .xp {
+        .level {
           color: #fff6b1;
+        }
+      }
+    }
+    .faq-container {
+      ul {
+        list-style: hiragana-iroha;
+        li {
+          margin-bottom: 5%;
+          .answer-container {
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            transition: max-height 1s ease, opacity .7s ease;
+
+            &.open {
+              max-height: 200px;
+              opacity: 1;
+            }
+
+            &.closed {
+              max-height: 0;
+              opacity: 0;
+            }
+
+            p {
+              margin-top: 5%;
+              text-align: left;
+            }
+          }
         }
       }
     }
@@ -325,5 +354,6 @@ nav {
   .content-container {
     margin: 1rem 0rem;
     padding: 0.5rem;
+    padding-bottom: 4rem;
   }
 }

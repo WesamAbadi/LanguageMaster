@@ -49,12 +49,21 @@ function App() {
       question: "Is this a beta version?",
       answer: "Yes, this is a beta version.",
     },
-    { question: "How can I contribute?", answer: "You can contribute by..." },
-    { question: "How can I report bugs?", answer: "To report bugs, please..." },
     { question: "Is it free?", answer: "Yes, it is free to use." },
     {
-      question: "How can I contact support?",
-      answer: "You can contact support by...",
+      question: "How can I contribute?",
+      answer:
+        "You can contribute by requesting an admin role and sumbitting your content.",
+    },
+    {
+      question: "How can I report bugs?",
+      answer:
+        "To report bugs, please click the report button at the bottom of any lesson and state your issue.",
+    },
+    {
+      question: "What are the benefits of this site?",
+      answer:
+        "It is a fun and educational learning platform that offers multiple languages. It is also a great way to enhance your vocabulary. You can also get a free lesson plan for free.",
     },
   ];
   const navigate = useNavigate();
@@ -80,6 +89,7 @@ function App() {
           try {
             const newUserData = {
               name: authUser.displayName,
+              email: authUser.email,
               admin: false,
               createdAt: new Date(
                 parseInt(authUser.metadata.createdAt)
@@ -227,7 +237,7 @@ function App() {
             <OverlayBox
               icon={<FaRegCircleQuestion />}
               content={
-                <div>
+                <div className="faq-container">
                   <p>FAQ</p>
                   <ul>
                     {faqItems.map((item, index) => (
@@ -235,7 +245,13 @@ function App() {
                         <button onClick={() => handleToggle(index)}>
                           {item.question}
                         </button>
-                        {openIndex === index && <p>{item.answer}</p>}
+                        <div
+                          className={`answer-container ${
+                            openIndex === index ? "open" : "closed"
+                          }`}
+                        >
+                          {openIndex === index && <p>{item.answer}</p>}
+                        </div>
                       </li>
                     ))}
                   </ul>

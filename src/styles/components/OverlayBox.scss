@@ -4,7 +4,7 @@
   justify-content: center;
   align-items: center;
   &:has(.overlay-content) {
-    background-color: #232323;
+    background-color: #0e0e0e;
     border-radius: 2rem;
   }
   .overlay-content {
@@ -17,8 +17,8 @@
     width: 17rem;
     min-height: 13rem;
     position: absolute;
-    top: 3rem;
-    left: -15.7rem;
+    top: 120%;
+    right: 0%;
     color: white;
     .user-info {
       display: flex;
@@ -29,6 +29,17 @@
         display: flex;
         gap: inherit;
       }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .overlay-container {
+    position: unset;
+    .overlay-content {
+      top: 8rem;
+      left: 50%;
+      transform: translate(-50%, -0%);
     }
   }
 }
