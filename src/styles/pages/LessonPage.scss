@@ -34,6 +34,9 @@
         color: #ffffffb3;
         transition: font-size 0.2s, color 0.3s;
       }
+      .disabled {
+        cursor: not-allowed;
+      }
     }
     .info {
       padding: 0 5%;

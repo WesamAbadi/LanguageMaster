@@ -1,16 +1,25 @@
 import React, { useState, useEffect, useRef } from "react";
-import "../../styles/components/OverlayBox.scss"
-const OverlayBox = ({ icon, content }) => {
+import "../../styles/components/OverlayBox.scss";
+const OverlayBox = ({ icon, content, setShowOverlay2 }) => {
   const [showOverlay, setShowOverlay] = useState(false);
   const overlayRef = useRef(null);
 
   const toggleOverlay = () => {
     setShowOverlay(!showOverlay);
+    setShowOverlay2(!showOverlay);
   };
 
   const handleClickOutside = (event) => {
     if (overlayRef.current && !overlayRef.current.contains(event.target)) {
       setShowOverlay(false);
+    }
+
+    if (
+      overlayRef.current &&
+      !overlayRef.current.contains(event.target) &&
+      !event.target.closest(".icons")
+    ) {
+      setShowOverlay2(false);
     }
   };
 

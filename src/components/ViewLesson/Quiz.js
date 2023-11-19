@@ -205,6 +205,7 @@ const Quiz = ({ lessonData, markLessonCompleted }) => {
 
   return (
     <div className="quiz">
+      <p>Drag and drop the correct option to fill in the blanks</p>
       <DragDropContext onDragEnd={handleDragEnd}>
         <div>{textWithBlanks}</div>
         <Droppable droppableId="options" direction="horizontal">

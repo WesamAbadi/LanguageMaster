@@ -31,6 +31,12 @@ body {
   border-radius: 2rem;
   color: white;
   min-height: 80vh;
+  transition: filter 0.2s;
+
+  &.blur {
+    filter: blur(6px);
+    pointer-events: none;
+  }
 }
 
 .success-feedback {
@@ -100,7 +106,7 @@ nav {
             max-height: 0;
             overflow: hidden;
             opacity: 0;
-            transition: max-height 1s ease, opacity .7s ease;
+            transition: max-height 1s ease, opacity 0.7s ease;
 
             &.open {
               max-height: 200px;
@@ -355,5 +361,9 @@ nav {
     margin: 1rem 0rem;
     padding: 0.5rem;
     padding-bottom: 4rem;
+
+    &.blur {
+      filter: blur(20px);
+    }
   }
 }

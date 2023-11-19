@@ -12,6 +12,7 @@
     justify-content: center;
     align-items: center;
     background: #0e0e0e;
+    border: solid 3px #6d6d6d4d;
     border-radius: 2rem;
     padding: 1rem;
     width: 17rem;
@@ -37,9 +38,9 @@
   .overlay-container {
     position: unset;
     .overlay-content {
-      top: 8rem;
+      top: 60%;
       left: 50%;
-      transform: translate(-50%, -0%);
+      transform: translate(-50%, 50%);
     }
   }
 }

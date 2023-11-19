@@ -16,29 +16,60 @@ function LessonPage() {
   const [feedback, setFeedback] = useState(false);
   const [xpGain, setXpGain] = useState(30);
   const [xpAnimationActive, setXpAnimationActive] = useState(false);
+  const [nextLesson, setNextLesson] = useState(false);
 
   const fetchLesson = async () => {
     try {
-      if (languageName && lessonId) {
-        const lessonDocRef = doc(
-          db,
-          "lessons",
-          languageName.toLowerCase(),
-          "lessons",
-          lessonId
-        );
-        const lessonDocSnapshot = await getDoc(lessonDocRef);
+      if (!languageName || !lessonId) {
+        return;
+      }
 
-        if (lessonDocSnapshot.exists()) {
-          setLessonData(lessonDocSnapshot.data());
-          if (lessonDocSnapshot.data().type === "listening") setXpGain(30);
-          else if (lessonDocSnapshot.data().type === "speaking") setXpGain(50);
-          else if (lessonDocSnapshot.data().type === "quiz") setXpGain(100);
-        } else {
-        }
+      const lessonDocRefCurrent = doc(
+        db,
+        "lessons",
+        languageName.toLowerCase(),
+        "lessons",
+        lessonId
+      );
+
+      const lessonDocSnapshotCurrent = await getDoc(lessonDocRefCurrent);
+      if (lessonDocSnapshotCurrent.exists()) {
+        handleLessonData(lessonDocSnapshotCurrent.data());
+      }
+
+      const lessonplus = (parseInt(lessonId, 10) + 1).toString();
+      const lessonDocRefNext = doc(
+        db,
+        "lessons",
+        languageName.toLowerCase(),
+        "lessons",
+        lessonplus
+      );
+
+      const lessonDocSnapshotNext = await getDoc(lessonDocRefNext);
+      if (lessonDocSnapshotNext.exists()) {
+        setNextLesson(true);
       }
     } catch (error) {
       console.error("Error fetching lesson:", error);
+    }
+  };
+
+  const handleLessonData = (lessonData) => {
+    setLessonData(lessonData);
+
+    switch (lessonData.type) {
+      case "listening":
+        setXpGain(30);
+        break;
+      case "speaking":
+        setXpGain(50);
+        break;
+      case "quiz":
+        setXpGain(100);
+        break;
+      default:
+        break;
     }
   };
 
@@ -183,18 +214,28 @@ function LessonPage() {
         <div className="lesson-header">
           <div className="back">
             <div>
-              <a href={`/${languageName}`}>↩ Back to lessons</a>
+              <a href={`/${languageName}/${parseInt(lessonId) - 1}`}>
+                ↩ Previous lesson
+              </a>
             </div>
             <div>
-              <a href={`/${languageName}/${parseInt(lessonId) + 1}`}>
-                Next lesson ↪
-              </a>
+              {nextLesson ? (
+                <a href={`/${languageName}/${parseInt(lessonId) + 1}`}>
+                  Next lesson ↪
+                </a>
+              ) : (
+                <div>
+                  <a href={`/${languageName}`}>
+                    No more lessons <br/> back to campaign ↩
+                  </a>
+                </div>
+              )}
             </div>
           </div>
           <div className="info">
-            <h3>Lesson: {lessonId}</h3>
+            <p>Lesson: {lessonId}</p>
             <h3>Title: {lessonData.title}</h3>
-            {isCompleted && <p>Lesson is already completed</p>}
+            {isCompleted && <p>Completed</p>}
             {!isCompleted && (
               <button onClick={() => markLessonCompleted()}>
                 Mark as completed

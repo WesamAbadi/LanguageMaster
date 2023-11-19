@@ -33,11 +33,12 @@ function App() {
   const [level, setLevel] = useState(0);
   const [loading, setLoading] = useState(true);
   const initialCheckboxes = [
-    { id: "AI assistant", isChecked: false },
+    { id: "AI assistant", isChecked: true },
     { id: "Popup translation", isChecked: false },
     { id: "Music player", isChecked: false },
   ];
   const initialSettings = { language: "English", number: 1 };
+  const [showOverlay, setShowOverlay] = useState(false);
 
   const [checkboxes, setCheckboxes] = useState(initialCheckboxes);
   const [theme, setTheme] = useState({ isChecked: true });
@@ -236,6 +237,7 @@ function App() {
           <div className="flex">
             <OverlayBox
               icon={<FaRegCircleQuestion />}
+              setShowOverlay2={setShowOverlay}
               content={
                 <div className="faq-container">
                   <p>FAQ</p>
@@ -260,6 +262,7 @@ function App() {
             />
             <OverlayBox
               icon={<FaPuzzlePiece />}
+              setShowOverlay2={setShowOverlay}
               content={
                 <div className="extensions-container">
                   <p>Extensions</p>
@@ -289,6 +292,7 @@ function App() {
             />
             <OverlayBox
               icon={<FaGear />}
+              setShowOverlay2={setShowOverlay}
               content={
                 <div>
                   BETA
@@ -351,6 +355,7 @@ function App() {
                   <FaCircleUser />
                 )
               }
+              setShowOverlay2={setShowOverlay}
               content={
                 <div className="user-info">
                   <div className="xp">
@@ -373,7 +378,7 @@ function App() {
           </button>
         )}
       </nav>
-      <div className="content-container">
+      <div className={` content-container ${showOverlay ? "blur" : ""}`}>
         <Routes>
           <Route path="*" element={<Navigate to="/" replace />} />
           <Route
