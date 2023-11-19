@@ -8,12 +8,16 @@ function AddLanguage({ updateFeedback }) {
   const [languageName, setLanguageName] = useState("");
   const [languageDescription, setLanguageDescription] = useState("DESCRIPTION");
   const [languageCode, setLanguageCode] = useState("en");
+  const [languageCampaign, setLanguageCampaign] = useState({});
   const [languageImage, setLanguageImage] = useState(
     "https://via.placeholder.com/150"
   );
   const [isEditMode, setIsEditMode] = useState(false);
   const [editLanguageData, setEditLanguageData] = useState(null);
   const [selectedLanguage, setSelectedLanguage] = useState(null);
+  const [newLevel, setNewLevel] = useState("");
+  const [newLessons, setNewLessons] = useState("");
+  const [editLevel, setEditLevel] = useState(null);
 
   useEffect(() => {
     // If editLanguageData is provided, set the component in edit mode
@@ -22,6 +26,7 @@ function AddLanguage({ updateFeedback }) {
       setLanguageDescription(editLanguageData.description || "");
       setLanguageCode(editLanguageData.code || "en");
       setLanguageImage(editLanguageData.image || "");
+      setLanguageCampaign(editLanguageData.campaign || {});
       setIsEditMode(true);
     }
   }, [editLanguageData]);
@@ -34,22 +39,27 @@ function AddLanguage({ updateFeedback }) {
       setLanguageDescription(selectedLanguage.description || "");
       setLanguageCode(selectedLanguage.code || "en");
       setLanguageImage(selectedLanguage.image || "");
+      setLanguageCampaign(selectedLanguage.campaign || {});
       setIsEditMode(true);
     } else {
       setSelectedLanguage("");
       setIsEditMode(false);
       setLanguageName("");
       setLanguageCode("en");
+      setLanguageCampaign({});
+      setEditLevel(null);
     }
   };
+
   const createOrUpdateLanguage = async () => {
     try {
       const languageRef = doc(db, "languages", languageName.toLowerCase());
       const languageData = {
         title: languageName,
         description: languageDescription,
-        image: languageImage,
         code: languageCode,
+        image: languageImage,
+        campaign: languageCampaign,
       };
 
       if (isEditMode) {
@@ -71,16 +81,46 @@ function AddLanguage({ updateFeedback }) {
       setLanguageName("");
       setLanguageDescription("DESCRIPTION");
       setLanguageCode("en");
-      setLanguageImage(
-        "https://superpalestinian.com/cdn/shop/products/image_09032836-9067-40fb-ae76-1c1de1cbc1ef.png?v=1669664967&width=1946"
-      );
+      setLanguageImage("https://via.placeholder.com/150");
+      setLanguageCampaign({});
       setIsEditMode(false);
+      setEditLevel(null);
     } catch (error) {
       updateFeedback(
         "Error adding/updating language. Please try again.",
         "error"
       );
     }
+  };
+
+  const addOrUpdateLevel = () => {
+    if (editLevel !== null) {
+      // Editing an existing level
+      setLanguageCampaign((prevCampaign) => ({
+        ...prevCampaign,
+        [editLevel]: newLessons.split(",").map(Number),
+      }));
+      setEditLevel(null);
+    } else {
+      // Adding a new level
+      setLanguageCampaign((prevCampaign) => ({
+        ...prevCampaign,
+        [newLevel]: newLessons.split(",").map(Number),
+      }));
+    }
+    setNewLevel("");
+    setNewLessons("");
+  };
+
+  const editExistingLevel = (level) => {
+    setEditLevel(level);
+    setNewLevel(level);
+    setNewLessons(languageCampaign[level].join(", "));
+  };
+
+  const deleteLevel = (level) => {
+    const { [level]: deletedLevel, ...restCampaign } = languageCampaign;
+    setLanguageCampaign(restCampaign);
   };
 
   return (
@@ -114,20 +154,37 @@ function AddLanguage({ updateFeedback }) {
           <button style={{ height: "30px", width: "30px" }}>?</button>
         </a>
       </div>
-      {/* <input
-        type="text"
-        placeholder="Language description"
-        value={languageDescription}
-        onChange={(e) => setLanguageDescription(e.target.value)}
-        className="language-input"
-      />
-      <input
-        type="text"
-        placeholder="Language IMG URL"
-        value={languageImage}
-        onChange={(e) => setLanguageImage(e.target.value)}
-        className="language-input"
-      /> */}
+
+      <div>
+        <h4>Campaign Levels</h4>
+        {Object.entries(languageCampaign).map(([level, lessons]) => (
+          <div key={level}>
+            <strong>{`Level ${level}:`}</strong> {lessons.join(", ")}
+            <button onClick={() => editExistingLevel(level)}>Edit</button>
+            <button onClick={() => deleteLevel(level)}>Delete</button>
+          </div>
+        ))}
+        <div>
+          <input
+            type="text"
+            placeholder="New Level"
+            value={newLevel}
+            onChange={(e) => setNewLevel(e.target.value)}
+            className="language-input"
+          />
+          <input
+            type="text"
+            placeholder="Lessons (comma-separated)"
+            value={newLessons}
+            onChange={(e) => setNewLessons(e.target.value)}
+            className="language-input"
+          />
+          <button onClick={addOrUpdateLevel}>
+            {editLevel !== null ? "Update Level" : "Add Level"}
+          </button>
+        </div>
+      </div>
+
       <button onClick={createOrUpdateLanguage} className="add-button">
         {isEditMode ? "Update" : "Add"}
       </button>

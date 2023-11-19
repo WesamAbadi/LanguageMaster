@@ -149,7 +149,7 @@
         font-size: 10px;
       }
       .first-word {
-        color:#3fc386;
+        color: #3fc386;
       }
     }
   }
@@ -205,5 +205,11 @@
   to {
     opacity: 0;
     transform: translateY(1em);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .quiz .final-result .explain-button {
+    margin: 2rem 5%;
   }
 }
