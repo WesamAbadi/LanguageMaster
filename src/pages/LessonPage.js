@@ -214,9 +214,13 @@ function LessonPage() {
         <div className="lesson-header">
           <div className="back">
             <div>
-              <a href={`/${languageName}/${parseInt(lessonId) - 1}`}>
-                ↩ Previous lesson
-              </a>
+              {lessonId > 1 ? (
+                <a href={`/${languageName}/${parseInt(lessonId) - 1}`}>
+                  ↩ Previous lesson
+                </a>
+              ) : (
+                <a href={`/${languageName}`}>Back to campaign ↩</a>
+              )}
             </div>
             <div>
               {nextLesson ? (
@@ -226,7 +230,7 @@ function LessonPage() {
               ) : (
                 <div>
                   <a href={`/${languageName}`}>
-                    No more lessons <br/> back to campaign ↩
+                    No more lessons <br /> back to campaign ↩
                   </a>
                 </div>
               )}

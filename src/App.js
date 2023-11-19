@@ -145,6 +145,7 @@ function App() {
   const signOutUser = async () => {
     try {
       await signOut(auth);
+      setShowOverlay(false);
       navigate("/");
     } catch (error) {
       console.error("Error signing out:", error);

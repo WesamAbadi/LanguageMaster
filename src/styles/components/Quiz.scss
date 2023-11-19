@@ -52,106 +52,6 @@
         padding: 2px;
       }
     }
-    .explain-button {
-      display: grid;
-      justify-items: center;
-      border-top: 1px solid #ffffff3d;
-      font-size: 15px;
-      margin: 2rem 20%;
-      padding-top: 2rem;
-      .note {
-        color: #a3a3a3;
-        font-size: 9px;
-      }
-      .aiResponse-container {
-        p {
-          display: inline-block;
-          opacity: 0;
-          transform: translateY(1em);
-          margin-bottom: 0;
-          text-align: justify;
-        }
-        &.fadein {
-          p {
-            animation: fadeInUp 0.5s forwards;
-          }
-        }
-        &.fadeout {
-          p {
-            animation: fadeInDown 0.5s forwards;
-          }
-        }
-      }
-
-      .button-animation {
-        font-family: "Manrope";
-        position: relative;
-        display: inline-block;
-        border-radius: 0;
-        background: rgb(0 0 0 / 42%);
-        color: var(--white-color);
-        overflow: hidden;
-        transition: 0.3s;
-        border-radius: 5px;
-
-        span {
-          position: absolute;
-          display: block;
-        }
-
-        span:nth-child(1) {
-          top: 0;
-          left: -100%;
-          width: 100%;
-          height: 2px;
-          background: linear-gradient(90deg, transparent, var(--accent-color));
-          animation: btn-anim1 2s linear infinite;
-        }
-
-        span:nth-child(2) {
-          top: -100%;
-          right: 0;
-          width: 2px;
-          height: 100%;
-          background: linear-gradient(180deg, transparent, var(--accent-color));
-          animation: btn-anim2 2s linear infinite;
-          animation-delay: 0.5s;
-        }
-
-        span:nth-child(3) {
-          bottom: 0;
-          right: -100%;
-          width: 100%;
-          height: 2px;
-          background: linear-gradient(270deg, transparent, var(--accent-color));
-          animation: btn-anim3 2s linear infinite;
-          animation-delay: 1s;
-        }
-
-        span:nth-child(4) {
-          bottom: -100%;
-          left: 0;
-          width: 2px;
-          height: 100%;
-          background: linear-gradient(360deg, transparent, var(--accent-color));
-          animation: btn-anim4 2s linear infinite;
-          animation-delay: 1.5s;
-        }
-
-        &:hover {
-          color: var(--white-color);
-          border-radius: 5px;
-          box-shadow: var(--box-shadow);
-          margin: 0.3rem;
-        }
-      }
-      .aiLanguage {
-        font-size: 10px;
-      }
-      .first-word {
-        color: #3fc386;
-      }
-    }
   }
 }
 
@@ -205,11 +105,5 @@
   to {
     opacity: 0;
     transform: translateY(1em);
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .quiz .final-result .explain-button {
-    margin: 2rem 5%;
   }
 }

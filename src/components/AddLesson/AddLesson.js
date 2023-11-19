@@ -166,10 +166,10 @@ function AddLesson({ updateFeedback }) {
     setActiveTab(direction);
   };
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     fetchLanguages();
     fetchLessons();
+    // eslint-disable-next-line
   }, [selectedLanguage, editLessonId]);
 
   return (

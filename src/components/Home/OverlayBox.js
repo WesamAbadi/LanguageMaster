@@ -33,6 +33,7 @@ const OverlayBox = ({ icon, content, setShowOverlay2 }) => {
     return () => {
       window.removeEventListener("click", handleClickOutside);
     };
+    // eslint-disable-next-line
   }, [showOverlay]);
 
   return (
