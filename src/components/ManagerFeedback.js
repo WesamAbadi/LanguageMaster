@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { getDocs, collection } from "firebase/firestore";
 import { db } from "../config/firebase-config";
 
 function ManagerFeedback() {
-  const [data, setData] = React.useState([]);
+  const [data, setData] = useState([]);
 
   const fetchFeedbacks = async () => {
     try {
@@ -20,7 +20,8 @@ function ManagerFeedback() {
   };
   useEffect(() => {
     fetchFeedbacks();
-  });
+    console.log("I'm rendering!");
+  }, []);
 
   return (
     <div className="table-container">

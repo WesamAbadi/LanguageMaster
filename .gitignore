@@ -16,7 +16,8 @@ ui-debug.log
 firebase.json
 firestore.indexes.json
 firestore.rules
-
+firebase-config.js
+/src/config/firebase-config.js
 # production
 /build
 /.firebase

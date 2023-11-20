@@ -108,6 +108,11 @@ option {
       &.idle {
         animation: moveButton 1.3s ease-in-out infinite;
         border-radius: 2rem;
+        &:hover {
+          .radio {
+            border-radius: 2rem;
+          }
+        }
       }
     }
   }
