@@ -25,7 +25,7 @@ function LanguageList({ onSelectLanguage, selectedLanguage }) {
     <div>
       <h4>Language List</h4>
       {selectedLanguage ? (
-        <button onClick={() => onSelectLanguage(null)}>Exit edit</button>
+        <button onClick={() => onSelectLanguage(null)}>Exit edit mode ❌</button>
       ) : (
         <span>Click on one to edit</span>
       )}

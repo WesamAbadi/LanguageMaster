@@ -103,6 +103,13 @@ option {
         background-color: rgb(220 91 255 / 18%);
       }
     }
+
+    .language-select-button {
+      &.idle {
+        animation: moveButton 1.3s ease-in-out infinite;
+        border-radius: 2rem;
+      }
+    }
   }
 }
 .lesson-feilds {
@@ -218,6 +225,27 @@ option {
         margin-top: 50px;
       }
     }
+  }
+}
+
+@keyframes moveButton {
+  0% {
+    margin-left: 0rem;
+    margin-right: 0rem;
+    border-right: solid 1px rgba(255, 255, 255, 0);
+    border-left: solid 1px rgba(255, 255, 255, 0);
+  }
+  50% {
+    margin-left: 0.1rem;
+    margin-right: 0.1rem;
+    border-right: solid 1px rgba(255, 255, 255, 0.5);
+    border-left: solid 1px rgba(255, 255, 255, 0.5);
+  }
+  100% {
+    margin-left: 0rem;
+    margin-right: 0rem;
+    border-right: solid 1px rgba(255, 255, 255, 0);
+    border-left: solid 1px rgba(255, 255, 255, 0);
   }
 }
 

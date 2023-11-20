@@ -184,7 +184,12 @@ function AddLesson({ updateFeedback }) {
           ) : (
             <>
               {languages.map((language) => (
-                <div key={language.id}>
+                <div
+                  className={`language-select-button ${
+                    selectedLanguage ? "" : "idle"
+                  }`}
+                  key={language.id}
+                >
                   <label htmlFor={language.id}>
                     <input
                       type="radio"
@@ -202,75 +207,78 @@ function AddLesson({ updateFeedback }) {
             </>
           )}
         </div>
-
-        <div className="lessons">
-          {lessons.length ? (
-            lessons.map((lesson) => (
-              <LessonCard
-                key={lesson.id}
-                lesson={lesson}
-                languageName={selectedLanguage}
-                admin={true}
-                onEdit={() => handleLessonEdit(lesson.id)}
-              />
-            ))
-          ) : (
-            <p>No lessons found.</p>
-          )}
-        </div>
-      </div>
-      <div className="lesson-feilds">
-        <div className="section-title">
-          <h3>
-            {editLessonId ? (
-              <button onClick={exitEditmode}>Exit edit mode</button>
+        {selectedLanguage && (
+          <div className="lessons">
+            {lessons.length ? (
+              lessons.map((lesson) => (
+                <LessonCard
+                  key={lesson.id}
+                  lesson={lesson}
+                  languageName={selectedLanguage}
+                  admin={true}
+                  onEdit={() => handleLessonEdit(lesson.id)}
+                />
+              ))
             ) : (
-              "Add a lesson"
+              <p>No lessons found.</p>
             )}
-          </h3>
-        </div>
-        <TabSwitch
-          activeTab={activeTab}
-          onTabChange={handleTabChange}
-          tabs={tabNames}
-        />
-
-        {activeTab === 0 ? (
-          <Listening
-            newLessonTitle={newLessonTitle}
-            newLessonContent={newLessonContent}
-            newLessonMp3={newLessonMp3}
-            setNewLessonTitle={setNewLessonTitle}
-            setNewLessonContent={setNewLessonContent}
-            setNewLessonMp3={setNewLessonMp3}
-          />
-        ) : activeTab === 1 ? (
-          <Speaking
-            newLessonTitle={newLessonTitle}
-            newLessonContent={newLessonContent}
-            setNewLessonTitle={setNewLessonTitle}
-            setNewLessonContent={setNewLessonContent}
-          />
-        ) : activeTab === 2 ? (
-          <Quiz
-            newLessonTitle={newLessonTitle}
-            newLessonContent={newLessonContent}
-            newLessonOptions={newLessonOptions}
-            setNewLessonTitle={setNewLessonTitle}
-            setNewLessonContent={setNewLessonContent}
-            setNewLessonOptions={setNewLessonOptions}
-          />
-        ) : (
-          <p>Please select a tab</p>
-        )}
-        {[0, 1, 2].includes(activeTab) && (
-          <div className="add-lesson-button">
-            <button onClick={createOrUpdateLesson}>
-              {editLessonId ? "Update" : "Add"} lesson
-            </button>
           </div>
         )}
       </div>
+      {selectedLanguage && (
+        <div className="lesson-feilds">
+          <div className="section-title">
+            <h3>
+              {editLessonId ? (
+                <button onClick={exitEditmode}>Exit edit mode ❌</button>
+              ) : (
+                "Add a lesson"
+              )}
+            </h3>
+          </div>
+          <TabSwitch
+            activeTab={activeTab}
+            onTabChange={handleTabChange}
+            tabs={tabNames}
+          />
+
+          {activeTab === 0 ? (
+            <Listening
+              newLessonTitle={newLessonTitle}
+              newLessonContent={newLessonContent}
+              newLessonMp3={newLessonMp3}
+              setNewLessonTitle={setNewLessonTitle}
+              setNewLessonContent={setNewLessonContent}
+              setNewLessonMp3={setNewLessonMp3}
+            />
+          ) : activeTab === 1 ? (
+            <Speaking
+              newLessonTitle={newLessonTitle}
+              newLessonContent={newLessonContent}
+              setNewLessonTitle={setNewLessonTitle}
+              setNewLessonContent={setNewLessonContent}
+            />
+          ) : activeTab === 2 ? (
+            <Quiz
+              newLessonTitle={newLessonTitle}
+              newLessonContent={newLessonContent}
+              newLessonOptions={newLessonOptions}
+              setNewLessonTitle={setNewLessonTitle}
+              setNewLessonContent={setNewLessonContent}
+              setNewLessonOptions={setNewLessonOptions}
+            />
+          ) : (
+            <p>Please select a tab</p>
+          )}
+          {[0, 1, 2].includes(activeTab) && (
+            <div className="add-lesson-button">
+              <button onClick={createOrUpdateLesson}>
+                {editLessonId ? "Update" : "Add"} lesson
+              </button>
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }

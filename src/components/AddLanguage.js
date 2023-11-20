@@ -130,7 +130,7 @@ function AddLanguage({ updateFeedback }) {
         onSelectLanguage={selectLanguageForEdit}
       />
 
-      <h4>{isEditMode ? "Edit" : "Add"} a language to the system</h4>
+      <h4>{isEditMode ? "Edit" : "Add"} a language</h4>
       <input
         type="text"
         placeholder="Language name"
@@ -186,7 +186,7 @@ function AddLanguage({ updateFeedback }) {
       </div>
 
       <button onClick={createOrUpdateLanguage} className="add-button">
-        {isEditMode ? "Update" : "Add"}
+        {isEditMode ? "Update Language" : "Add Language"}
       </button>
     </div>
   );

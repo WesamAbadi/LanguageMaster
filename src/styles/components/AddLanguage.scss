@@ -15,7 +15,7 @@
 }
 .add-language-container {
   button {
-    background: rgb(14 14 14 / 36%);
+    background: rgba(65, 65, 65, 0.61);
     border: none;
     border-radius: 5px;
     padding: 8px 12px;
@@ -28,10 +28,10 @@
       transform: scale(1.05);
     }
   }
-  ul{
+  ul {
     list-style: none;
     padding: 0;
-    li{
+    li {
       background: rgb(65 65 65 / 61%);
       border-radius: 5px;
       padding: 8px 12px;
@@ -39,7 +39,8 @@
       color: white;
       cursor: pointer;
       transition: background 0.3s, transform 0.2s;
-      &:hover, &.selected{
+      &:hover,
+      &.selected {
         background: rgb(0 0 0 / 29%);
         cursor: pointer;
         transform: scale(1.05);
@@ -58,14 +59,7 @@
 }
 
 .add-button {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  padding: 10px 20px;
-  cursor: pointer;
-}
-
-.add-button:hover {
-  background-color: #0056b3;
+  margin-top: 5%;
+  border: 3px solid rgba(147, 255, 205, 0.6588235294) !important;
+  width: 100%;
 }
