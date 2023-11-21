@@ -107,7 +107,9 @@ function App() {
       } else {
         setUser(null);
       }
-      setLoading(false);
+      setTimeout(() => {
+        setLoading(false);
+      }, 1000);
     });
 
     return () => {

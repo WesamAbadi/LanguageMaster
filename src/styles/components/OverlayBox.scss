@@ -21,7 +21,7 @@
     top: 120%;
     right: 0%;
     color: white;
-    animation: pop .4s;
+    animation: unblur .4s;
     .user-info {
       display: flex;
       flex-direction: column;
@@ -47,7 +47,7 @@
   }
 }
 
-@keyframes pop {
+@keyframes unblur {
   0% {
     filter: blur(20px);
     opacity: 0.5;

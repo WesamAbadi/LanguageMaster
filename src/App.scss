@@ -37,6 +37,9 @@ body {
     filter: blur(6px);
     pointer-events: none;
   }
+  > div {
+    animation: unblur 0.3s;
+  }
 }
 
 .success-feedback {
@@ -217,6 +220,7 @@ nav {
 }
 .loading-screen {
   .blob {
+    animation: unblur 1s;
     width: 2rem;
     height: 2rem;
     background: rgba(230, 230, 230, 0.85);
@@ -352,6 +356,22 @@ nav {
     left: 100%;
   }
 }
+@keyframes unblur {
+  0% {
+    filter: blur(20px);
+    opacity: 0.5;
+    pointer-events: none;
+  }
+  99% {
+    pointer-events: none;
+  }
+  100% {
+    filter: blur(0px);
+    opacity: 1;
+    pointer-events: unset;
+  }
+}
+
 @media screen and (max-width: 768px) {
   nav {
     flex-wrap: wrap;
