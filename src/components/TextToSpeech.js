@@ -43,8 +43,8 @@ function TextToSpeech({ index, text, languageCode }) {
     const timeoutId = setTimeout(() => {
       setShowDiv(true);
     }, index * 400);
-
     return () => clearTimeout(timeoutId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loading]);
 
   return (

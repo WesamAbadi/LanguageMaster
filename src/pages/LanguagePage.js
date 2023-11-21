@@ -104,8 +104,7 @@ function LanguagePage() {
         <div className="alphabet">
           <div>
             <p>
-              The alphabet of <span>{languageName}</span> contains a total of{" "}
-              <span>{Alphabet && Alphabet.length}</span>.
+              The alphabet of the <span>{languageName} </span>language contains <span>{Alphabet && Alphabet.length}</span> letters in total. 
             </p>
           </div>
 
