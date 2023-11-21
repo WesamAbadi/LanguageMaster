@@ -51,8 +51,16 @@ function TextToSpeech({ index, text, languageCode }) {
     <div>
       {showDiv && (
         <div className="text-to-speech" onClick={call}>
-          {loading ? <GiSandsOfTime /> : <FaPlayCircle />}
-          {text}
+          {loading ? (
+            <div className="loading">
+              <GiSandsOfTime />{" "}
+            </div>
+          ) : (
+            <div className="play">
+              <FaPlayCircle />{" "}
+            </div>
+          )}
+          <p>{text}</p>
         </div>
       )}
     </div>

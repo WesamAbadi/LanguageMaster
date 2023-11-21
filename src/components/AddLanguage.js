@@ -9,6 +9,7 @@ function AddLanguage({ updateFeedback }) {
   const [languageDescription, setLanguageDescription] = useState("DESCRIPTION");
   const [languageCode, setLanguageCode] = useState("en");
   const [languageCampaign, setLanguageCampaign] = useState({});
+  const [languageAlphabet, setLanguageAlphabet] = useState([]);
   const [languageImage, setLanguageImage] = useState(
     "https://via.placeholder.com/150"
   );
@@ -27,6 +28,8 @@ function AddLanguage({ updateFeedback }) {
       setLanguageCode(editLanguageData.code || "en");
       setLanguageImage(editLanguageData.image || "");
       setLanguageCampaign(editLanguageData.campaign || {});
+      setLanguageAlphabet(editLanguageData.alphabet || []);
+      console.log(editLanguageData.alphabet);
       setIsEditMode(true);
     }
   }, [editLanguageData]);
@@ -40,6 +43,7 @@ function AddLanguage({ updateFeedback }) {
       setLanguageCode(selectedLanguage.code || "en");
       setLanguageImage(selectedLanguage.image || "");
       setLanguageCampaign(selectedLanguage.campaign || {});
+      setLanguageAlphabet(selectedLanguage.alphabet || []);
       setIsEditMode(true);
     } else {
       setSelectedLanguage("");
@@ -47,6 +51,7 @@ function AddLanguage({ updateFeedback }) {
       setLanguageName("");
       setLanguageCode("en");
       setLanguageCampaign({});
+      setLanguageAlphabet([]);
       setEditLevel(null);
     }
   };
@@ -60,6 +65,7 @@ function AddLanguage({ updateFeedback }) {
         code: languageCode,
         image: languageImage,
         campaign: languageCampaign,
+        alphabet: languageAlphabet,
       };
 
       if (isEditMode) {
@@ -83,6 +89,7 @@ function AddLanguage({ updateFeedback }) {
       setLanguageCode("en");
       setLanguageImage("https://via.placeholder.com/150");
       setLanguageCampaign({});
+      setLanguageAlphabet([]);
       setIsEditMode(false);
       setEditLevel(null);
     } catch (error) {
@@ -182,6 +189,19 @@ function AddLanguage({ updateFeedback }) {
           <button onClick={addOrUpdateLevel}>
             {editLevel !== null ? "Update Level" : "Add Level"}
           </button>
+        </div>
+        <div>
+          <input
+            type="text"
+            placeholder="alphabet (comma-separated)"
+            value={languageAlphabet.join(", ")}
+            onChange={(e) =>
+              setLanguageAlphabet(
+                e.target.value.split(",").map((item) => item.trim())
+              )
+            }
+            className="language-input"
+          />
         </div>
       </div>
 

@@ -101,16 +101,29 @@ function LanguagePage() {
         tabs={tabNames}
       />
       {activeTab === 0 ? (
-        <div className="alphabet-grid">
-          {Alphabet && Alphabet.length > 0 ? (
-            Alphabet.map((letter, index) => (
-              <div key={index}>
-                <TextToSpeech index={index/10} text={letter} languageCode={languageCode} />
-              </div>
-            ))
-          ) : (
-            <p>No data available</p>
-          )}
+        <div className="alphabet">
+          <div>
+            <p>
+              The alphabet of <span>{languageName}</span> contains a total of{" "}
+              <span>{Alphabet && Alphabet.length}</span>.
+            </p>
+          </div>
+
+          <div className="alphabet-grid">
+            {Alphabet && Alphabet.length > 0 ? (
+              Alphabet.map((letter, index) => (
+                <div key={index}>
+                  <TextToSpeech
+                    index={index / 10}
+                    text={letter}
+                    languageCode={languageCode}
+                  />
+                </div>
+              ))
+            ) : (
+              <p>No data available</p>
+            )}
+          </div>
         </div>
       ) : activeTab === 1 ? (
         <div className="campaign">
@@ -134,7 +147,7 @@ function LanguagePage() {
                             lesson={lessonItem}
                             languageName={languageName}
                             key={lessonItem.id}
-                            index ={lessonIndex}
+                            index={lessonIndex}
                             isCompleted={
                               progress.data && progress.data.lessons
                                 ? progress.data.lessons.includes(lessonItem.id)
