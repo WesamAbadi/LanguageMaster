@@ -21,6 +21,7 @@
     top: 120%;
     right: 0%;
     color: white;
+    animation: pop .4s;
     .user-info {
       display: flex;
       flex-direction: column;
@@ -43,5 +44,16 @@
       transform: translate(-50%, 50%);
       width: 85%;
     }
+  }
+}
+
+@keyframes pop {
+  0% {
+    filter: blur(20px);
+    opacity: 0.5;
+  }
+  100% {
+    filter: blur(0px);
+    opacity: 1;
   }
 }
