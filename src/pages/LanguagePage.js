@@ -101,11 +101,11 @@ function LanguagePage() {
         tabs={tabNames}
       />
       {activeTab === 0 ? (
-        <div className="alphabet">
+        <div className="alphabet-grid">
           {Alphabet && Alphabet.length > 0 ? (
             Alphabet.map((letter, index) => (
               <div key={index}>
-                <TextToSpeech text={letter} language={languageCode} />
+                <TextToSpeech text={letter} languageCode={languageCode} />
               </div>
             ))
           ) : (

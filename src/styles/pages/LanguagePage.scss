@@ -14,8 +14,17 @@
 a {
   text-decoration: none;
 }
-.lessons{
-  div{
+.lessons {
+  div {
     flex-grow: 1;
   }
+}
+
+.alphabet-grid {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(150px, 1fr)
+  );
+  gap: 10px;
 }

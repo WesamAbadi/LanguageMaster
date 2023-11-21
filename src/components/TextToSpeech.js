@@ -41,11 +41,23 @@ function TextToSpeech({ text, languageCode }) {
   }, [loading]);
 
   return (
-    <div style={{ margin: "10px" }}>
-      <button style={{ display: "flex", gap: "5px" }} onClick={call}>
-        {loading ? <GiSandsOfTime /> : <FaPlayCircle />}
-        {text}
-      </button>
+    <div
+      style={{
+        cursor: "pointer",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        height: "2rem",
+        widows: "100%",
+        gap: "5px",
+        padding: "5px",
+        border: "1px solid #ccc",
+        borderRadius: "5px",
+      }}
+      onClick={call}
+    >
+      {loading ? <GiSandsOfTime /> : <FaPlayCircle />}
+      {text}
     </div>
   );
 }
