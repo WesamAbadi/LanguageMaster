@@ -4,6 +4,7 @@ import { db, auth } from "../config/firebase-config";
 import { useNavigate, useParams } from "react-router-dom";
 import TabSwitch from "../components/TabSwitch";
 import LessonCard from "../components/ViewLesson/LessonCard";
+import TextToSpeech from "../components/TextToSpeech";
 import "../styles/pages/LanguagePage.scss";
 
 function LanguagePage() {
@@ -11,6 +12,8 @@ function LanguagePage() {
   const [lessons, setLessons] = useState([]);
   const [progress, setProgress] = useState([]);
   const [Campaigns, setCampaigns] = useState([]);
+  const [Alphabet, SetAlphabet] = useState([]);
+  const [languageCode, setLaguageCode] = useState("");
   let navigate = useNavigate();
 
   const [activeTab, setActiveTab] = useState(1);
@@ -30,8 +33,12 @@ function LanguagePage() {
       if (!languageExists) {
         navigate("/");
       } else {
+        const languageCode = languageExists.data.code;
         const campaignData = languageExists.data.campaign;
+        const alphabetData = languageExists.data.alphabet;
+        setLaguageCode(languageCode);
         setCampaigns(campaignData);
+        SetAlphabet(alphabetData);
         const lessonsCollectionRef = collection(db, "lessons");
         const languageDocRef = doc(
           lessonsCollectionRef,
@@ -94,7 +101,17 @@ function LanguagePage() {
         tabs={tabNames}
       />
       {activeTab === 0 ? (
-        <p>Alphabet soon..</p>
+        <div className="alphabet">
+          {Alphabet && Alphabet.length > 0 ? (
+            Alphabet.map((letter, index) => (
+              <div key={index}>
+                <TextToSpeech text={letter} language={languageCode} />
+              </div>
+            ))
+          ) : (
+            <p>No data available</p>
+          )}
+        </div>
       ) : activeTab === 1 ? (
         <div className="campaign">
           {Campaigns && Object.keys(Campaigns).length > 0 ? (
