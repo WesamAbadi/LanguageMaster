@@ -1,8 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "../../styles/components/LessonCard.scss";
 
-function LessonCard({ lesson, languageName, isCompleted, admin, onEdit }) {
+function LessonCard({
+  lesson,
+  languageName,
+  index,
+  isCompleted,
+  admin,
+  onEdit,
+}) {
+  const [campaign, setCampaign] = useState(false);
+
+  useEffect(() => {
+    const newCampaign = index !== null && !isNaN(index);
+    setCampaign(newCampaign);
+    console.log("index: ", index);
+    console.log("it's a campaign?: ", newCampaign);
+  }, [index]);
+
   return (
     <div meta={lesson.id}>
       {admin ? (
@@ -13,7 +29,7 @@ function LessonCard({ lesson, languageName, isCompleted, admin, onEdit }) {
           key={lesson.id}
         >
           <div className="lesson-card-header">
-            <p>{lesson.id}</p>
+            {campaign ? <p>{index + 1}</p> : <p>{lesson.id}</p>}
             {isCompleted && <p className="done">✔ Done</p>}
             <button className="edit-button" onClick={() => onEdit(lesson.id)}>
               Edit
@@ -33,7 +49,7 @@ function LessonCard({ lesson, languageName, isCompleted, admin, onEdit }) {
             key={lesson.id}
           >
             <div className="lesson-card-header">
-              <p>{lesson.id}</p>
+              {campaign ? <p>{index + 1}</p> : <p>{lesson.id}</p>}
               {isCompleted && <p className="done">✔ Done</p>}
             </div>
             <p className="lesson-title">Title: {lesson.data.title}</p>

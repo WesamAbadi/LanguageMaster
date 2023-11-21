@@ -134,6 +134,7 @@ function LanguagePage() {
                             lesson={lessonItem}
                             languageName={languageName}
                             key={lessonItem.id}
+                            index ={lessonIndex}
                             isCompleted={
                               progress.data && progress.data.lessons
                                 ? progress.data.lessons.includes(lessonItem.id)
