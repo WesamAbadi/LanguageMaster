@@ -105,7 +105,7 @@ function LanguagePage() {
           {Alphabet && Alphabet.length > 0 ? (
             Alphabet.map((letter, index) => (
               <div key={index}>
-                <TextToSpeech text={letter} languageCode={languageCode} />
+                <TextToSpeech index={index/10} text={letter} languageCode={languageCode} />
               </div>
             ))
           ) : (

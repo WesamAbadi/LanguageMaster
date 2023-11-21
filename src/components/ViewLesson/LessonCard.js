@@ -15,8 +15,6 @@ function LessonCard({
   useEffect(() => {
     const newCampaign = index !== null && !isNaN(index);
     setCampaign(newCampaign);
-    console.log("index: ", index);
-    console.log("it's a campaign?: ", newCampaign);
   }, [index]);
 
   return (

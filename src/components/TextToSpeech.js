@@ -2,11 +2,13 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { FaPlayCircle } from "react-icons/fa";
 import { GiSandsOfTime } from "react-icons/gi";
+import "../styles/components/TextToSpeech.scss";
 
-function TextToSpeech({ text, languageCode }) {
+function TextToSpeech({ index, text, languageCode }) {
   const [loading, setLoading] = useState(false);
-  const apiKey = process.env.REACT_APP_RAPIDAPI_KEY;
+  const [showDiv, setShowDiv] = useState(false);
 
+  const apiKey = process.env.REACT_APP_RAPIDAPI_KEY;
   const call = async () => {
     setLoading(true);
     const options = {
@@ -38,26 +40,21 @@ function TextToSpeech({ text, languageCode }) {
   };
 
   useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      setShowDiv(true);
+    }, index * 400);
+
+    return () => clearTimeout(timeoutId);
   }, [loading]);
 
   return (
-    <div
-      style={{
-        cursor: "pointer",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        height: "2rem",
-        widows: "100%",
-        gap: "5px",
-        padding: "5px",
-        border: "1px solid #ccc",
-        borderRadius: "5px",
-      }}
-      onClick={call}
-    >
-      {loading ? <GiSandsOfTime /> : <FaPlayCircle />}
-      {text}
+    <div>
+      {showDiv && (
+        <div className="text-to-speech" onClick={call}>
+          {loading ? <GiSandsOfTime /> : <FaPlayCircle />}
+          {text}
+        </div>
+      )}
     </div>
   );
 }
