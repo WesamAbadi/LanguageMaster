@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { FaPlayCircle } from "react-icons/fa";
-import { GiSandsOfTime } from "react-icons/gi";
 import "../styles/components/TextToSpeech.scss";
 
 function TextToSpeech({ index, text, languageCode }) {
@@ -29,7 +28,6 @@ function TextToSpeech({ index, text, languageCode }) {
       const response = await axios.request(options);
       const blob = new Blob([response.data], { type: "audio/mpeg" });
       const audioURL = URL.createObjectURL(blob);
-      console.log(audioURL);
       const audio = new Audio(audioURL);
       audio.play();
     } catch (error) {
@@ -50,14 +48,18 @@ function TextToSpeech({ index, text, languageCode }) {
   return (
     <div>
       {showDiv && (
-        <div className="text-to-speech" onClick={call}>
+        <div
+          className={`text-to-speech ${loading ? "loading" : ""}`}
+          onClick={call}
+        >
           {loading ? (
             <div className="loading">
-              <GiSandsOfTime />{" "}
+              {/* <GiSandsOfTime /> */}
+              <img src={require("../assets/img/loading.gif")} alt="English" />
             </div>
           ) : (
             <div className="play">
-              <FaPlayCircle />{" "}
+              <FaPlayCircle />
             </div>
           )}
           <p>{text}</p>

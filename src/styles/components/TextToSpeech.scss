@@ -10,12 +10,19 @@
   border-radius: 5px;
   animation: fadein 0.5s;
   transition: border 0.2s;
+  &.loading {
+    border: solid 2px white;
+  }
   svg {
     color: rgba(245, 245, 245, 0.15);
   }
   .loading {
     svg {
       color: white;
+    }
+    img{
+      height: 17px;
+      filter: grayscale(1);
     }
   }
   p {
