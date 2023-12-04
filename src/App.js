@@ -9,7 +9,11 @@ import {
 } from "react-router-dom";
 
 import { auth, googleProvider, db } from "./config/firebase-config";
-import { signInWithPopup, signOut } from "firebase/auth";
+import {
+  signInWithPopup,
+  signInWithEmailAndPassword,
+  signOut,
+} from "firebase/auth";
 import { doc, setDoc, getDoc, collection } from "firebase/firestore";
 
 import {
@@ -86,6 +90,21 @@ function App() {
           setXp(userData.xp || 0);
           setLevel(userData.lvl || 0);
           setUser({ ...authUser, ...userData });
+
+          // if (authUser.displayName === null) {
+          //   try {
+          //     const name = prompt("Enter your name");
+          //     if (name !== null) {
+          //       const updatedUser = { ...authUser, displayName: name };
+          //       await setDoc(userDocRef, updatedUser);
+          //       setUser(updatedUser);
+          //     } else {
+          //       console.log("User cancelled entering name");
+          //     }
+          //   } catch (error) {
+          //     console.error("Error updating display name:", error);
+          //   }
+          // }
         } else {
           try {
             const newUserData = {
@@ -151,6 +170,25 @@ function App() {
       navigate("/");
     } catch (error) {
       console.error("Error signing out:", error);
+    }
+  };
+
+  const handleLogin = async (email = "", password = "") => {
+    try {
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const username = email.split("@")[0];
+      const user = userCredential.user;
+      const userDocRef = doc(db, "users", auth.currentUser.uid);
+      await setDoc(userDocRef, { name: username }, { merge: true });
+      console.log("User logged in:", user);
+    } catch (error) {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.error("Error during login:", errorCode, errorMessage);
     }
   };
 
@@ -315,9 +353,7 @@ function App() {
                         <option value="Arabic">Arabic</option>
                       </select>
                     </label>
-
                     <br />
-
                     {/* <label>
                       Num of generated answers:
                       <select
@@ -376,9 +412,11 @@ function App() {
             />
           </div>
         ) : (
-          <button className="login-button" onClick={signInWithGoogle}>
-            Sign in with Google
-          </button>
+          <div>
+            <button className="login-button" onClick={signInWithGoogle}>
+              Sign in with Google
+            </button>
+          </div>
         )}
       </nav>
       <div className={` content-container ${showOverlay ? "blur" : ""}`}>
@@ -387,7 +425,11 @@ function App() {
           <Route
             path="/"
             element={
-              <Landing user={user} signInWithGoogle={signInWithGoogle} />
+              <Landing
+                user={user}
+                signInWithGoogle={signInWithGoogle}
+                handleLogin={() => handleLogin("demo@demo.com", "userdemo")}
+              />
             }
           />
           <Route

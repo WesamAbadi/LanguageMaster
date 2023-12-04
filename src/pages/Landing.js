@@ -1,7 +1,7 @@
 import React from "react";
 import "../styles/pages/Landing.scss";
 function Landing(props) {
-  const { user, signInWithGoogle } = props;
+  const { user, signInWithGoogle, handleLogin } = props;
   return (
     <div>
       <main>
@@ -52,9 +52,17 @@ function Landing(props) {
                 <button>Start!</button>
               </a>
             ) : (
-              <button className="login-button" onClick={signInWithGoogle}>
-                Start by signing here!
-              </button>
+              <div>
+                <button className="login-button" onClick={signInWithGoogle}>
+                  Start by signing here!
+                </button>
+                <button
+                  className="login-button"
+                  onClick={() => handleLogin()}
+                >
+                  Demo account
+                </button>
+              </div>
             )}
           </div>
         </section>
