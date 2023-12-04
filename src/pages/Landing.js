@@ -56,6 +56,7 @@ function Landing(props) {
                 <button className="login-button" onClick={signInWithGoogle}>
                   Start by signing here!
                 </button>
+                or 
                 <button
                   className="login-button"
                   onClick={() => handleLogin()}

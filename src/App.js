@@ -183,7 +183,9 @@ function App() {
       const username = email.split("@")[0];
       const user = userCredential.user;
       const userDocRef = doc(db, "users", auth.currentUser.uid);
-      await setDoc(userDocRef, { name: username }, { merge: true });
+      if (!userDocRef.name){
+        await setDoc(userDocRef, { name: username }, { merge: true });
+      }
       console.log("User logged in:", user);
     } catch (error) {
       const errorCode = error.code;
