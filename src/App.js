@@ -300,7 +300,7 @@ function App() {
                 <div>
                   BETA
                   <div
-                    style={{ border: "1px solid white" }}
+                    style={{ border: "1px solid transparent" }}
                     className="ai-settings"
                   >
                     <label>
@@ -318,7 +318,7 @@ function App() {
 
                     <br />
 
-                    <label>
+                    {/* <label>
                       Num of generated answers:
                       <select
                         value={settings.number}
@@ -328,9 +328,9 @@ function App() {
                         <option value="2">2</option>
                         <option value="3">3</option>
                       </select>
-                    </label>
+                    </label> */}
                   </div>
-                  <div
+                  {/* <div
                     style={{ border: "1px solid green" }}
                     className="ui-settings"
                   >
@@ -346,7 +346,7 @@ function App() {
                         Toggle {theme.isChecked}
                       </label>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
               }
             />
