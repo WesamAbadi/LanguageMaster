@@ -22,6 +22,7 @@ import {
   FaGear,
   FaCircleUser,
 } from "react-icons/fa6";
+import { FcGoogle } from "react-icons/fc";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Admin from "./pages/Admin";
@@ -183,7 +184,7 @@ function App() {
       const username = email.split("@")[0];
       const user = userCredential.user;
       const userDocRef = doc(db, "users", auth.currentUser.uid);
-      if (!userDocRef.name){
+      if (!userDocRef.name) {
         await setDoc(userDocRef, { name: username }, { merge: true });
       }
       console.log("User logged in:", user);
@@ -416,7 +417,7 @@ function App() {
         ) : (
           <div>
             <button className="login-button" onClick={signInWithGoogle}>
-              Sign in with Google
+              Sign in with Google <FcGoogle />
             </button>
           </div>
         )}

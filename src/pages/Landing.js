@@ -1,5 +1,6 @@
 import React from "react";
 import "../styles/pages/Landing.scss";
+import { FcGoogle } from "react-icons/fc";
 function Landing(props) {
   const { user, signInWithGoogle, handleLogin } = props;
   return (
@@ -52,15 +53,12 @@ function Landing(props) {
                 <button>Start!</button>
               </a>
             ) : (
-              <div>
+              <div className="login-options">
                 <button className="login-button" onClick={signInWithGoogle}>
-                  Start by signing here!
+                  Sign in with <FcGoogle />
                 </button>
-                or 
-                <button
-                  className="login-button"
-                  onClick={() => handleLogin()}
-                >
+                or
+                <button className="login-button" onClick={() => handleLogin()}>
                   Demo account
                 </button>
               </div>
