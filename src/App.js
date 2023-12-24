@@ -28,6 +28,7 @@ import Login from "./pages/Login";
 import Admin from "./pages/Admin";
 import LanguagePage from "./pages/LanguagePage";
 import LessonPage from "./pages/LessonPage";
+import Leaderboard from "./pages/Leaderboard";
 import Landing from "./pages/Landing";
 import Soon from "./pages/Soon";
 import OverlayBox from "./components/Home/OverlayBox";
@@ -276,6 +277,7 @@ function App() {
             Home
           </NavLink>
           {user && <NavLink to="/Admin">Admin</NavLink>}
+          {user && <NavLink to="/Leaderboard">Leaderboard</NavLink>}
         </div>
         {user ? (
           <div className="flex">
@@ -442,6 +444,10 @@ function App() {
           <Route
             path="/Home"
             element={user ? <Home isAuth={user} /> : <Navigate to="/Login" />}
+          />
+          <Route
+            path="/Leaderboard"
+            element={user ? <Leaderboard isAuth={user} /> : <Navigate to="/Login" />}
           />
           <Route
             path="/Admin"
