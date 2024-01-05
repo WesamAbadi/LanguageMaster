@@ -44,6 +44,7 @@ function Leaderboard() {
 
   React.useEffect(() => {
     fetchUsers();
+    // eslint-disable-next-line
   }, [sortBy, sortOrder]);
 
   return (
