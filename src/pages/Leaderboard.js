@@ -50,11 +50,26 @@ function Leaderboard() {
   return (
     <div className="table-container">
       <h2>Leaderboard - Users</h2>
+      <p>sort by {sortBy}</p>
       <table>
         <thead>
           <tr>
-            <th onClick={() => handleSort("name")}>Name</th>
-            <th onClick={() => handleSort("xp")}>LVL / XP</th>
+            <th onClick={() => handleSort("name")}>
+              Name{" "}
+              {sortBy === "name" && sortOrder === "asc"
+                ? "▲"
+                : sortBy === "name" && sortOrder === "desc"
+                ? "▼"
+                : ""}
+            </th>
+            <th onClick={() => handleSort("xp")}>
+              LVL / XP{" "}
+              {sortBy === "xp" && sortOrder === "asc"
+                ? "▲"
+                : sortBy === "xp" && sortOrder === "desc"
+                ? "▼"
+                : ""}
+            </th>
           </tr>
         </thead>
         <tbody>

@@ -318,11 +318,11 @@ function App() {
                       key={checkbox.id}
                     >
                       {checkbox.id === "AI assistant" ? (
-                        <p>AI assistant (Beta)</p>
+                        <p>AI assistant</p>
                       ) : checkbox.id === "Popup translation" ? (
-                        <p>Popup chat (soon)</p>
+                        <p>Popup chat </p>
                       ) : (
-                        <p>Music player (soon)</p>
+                        <p>Music player </p>
                       )}
                       <input
                         type="checkbox"
@@ -341,7 +341,6 @@ function App() {
               setShowOverlay2={setShowOverlay}
               content={
                 <div>
-                  BETA
                   <div
                     style={{ border: "1px solid transparent" }}
                     className="ai-settings"
@@ -447,7 +446,9 @@ function App() {
           />
           <Route
             path="/Leaderboard"
-            element={user ? <Leaderboard isAuth={user} /> : <Navigate to="/Login" />}
+            element={
+              user ? <Leaderboard isAuth={user} /> : <Navigate to="/Login" />
+            }
           />
           <Route
             path="/Admin"
