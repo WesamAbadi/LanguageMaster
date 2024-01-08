@@ -5,6 +5,11 @@
 
 Language Master is a React.js project that helps you learn new languages on the fly!
 
+Information
+-------------
+- Live: [language.wesamabadi.com](language.wesamabadi.com)
+- Auther: Wesam Abadi
+
 Prerequisites
 -------------
 
