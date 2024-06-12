@@ -212,22 +212,22 @@ function App() {
     saveSettingsToLocalStorage(newSettings);
   };
 
-  const handleNumberChange = (event) => {
-    const newSettings = {
-      ...settings,
-      number: parseInt(event.target.value, 10),
-    };
-    setSettings(newSettings);
-    saveSettingsToLocalStorage(newSettings);
-  };
-  const handleThemeChange = (event) => {
-    const newTheme = {
-      ...theme,
-      isChecked: !theme.isChecked,
-    };
-    setTheme(newTheme);
-    saveThemeToLocalStorage(newTheme);
-  };
+  // const handleNumberChange = (event) => {
+  //   const newSettings = {
+  //     ...settings,
+  //     number: parseInt(event.target.value, 10),
+  //   };
+  //   setSettings(newSettings);
+  //   saveSettingsToLocalStorage(newSettings);
+  // };
+  // const handleThemeChange = (event) => {
+  //   const newTheme = {
+  //     ...theme,
+  //     isChecked: !theme.isChecked,
+  //   };
+  //   setTheme(newTheme);
+  //   saveThemeToLocalStorage(newTheme);
+  // };
   const saveCheckboxesToLocalStorage = (checkboxes) => {
     localStorage.setItem("checkboxes", JSON.stringify(checkboxes));
   };

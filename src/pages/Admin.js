@@ -93,9 +93,10 @@ function Admin({ user }) {
           <p>You do not have permission to access this page.</p>
           <p>
             If you want to be an Admin at Language Master,
-            <a href="#">
+            {/* <a href="#">
               <button onClick={requestAdmin}>APPLY HERE</button>
-            </a>
+            </a> */}
+            <button onClick={requestAdmin}>APPLY HERE</button>
           </p>
         </div>
       )}
