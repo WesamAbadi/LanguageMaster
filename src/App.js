@@ -234,9 +234,9 @@ function App() {
   const saveSettingsToLocalStorage = (settings) => {
     localStorage.setItem("settings", JSON.stringify(settings));
   };
-  const saveThemeToLocalStorage = (theme) => {
-    localStorage.setItem("theme", JSON.stringify(theme));
-  };
+  // const saveThemeToLocalStorage = (theme) => {
+  //   localStorage.setItem("theme", JSON.stringify(theme));
+  // };
 
   if (loading) {
     return (
